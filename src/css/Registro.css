@@ -1,0 +1,162 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;700;800&family=Poppins:wght@100;200;400;500;700;800&display=swap');
+
+/* Estilos base para la cabecera */
+* {
+    padding: 0;
+    margin: 0;
+    text-decoration: none;
+    list-style: none;
+    box-sizing: border-box;
+}
+
+.cont-btn-home{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-top: 1%;
+    padding-left: 1%;
+}
+
+.HomeButton{
+    color: #000;
+    font-family: 'Poppins', sans-serif;
+    font-size: 20px;
+    font-weight: 500;
+    margin-left: 5px;
+}
+
+.img-fondo {
+    background-image: url("../images-fondo/fondo-lrc.png");
+    background-size: cover;
+    background-position: center;
+}
+
+.container-registro {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    place-items: center;
+}
+
+img.logo {
+    width: 149px;
+    height: 149px;
+    margin-bottom: 1%;
+}
+
+div.form-registro {
+    text-align: center;
+    width: 375px;
+    height: 567px;
+    border-style: solid;
+    border-color: #C1C1C1;
+    border-width: 2px;
+    background-color: #FFF;
+    margin-bottom: 1.1%;
+}
+
+h2.titulo {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    margin-top: 4%;
+    margin-bottom: 6%;
+}
+
+.nom-cajas {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px;
+    display: flex;
+    padding-left: 9%;
+}
+
+.cajas {
+    width: 305px;
+    height: 36px;
+    background-color: #eee;
+    border-style: solid;
+    border-color: #eee;
+    border-width: 1px;
+    border-radius: 6px;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 200;
+    font-size: 14px;
+    padding-left: 3%;
+    color: black;
+    margin-bottom: 5%;
+}
+
+.cajas::placeholder {
+    font-family: 'Open Sans', sans-serif;
+    font-style: italic;
+    font-weight: 100;
+    font-size: 14px;
+    color: black;
+}
+
+.botones {
+    display: grid;
+    place-items: center;
+}
+
+.btn-registrar {
+    width: 305px;
+    height: 36px;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    color: #FFF;
+    background-color: #3BA4F6;
+    border-style: solid;
+    border-color: #3BA4F6;
+    border-radius: 6px;
+    border-width: 1px;
+    margin-bottom: 6%;
+    cursor: pointer;
+}
+
+.btn-iniciarsesion {
+    width: 75%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.con-cuenta {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px;
+    font-style: italic;
+    font-weight: 500;
+    color: #000;
+}
+
+.inicia-ahora {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px;
+    font-style: italic;
+    font-weight: 500;
+    color: #3BA4F6;
+    margin-bottom: 15%;
+    cursor: pointer;
+}
+
+.cont-line {
+    width: 85%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.horizontal-line {
+    width: 129px;
+    height: 1px;
+}
+
+.cont-logos {
+    width: 35%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.logos {
+    width: 34px;
+    height: 34px;
+    cursor: pointer;
+}
