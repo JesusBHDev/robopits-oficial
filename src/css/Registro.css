@@ -47,7 +47,7 @@ img.logo {
 div.form-registro {
     text-align: center;
     width: 375px;
-    height: 567px;
+    height: 577px;
     border-style: solid;
     border-color: #C1C1C1;
     border-width: 2px;
@@ -134,7 +134,7 @@ h2.titulo {
     font-style: italic;
     font-weight: 500;
     color: #3BA4F6;
-    margin-bottom: 15%;
+    margin-bottom: 9%;
     cursor: pointer;
 }
 
