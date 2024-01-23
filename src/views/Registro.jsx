@@ -29,7 +29,7 @@ const
               <div>
                 {/* Input del Nombre de Usuario */}
                 <label className='nom-cajas' htmlFor="Nombre">Nombre de usuario</label>
-                <input className="cajas" name='Nombre' type="user" placeholder="Ingrese su nombre de usuario" {...register('Nombre', {
+                <input className="cajas" id='Nombre' type="user" placeholder="Ingrese su nombre de usuario" {...register('Nombre', {
                   required: true,
                   maxLength: 10,
                   pattern: /^[a-zA-Z][a-zA-Z0-9-_]{3,32}$/,
@@ -50,7 +50,7 @@ const
               <div>
                 {/* Input del Email */}
                 <label className='nom-cajas' htmlFor="Email">Email</label>
-                <input className='cajas' name='Email' placeholder='Ingrese su email' type="email" {...register('Email', {
+                <input className='cajas' id='Email' placeholder='Ingrese su email' type="email" {...register('Email', {
                   required: true,
                   pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/i,
                 })} />
@@ -64,7 +64,7 @@ const
               <div>
                 {/* Input de la contraseña */}
                 <label className='nom-cajas' htmlFor="Password">Contraseña</label>
-                <input className='cajas' name='Password' type="password" autoComplete="off"
+                <input className='cajas' id='Password' type="password" autoComplete="off"
                   placeholder="Ingrese su contraseña" {...register('Password', {
                     required: true,
                     pattern: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/,
@@ -79,7 +79,7 @@ const
 
               <div>
                 <label className='nom-cajas' htmlFor="Password2">Confirmar contraseña</label>
-                <input className='cajas' name='Password2' type="password" autoComplete="off"
+                <input className='cajas' id='Password2' type="password" autoComplete="off"
                   placeholder="Ingrese su contraseña de nuevo" {...register('Password2', {
                     required: true,
                     pattern: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/,
