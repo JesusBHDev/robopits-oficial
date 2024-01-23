@@ -28,67 +28,67 @@ const
               {/* AQUI COMIENZA A COPIAR */}
               <div>
                 {/* Input del Nombre de Usuario */}
-                <label className='nom-cajas' htmlFor="username">Nombre de usuario</label>
-                <input className="cajas" type="user" placeholder="Ingrese su nombre de usuario" {...register('username', {
+                <label className='nom-cajas' htmlFor="Nombre">Nombre de usuario</label>
+                <input className="cajas" name='Nombre' type="user" placeholder="Ingrese su nombre de usuario" {...register('Nombre', {
                   required: true,
                   maxLength: 10,
                   pattern: /^[a-zA-Z][a-zA-Z0-9-_]{3,32}$/,
                 })} />
                 {/* Mensaje de error de USERNAME: Required */}
-                {errors.username?.type === 'required' &&
+                {errors.Nombre?.type === 'required' &&
                   <p style={{ color: "red", marginTop: "-20px", marginBottom: "5px" }}>El campo de nombre de usuario es obligatorio</p>}
 
                 {/* Mensaje de error de USERNAME: maxLength  */}
-                {errors.username?.type === 'maxLength' &&
+                {errors.Nombre?.type === 'maxLength' &&
                   <p style={{ color: "red", marginTop: "-20px", marginBottom: "5px" }}>El campo de nombre no puede contener más de 10 caracteres</p>}
 
                 {/* Mensaje de error de USERNAME: Pattern */}
-                {errors.username?.type === 'pattern' &&
+                {errors.Nombre?.type === 'pattern' &&
                   <p style={{ color: "red", marginTop: "-20px", marginBottom: "5px" }}>Ingresa un nombre de usuario valido. Solo puedes usar letras, números y guión bajo o alto</p>}
               </div>
 
               <div>
                 {/* Input del Email */}
-                <label className='nom-cajas' htmlFor="email">Email</label>
-                <input className='cajas' placeholder='Ingrese su email' type="email" {...register('email', {
+                <label className='nom-cajas' htmlFor="Email">Email</label>
+                <input className='cajas' name='Email' placeholder='Ingrese su email' type="email" {...register('Email', {
                   required: true,
                   pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/i,
                 })} />
                 {/* Mensaje de error de EMAIL: Required */}
-                {errors.email?.type === 'required' && <p style={{ color: "red", marginTop: "-20px", marginBottom: "5px" }}>El campo de email es obligatorio</p>}
+                {errors.Email?.type === 'required' && <p style={{ color: "red", marginTop: "-20px", marginBottom: "5px" }}>El campo de email es obligatorio</p>}
 
                 {/* Mensaje de error de EMAIL: Pattern */}
-                {errors.email?.type === 'pattern' && <p style={{ color: "red", marginTop: "-20px", marginBottom: "5px" }}>Ingresa un correo válido, no olvides usar @ y .com</p>}
+                {errors.Email?.type === 'pattern' && <p style={{ color: "red", marginTop: "-20px", marginBottom: "5px" }}>Ingresa un correo válido, no olvides usar @ y .com</p>}
               </div>
 
               <div>
                 {/* Input de la contraseña */}
-                <label className='nom-cajas' htmlFor="passw">Contraseña</label>
-                <input className='cajas' type="password" autoComplete="off"
-                  placeholder="Ingrese su contraseña" {...register('passw', {
+                <label className='nom-cajas' htmlFor="Password">Contraseña</label>
+                <input className='cajas' name='Password' type="password" autoComplete="off"
+                  placeholder="Ingrese su contraseña" {...register('Password', {
                     required: true,
                     pattern: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/,
                   })} />
                 {/* Mensaje de error de CONTRASEÑA: Required */}
-                {errors.passw?.type === 'required' && <p style={{ color: "red", marginTop: "-20px", marginBottom: "5px" }}>El campo de contraseña es obligatorio</p>}
+                {errors.Password?.type === 'required' && <p style={{ color: "red", marginTop: "-20px", marginBottom: "5px" }}>El campo de contraseña es obligatorio</p>}
 
                 {/* Mensaje de error de CONTRASEÑA: Pattern */}
-                {errors.passw?.type === 'pattern' && <p style={{ color: "red", marginTop: "-20px", marginBottom: "5px" }}>Ingresa una contraseña válida con mínimo 8 cáracteres. Debes usar como mínimo 1 letra mayúscula,
+                {errors.Password?.type === 'pattern' && <p style={{ color: "red", marginTop: "-20px", marginBottom: "5px" }}>Ingresa una contraseña válida con mínimo 8 cáracteres. Debes usar como mínimo 1 letra mayúscula,
                   1 letra minúscula, 1 símbolo raro y 1 número</p>}
               </div>
 
               <div>
-                <label className='nom-cajas' htmlFor="passw2">Confirmar contraseña</label>
-                <input className='cajas' type="password" autoComplete="off"
-                  placeholder="Ingrese su contraseña de nuevo" {...register('passw2', {
+                <label className='nom-cajas' htmlFor="Password2">Confirmar contraseña</label>
+                <input className='cajas' name='Password2' type="password" autoComplete="off"
+                  placeholder="Ingrese su contraseña de nuevo" {...register('Password2', {
                     required: true,
                     pattern: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/,
                   })} />
                 {/* Mensaje de error de CONFIRMAR CONTRASEÑA: Required */}
-                {errors.passw2?.type === 'required' && <p style={{ color: "red", marginTop: "-20px", marginBottom: "5px" }}>El campo de confirmar contraseña es obligatorio</p>}
+                {errors.Password2?.type === 'required' && <p style={{ color: "red", marginTop: "-20px", marginBottom: "5px" }}>El campo de confirmar contraseña es obligatorio</p>}
 
                 {/* Mensaje de error de CONFIRMAR CONTRASEÑA: Pattern */}
-                {errors.passw2?.type === 'pattern' && <p style={{ color: "red", marginTop: "-20px", marginBottom: "5px" }}>Ingresa una contraseña válida con mínimo 8 cáracteres. Debes usar como mínimo 1 letra mayúscula,
+                {errors.Password2?.type === 'pattern' && <p style={{ color: "red", marginTop: "-20px", marginBottom: "5px" }}>Ingresa una contraseña válida con mínimo 8 cáracteres. Debes usar como mínimo 1 letra mayúscula,
                   1 letra minúscula, 1 símbolo raro y 1 número</p>}
               </div>
 
