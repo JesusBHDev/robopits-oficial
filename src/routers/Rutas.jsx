@@ -18,11 +18,6 @@ import Error404 from '../views/Error404';
 
 export const Rutas = createBrowserRouter([
     {
-        path: "/",
-        element: <Bienvenida/>,
-        errorElement: <Error404/>,
-    },
-    {
         path: "/Inicio",
         element: <Inicio/>
     },
@@ -41,7 +36,6 @@ export const Rutas = createBrowserRouter([
 
     /* Rutas del Nav */
     {
-        
         path: "/sensores",
         element: <Sensores/>
     },
@@ -81,7 +75,12 @@ export const Rutas = createBrowserRouter([
         path: "/todos-los-productos",
         element: <Productos/>
     },
-    
+    {
+        path: "/",
+        element: <Bienvenida/>,
+        errorElement: <Error404/>,
+    },
 ]);
+
 
 export default Rutas

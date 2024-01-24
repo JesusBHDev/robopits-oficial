@@ -8,6 +8,17 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
+
+import MigasPan from '../views/MigasPan';
+
+export const ImagenFondo = () => {
+    <div>
+             <img src="images/robopits-pequeño.png" alt="RoboPits" class="Logo" />
+    </div>
+}
+
+
+
 /* Este es el header o encabezado del inicio */
 export const HeaderInicio = () => {
 
@@ -15,14 +26,14 @@ export const HeaderInicio = () => {
         <div>
             <header class="header">
                 <div class="logo-y-nombre">
-                    <img src="images/robopits-pequeño.png" alt="RoboPits" class="Logo" />
                     <NavLink to="/Inicio">
                         <h1 class="RoboPits">RoboPits</h1>
                     </NavLink>
                 </div>
 
                 <div class="search-container">
-                    <input type="search" autocomplete="off" placeholder="Busca componentes electrónicos, herramientas y más..." class="search-input" />
+                    <input type="search" autocomplete="off" placeholder="Busca componentes electrónicos, herramientas y más..."
+                     class="search-input" pattern='^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$' />
                     <button class="search-button">
                         <div class="search-icon">
                             <Icon icon="ic:baseline-search" style={{ fontSize: "32px" }} />
@@ -42,6 +53,7 @@ export const HeaderInicio = () => {
                         <Icon icon="ic:baseline-shopping-cart" style={{ fontSize: "32px" }} />
                     </div>
                 </div>
+
             </header>
 
         </div>
@@ -86,7 +98,9 @@ export const NavbarInicio = () => {
                     </div>
                 </div>
             ))}
+            <MigasPan/>
         </div>
+        
     );
 };
 

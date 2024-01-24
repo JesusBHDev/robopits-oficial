@@ -1,12 +1,26 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;700;800&family=Poppins:wght@100;200;400;500;700;800&display=swap');
 
-/* Estilos base para la cabecera */
-* {
+*{
     padding: 0;
     margin: 0;
     text-decoration: none;
     list-style: none;
     box-sizing: border-box;
+    height: 100%;
+}
+
+#naptha_container0932014_0707 {
+    display: none !important;  /* Oculta el elemento si es visible */
+    /* o puedes intentar otras propiedades que anulen el estilo, como */
+    /* background: none; */
+    /* border: none; */
+    /* ... */
+  }
+  
+.img-fondo-restablecer {
+    background-image: url("../images-fondo/fondo-lrc.png");
+    background-size: cover;
+    background-position: center;
 }
 
 .cont-btn-home{
@@ -25,11 +39,6 @@
     margin-left: 5px;
 }
 
-.img-fondo {
-    background-image: url("../images-fondo/fondo-lrc.png");
-    background-size: cover;
-    background-position: center;
-}
 
 .container-restablecer {
     padding-top: 6.8%;
@@ -37,16 +46,15 @@
     height: 100%;
     display: grid;
     place-items: center;
-    padding-bottom: 3%;
 }
 
-img.logo {
+.logo {
     width: 149px;
     height: 149px;
     margin-bottom: 1%;
 }
 
-div.form-restablecer {
+.form-restablecer {
     text-align: center;
     width: 375px;
     height: 390px;
@@ -57,7 +65,7 @@ div.form-restablecer {
     margin-bottom: 2.8%;
 }
 
-h2.titulo {
+.titulo {
     font-family: 'Poppins', sans-serif;
     font-weight: 500;
     margin-top: 4%;
@@ -99,7 +107,6 @@ h2.titulo {
     font-size: 14px;
     padding-left: 3%;
     color: black;
-    margin-bottom: 7%;
 }
 
 .cajas::placeholder {
@@ -127,7 +134,6 @@ h2.titulo {
     border-color: #3BA4F6;
     border-radius: 6px;
     border-width: 1px;
-    margin-bottom: 6%;
     cursor: pointer;
 }
 

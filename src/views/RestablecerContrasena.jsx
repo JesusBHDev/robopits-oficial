@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 import { Icon } from "@iconify/react";
 const RestablecerContrasena = () => {
     return (
-        <div className='img-fondo'>
+        <div className='img-fondo-restablecer'>
             <NavLink to="/">
                 <div className='cont-btn-home'>
                     <Icon icon="mdi:home" style={{ fontSize: "32px", color: "black" }} />
@@ -22,13 +22,13 @@ const RestablecerContrasena = () => {
                     </div>
 
                     {/* Input del Email */}
-                    <label className='nom-cajas' for="email">Email</label>
-                    <input className='cajas' placeholder='Ingrese su email' type="email" name="email" autocomplete="off" required
+                    <label className='nom-cajas' htmlFor="email">Email</label>
+                    <input className='cajas' placeholder='Ingrese su email' type="email" name="email" autoComplete="off" required
                         pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}"
                         title="Ingresa un correo válido, no olvides usar @ y .com" />
 
                     <div className='botones'>
-                        <input type="submit" id="restablecer" class="btn-restablecer" value="Restablecer" onclick="" />
+                        <input type="submit" id="restablecer" className="btn-restablecer" value="Restablecer"/>
 
                         <NavLink to="/login">
                             <p className='btn-regresar'>Regresar</p>

@@ -1,15 +1,23 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;700;800&family=Poppins:wght@100;200;400;500;700;800&display=swap');
 
-/* Estilos base para la cabecera */
-* {
+*{
     padding: 0;
     margin: 0;
     text-decoration: none;
     list-style: none;
-    box-sizing: border-box;
+    height: 100%;
 }
 
-.cont-btn-home{
+#naptha_container0932014_0707 {
+    display: none !important;  /* Oculta el elemento si es visible */
+    /* o puedes intentar otras propiedades que anulen el estilo, como */
+    /* background: none; */
+    /* border: none; */
+    /* ... */
+  }
+  
+.cont-btn-home-login{
+    height: 40px;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -17,7 +25,7 @@
     padding-left: 1%;
 }
 
-.HomeButton{
+.HomeButton-login{
     color: #000;
     font-family: 'Poppins', sans-serif;
     font-size: 20px;
@@ -25,7 +33,14 @@
     margin-left: 5px;
 }
 
-.img-fondo {
+.cont-home-login{
+    height: 40px;
+    display: grid;
+    place-self: start;
+    align-self: center;
+}
+
+.img-fondo-login {
     background-image: url("../images-fondo/fondo-lrc.png");
     background-size: cover;
     background-position: center;
@@ -33,21 +48,25 @@
 
 .container-login {
     width: 100%;
-    height: 100%;
+    height: auto;
     display: grid;
     place-items: center;
-    padding-top: 3.8%;
-    padding-bottom: 2%;
+
 }
 
-img.logo {
+.form-logo-login{
+    height: 150px;
+}
+
+.logo-login {
     width: 149px;
     height: 149px;
-    margin-bottom: 1%;
+    margin-top: 1%;
+    margin-bottom: 3%;
 }
 
 
-div.form-login {
+.form-login {
     text-align: center;
     width: 375px;
     height: 452px;
@@ -55,25 +74,29 @@ div.form-login {
     border-color: #C1C1C1;
     border-width: 2px;
     background-color: #FFF;
-    margin-bottom: 2.8%;
 }
 
-h2.titulo {
+.titulo-login {
+    height: 40px;
     font-family: 'Poppins', sans-serif;
     font-weight: 500;
     margin-top: 4%;
-    margin-bottom: 6%;
+}
+
+.contenedor-cajas-login{
+    height: 70px;
 }
 
 
-.nom-cajas {
+.nom-cajas-login {
+    height: 20px;
     font-family: 'Open Sans', sans-serif;
     font-size: 14px;
     display: flex;
     padding-left: 9%;
 }
 
-.cajas {
+.cajas-login {
     width: 305px;
     height: 36px;
     background-color: #eee;
@@ -86,10 +109,9 @@ h2.titulo {
     font-size: 14px;
     padding-left: 3%;
     color: black;
-    margin-bottom: 7%;
 }
 
-.cajas::placeholder {
+.cajas-login::placeholder {
     font-family: 'Open Sans', sans-serif;
     font-style: italic;
     font-weight: 100;
@@ -116,11 +138,17 @@ h2.titulo {
     border-width: 2px;
 }
 */
-.botones {
+.botones-login {
+    height: 240px;
     display: grid;
     place-items: center;
 }
-.btn-continuar {
+
+.cont-btn-rest-contra-login{
+    height: 25px;
+}
+
+.btn-continuar-login {
     width: 305px;
     height: 36px;
     font-family: 'Open Sans', sans-serif;
@@ -132,26 +160,24 @@ h2.titulo {
     border-color: #3BA4F6;
     border-radius: 6px;
     border-width: 1px;
-    margin-bottom: 6%;
     cursor: pointer;
 }
 
-.btn-reestablecerContrasena {
+.btn-reestablecerContrasena-login {
     font-family: 'Open Sans', sans-serif;
     font-size: 14px;
     font-style: italic;
     font-weight: 500;
     color: #3BA4F6;
-    margin-bottom: 7%;
 }
 
-.btn-creacuenta {
+.btn-creacuenta-login {
     width: 80%;
     display: flex;
     justify-content: space-between;
 }
 
-.no-cuenta {
+.no-cuenta-login {
     font-family: 'Open Sans', sans-serif;
     font-size: 14px;
     font-style: italic;
@@ -159,7 +185,7 @@ h2.titulo {
     color: #000;
 }
 
-.crea-cuenta {
+.crea-cuenta-login {
     font-family: 'Open Sans', sans-serif;
     font-size: 14px;
     font-style: italic;
@@ -168,24 +194,24 @@ h2.titulo {
     margin-bottom: 15%;
 }
 
-.cont-line {
+.cont-line-login {
     width: 85%;
     display: flex;
     justify-content: space-between;
 }
 
-.horizontal-line {
+.horizontal-line-login {
     width: 129px;
     height: 1px;
 }
 
-.cont-logos {
+.cont-logos-login {
     width: 35%;
     display: flex;
     justify-content: space-between;
 }
 
-.logos {
+.logos-login {
     width: 34px;
     height: 34px;
     cursor: pointer;
