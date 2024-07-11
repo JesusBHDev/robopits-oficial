@@ -1,4 +1,4 @@
-import { FooterInicio, HeaderInicio, NavbarInicio } from "../components/componentes-inicio";
+import { FooterInicio, HeaderInicio } from "../components/componentes-inicio";
 import { NavLink } from "react-router-dom";
 
 import "../css/Error404.css"
@@ -6,7 +6,6 @@ function Error404() {
   return (
     <div>
       <HeaderInicio />
-      <NavbarInicio />
       <div className="contMensajeError">
         <div className="mensajeError">
           <p className="texto1">
@@ -20,7 +19,7 @@ function Error404() {
               <p className="texto4">Ir a la pagina de Inicio</p>
             </NavLink>
           </p>
-          <img src="images/robopits404.png" alt="Error 404 Not Found" />
+          <img src="images/robopits404.webp" alt="Error 404 Not Found" />
         </div>
       </div>
       <FooterInicio />

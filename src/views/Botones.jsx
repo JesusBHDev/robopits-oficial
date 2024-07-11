@@ -1,10 +1,10 @@
 import React from 'react'
-import { FooterInicio, HeaderInicio, NavbarInicio } from '../components/componentes-inicio';
+import { FooterInicio, HeaderInicio } from '../components/componentes-inicio';
+
 const Botones = () => {
   return (
     <div>
-      <HeaderInicio />
-      <NavbarInicio />
+      <HeaderInicio/>
       <div>
         <h1 className='tituloB'>Botones</h1>
       </div>

@@ -1,11 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;700;800&family=Poppins:wght@100;200;400;500;700;800&display=swap');
 
-/* Estilos base para la cabecera */
-
-.tituloB{
-    color: #1d70d8;
+* {
+    padding: 0;
+    margin: 0;
+    text-decoration: none;
+    list-style: none;
 }
 
-.subtituloB{
-    color: #888888;
+.container-bienvenida{
+    height: auto;
+    max-width: 80%;
+    margin: 0 auto;
+    padding: 20px;
 }

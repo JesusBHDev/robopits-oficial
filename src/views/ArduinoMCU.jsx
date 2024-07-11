@@ -1,12 +1,11 @@
 import React from 'react'
-import { FooterInicio, HeaderInicio, NavbarInicio } from '../components/componentes-inicio';
+import { FooterInicio, HeaderInicio } from '../components/componentes-inicio';
 const ArduinoMCU = () => {
   return (
     <div>
       <HeaderInicio />
-      <NavbarInicio />
       <div>
-        <h1 className='tituloB'>Soldadura</h1>
+        <h1 className='tituloB'>Arduino MCU</h1>
       </div>
       <FooterInicio />
     </div>

@@ -1,0 +1,28 @@
+/* avisos-privacidad.css */
+
+.avisos-privacidad-container {
+    height: auto;
+    max-width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .titulo-seccion {
+    color: #333;
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .subtitulo-seccion {
+    color: #eb3449;
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+  
+  .parrafo {
+    color: #666;
+    font-size: 16px;
+    line-height: 1.5;
+    margin-bottom: 20px;
+  }
+  

@@ -6,32 +6,24 @@
     text-decoration: none;
     list-style: none;
     box-sizing: border-box;
-    height: 100%;
 }
-
-#naptha_container0932014_0707 {
-    display: none !important;  /* Oculta el elemento si es visible */
-    /* o puedes intentar otras propiedades que anulen el estilo, como */
-    /* background: none; */
-    /* border: none; */
-    /* ... */
-  }
   
 .img-fondo-restablecer {
-    background-image: url("../images-fondo/fondo-lrc.png");
+    background-image: url("../images-fondo/fondo-lrc.webp");
     background-size: cover;
     background-position: center;
 }
 
-.cont-btn-home{
+.cont-home-restablecer{
+    width: 100%;
+    height: 40px;
     display: flex;
-    flex-direction: row;
     align-items: center;
-    padding-top: 1%;
-    padding-left: 1%;
+    justify-content: space-between;
+    padding: 1% 2% 0% 2%;
 }
 
-.HomeButton{
+.HomeButton-restablecer{
     color: #000;
     font-family: 'Poppins', sans-serif;
     font-size: 20px;
@@ -41,14 +33,13 @@
 
 
 .container-restablecer {
-    padding-top: 6.8%;
     width: 100%;
-    height: 100%;
+    height: auto;
     display: grid;
     place-items: center;
 }
 
-.logo {
+.logo-restablecer {
     width: 149px;
     height: 149px;
     margin-bottom: 1%;
@@ -57,25 +48,28 @@
 .form-restablecer {
     text-align: center;
     width: 375px;
-    height: 390px;
+    height: auto;
     border-style: solid;
     border-color: #C1C1C1;
     border-width: 2px;
     background-color: #FFF;
-    margin-bottom: 2.8%;
 }
 
-.titulo {
+.titulo-restablecer {
+    height: 40px;
     font-family: 'Poppins', sans-serif;
     font-weight: 500;
     margin-top: 4%;
-    margin-bottom: 6%;
 }
 
-.cont-msj {
+.contenedor-cajas-restablecer{
+    height: 13%;
+}
+.cont-msj-restablecer {
+    height: auto;
     width: 80%;
     margin-left: 9%;
-    margin-bottom: 10%;
+    margin-bottom: 5%;
 }
 
 .mensaje-restablecer {
@@ -87,14 +81,15 @@
 }
 
 
-.nom-cajas {
+.nom-cajas-restablecer {
+    height: auto;
     font-family: 'Open Sans', sans-serif;
     font-size: 14px;
     display: flex;
     padding-left: 9%;
 }
 
-.cajas {
+.cajas-restablecer {
     width: 305px;
     height: 36px;
     background-color: #eee;
@@ -109,7 +104,7 @@
     color: black;
 }
 
-.cajas::placeholder {
+.cajas-restablecer::placeholder {
     font-family: 'Open Sans', sans-serif;
     font-style: italic;
     font-weight: 100;
@@ -117,7 +112,8 @@
     color: black;
 }
 
-.botones {
+.botones-restablecer {
+    height: 210px;
     display: grid;
     place-items: center;
 }
@@ -137,7 +133,7 @@
     cursor: pointer;
 }
 
-.btn-regresar {
+.btn-regresar-restablecer {
     font-family: 'Open Sans', sans-serif;
     font-size: 14px;
     font-style: italic;

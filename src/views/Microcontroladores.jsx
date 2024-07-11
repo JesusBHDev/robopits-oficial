@@ -1,13 +1,12 @@
 import React from 'react'
-import { FooterInicio, HeaderInicio, NavbarInicio } from '../components/componentes-inicio';
+import { FooterInicio, HeaderInicio } from '../components/componentes-inicio';
 
 const Microcontroladores = () => {
   return (
     <div>
       <HeaderInicio />
-      <NavbarInicio />
       <div>
-        <h1 className='tituloB'>Productos</h1>
+        <h1 className='tituloB'>Microcontroladores</h1>
       </div>
       <FooterInicio />
     </div>

@@ -2,6 +2,7 @@
 
 
 .contMensajeError{
+    height: auto;
     margin-top: 3%;
     display: grid;
     place-items: center;
@@ -17,6 +18,7 @@
 }
 
 .texto1{
+    height: auto;
     color: #454e59;
     font-family: 'Open Sans', sans-serif;
     font-size: 16px;
@@ -25,6 +27,7 @@
 }
 
 .texto2{
+    height: auto;
     color: #393E46;
     font-family: 'Poppins', sans-serif;
     font-weight: 800;
