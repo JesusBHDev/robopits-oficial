@@ -68,10 +68,14 @@ export const AuthProvider = ({ children }) => {
     
     const signinEmpleado = async (empleadoData) => {
         try {
+            const cookies = Cookies.get();
+            console.log(cookies);
             const res = await IniciarEmpleado(empleadoData);
             console.log(res);
             setIsEmpleadoAuthenticated(true);
             setEmpleado(res.data);
+            console.log(res.data.admin);
+            Cookies.set('admin', res.data.admin);
         } catch (error) {
             if (Array.isArray(error.response.data)) {
                 return setEmpleadoErrors(error.response.data);
@@ -144,20 +148,22 @@ export const AuthProvider = ({ children }) => {
         checkLogin();
       }, []);
       
-    useEffect(() => {
+      useEffect(() => {
         async function checkLoginEmpleado() {
             const cookies = Cookies.get();
+            console.log(cookies);
+    
             if (!cookies.admin) {
                 setIsEmpleadoAuthenticated(false);
                 setEmpleadoLoading(false);
                 return setEmpleado(null);
             }
-
+    
             try {
                 const res = await verificarTokenEmpleado(cookies.admin);
                 if (!res.data) {
-                    setIsEmpleadoAuthenticated(false)
-                    setEmpleadoLoading(false)
+                    setIsEmpleadoAuthenticated(false);
+                    setEmpleadoLoading(false);
                     return;
                 }
                 setIsEmpleadoAuthenticated(true);
@@ -170,7 +176,7 @@ export const AuthProvider = ({ children }) => {
                 setEmpleadoLoading(false);
             }
         }
-
+    
         checkLoginEmpleado();
     }, []);
 

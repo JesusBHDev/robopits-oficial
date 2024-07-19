@@ -14,7 +14,17 @@ export const resetPasswordRequest = (token, Password) => axios.post(`/passwordRe
 //_____________APIS REALES DEL PROYECTO XD________//
 export const crearEmpleado = user => axios.post(`/registro`, user);
 export const IniciarEmpleado = user => axios.post(`/inicio`, user);
-export const verificarTokenEmpleado = () => axios.get('/verificar')
+
+export const verificarTokenEmpleado = async (admin) => {
+  return await axios.get('/verificar', {
+    headers: {
+      'Authorization': `Bearer ${admin}`
+    }
+  });
+};
+export const getAllEmployees = () => axios.get(`/empleados`);
+export const deleteEmployee = (id) => axios.delete(`/empleados/${id}`);
+export const updateEmpleado = (id, updatedData) => axios.put(`/empleados/${id}`, updatedData);
 
 export const crearCategoria = Categoria => axios.post(`/Categorias`, Categoria);
 export const getAllCategorias = categoria => axios.get(`/Categorias`, categoria);

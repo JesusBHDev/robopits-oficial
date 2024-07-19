@@ -44,7 +44,7 @@ const ResenaProducto = () => {
         }
 
         try {
-            await agregarAlCarrito(user._id, producto._id, cantidad);
+            await agregarAlCarrito(user.id, producto._id, cantidad);
             alert('Producto agregado al carrito exitosamente');
         } catch (error) {
             console.error('Error al agregar producto al carrito:', error);
