@@ -26,10 +26,13 @@ export const AuthProvider = ({ children }) => {
 
     const signup = async (user) => {
         try {
+            const cookies = Cookies.get();
+            console.log(cookies)
             const res = await registerRequest(user);
             console.log(res.data);
             setUser(res.data);
             setIsAuthenticated(true);
+            Cookies.set('token', res.data.token)
         } catch (error) {
             console.log(error.response.data);
             setErrors(error.response.data);
@@ -38,10 +41,12 @@ export const AuthProvider = ({ children }) => {
 
     const signupEmpleado = async (empleadoData) => {
         try {
+          
             const res = await crearEmpleado(empleadoData);
             console.log(res.data);
             setEmpleado(res.data);
             setIsEmpleadoAuthenticated(true);
+           
         } catch (error) {
             console.log(error.response.data);
             setEmpleadoErrors(error.response.data);

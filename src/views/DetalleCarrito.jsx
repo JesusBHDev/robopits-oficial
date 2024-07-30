@@ -5,8 +5,6 @@ import { Icon } from "@iconify/react";
 import { Button, Modal, Input } from 'antd';
 
 export default function DetalleCarrito() {
-    //lab2
-    //huevos123
     const { user } = useAuth();
     const [carrito, setCarrito] = useState([]);
     const [direccion, setDireccion] = useState('');

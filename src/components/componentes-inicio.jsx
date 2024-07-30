@@ -37,23 +37,19 @@ export const HeaderInicio = () => {
         <div className='container-header'>
             <header className="header">
                 <div className="logo-y-nombre">
-                    <img src="images/robopits-pequeño.webp" alt="RoboPits" className="Logo" />
+                    <img src="/images/robopits-pequeño.webp" alt="RoboPits" className="Logo" />
                     <NavLink to="/Inicio">
                         <h1 className="RoboPits">RoboPits</h1>
                     </NavLink>
                 </div>
-
                 <div className='container w-8/12 w-full'>
                     <Secciones />
                 </div>
-
                 <div className='w-full flex justify-end mr-3 md:mr-14 h-auto'>
-
-
                     <div className='md:flex block'>
                         {user ? (
-                            <div className='flex text-xl font-bold text-blue-500 items-center'>
-                                <Icon icon="mdi:circle" className='bg-green-500 rounded-full text-green-500 size-3 mr-1.5'/> Bienvenido, {user.Nombre}!
+                            <div className='flex md:text-xl text-sm font-bold text-blue-500 items-center'>
+                                <Icon icon="mdi:circle" className='bg-green-500 rounded-full text-green-500 md:size-3 mr-1.5 size-2' /> Bienvenido, {user.Nombre}!
                             </div>
                         ) : (
                             <div className='flex mr-3'>
@@ -62,7 +58,6 @@ export const HeaderInicio = () => {
                             </div>
                         )}
                     </div>
-
                     <div className='flex items-center'>
 
                         {user ? (
@@ -72,16 +67,14 @@ export const HeaderInicio = () => {
                         ) : (
                             <div className='flex mr-3 items-center'>
                                 <IconoUsuarioC />
-                            </div>  
+                            </div>
                         )}
 
                         <NavLink to="/carrito">
                             <Icon icon="mdi:cart-outline" className='text-black size-8' />
                         </NavLink>
                     </div>
-
                 </div>
-
             </header>
             <div className="boton-categorias">
                 {/* Este boton es el boton de categorías que cambia si esta abierto o cerrado */}
@@ -99,7 +92,9 @@ export const HeaderInicio = () => {
                     </div>
                 </div>
             ))}
-            <MigasPan />
+            <div className='w-auto h-auto'>
+                <MigasPan />
+            </div>
         </div>
 
 
@@ -182,7 +177,7 @@ export const FooterInicio = () => {
             </div>
 
             <div className='w-auto h-auto grid text-center items-center lg:pr-16 lg:pl-32 place-items-center'>
-                <img src="images/robopits-transparente2.webp" alt="RoboPits" className='h-auto w-auto mt-10 md:mt-0' />
+                <img src="/images/robopits-transparente2.webp" alt="RoboPits" className='h-auto w-auto mt-10 md:mt-0' />
                 <h1 className='text-white font-extrabold text-3xl'>RoboPits</h1>
             </div>
         </div>

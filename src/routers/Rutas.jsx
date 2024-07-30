@@ -22,7 +22,7 @@ import QuienesSomos from "../views/QuienesSomos";
 import TerminosCondiciones from "../views/TerminosCondiciones";
 import AvisosPrivacidad from "../views/AvisosPrivacidad";
 import PasswordReset from "../views/PasswordReset";
-
+import Perfil from "../views/Perfil.jsx";
 /*PRODUCTOS CLIENTE*/
 import Productos from '../views/Productos';
 import Categorias from "../views/Categorias.jsx";
@@ -39,7 +39,7 @@ import AdminEmpleado from "../ViewsAdmin/AdminEmpleado.jsx";
 import AdminVentas from "../ViewsAdmin/AdminVentas.jsx";
 import AdminPedidos from "../ViewsAdmin/AdminPedidos.jsx";
 import AdminPagina from "../ViewsAdmin/AdminPagina.jsx";
-
+import ProductosPorCategoria from "../views/ProductosPorCategoria.jsx";
 import Carrito from "../views/Carrito.jsx";
 import Pedido from "../views/Pedido.jsx";
 export const Rutas = createBrowserRouter([
@@ -146,6 +146,14 @@ export const Rutas = createBrowserRouter([
         path: "/Pedidos",
         element: <Pedido/>,
         errorElement: <Error404/>,
+    },
+    {
+        path: "/categoria/:id",
+        element: <ProductosPorCategoria/>
+    },
+    {
+        path:"/perfil",
+        element:  <ProtectedRoutes Page={Perfil}/>
     },
     ///////////////Rutas del Admin//////////////////////
     {

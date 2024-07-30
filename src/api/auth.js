@@ -34,17 +34,36 @@ export const updateCategoria = (categoriaId, categoriaData) => axios.put(`/Categ
 
 export const crearProducto = Producto => axios.post(`/Productos`, Producto);
 export const getAllProductos = Productos => axios.get(`/Productos`, Productos);
+export const obtenerProductosPorCategoria = (categoriaId) => {return axios.get(`/Productos/categoria/${categoriaId}`);};
 export const getProducto = ProductoId => axios.get(`/Producto/${ProductoId}`);
 export const EliminarProducto = (ProductoId) => {return axios.delete(`/Producto/${ProductoId}`);};
 export const updateProducto = (ProductoId, productoData) => axios.put(`/Producto/${ProductoId}`, productoData);
 
 export const agregarAlCarrito = (userId, productId, quantity) => axios.post('/carritoagregar', { userId, productId, quantity });
 export const obtenerCarrito = (userId) =>  axios.get(`/carrito/${userId}`);
+export const decrementarCantidadProducto = (userId, productId) => axios.post('/carrito/decrement', { userId, productId });
+export const eliminarProductoDelCarrito = (userId, productId) => axios.post('/carrito/remove', { userId, productId });
+export const incrementarCantidadProducto = (userId, productId) => axios.post('/carrito/increment', { userId, productId });
+export const obtenerRecomendaciones = () => axios.get('/recomendaciones');
 
-export const agregarPedido = (userId, direccion, descuento) => axios.post('/crearpedido', { userId, direccion, descuento });
+export const agregarPedido = (userId, direccion, descuento) => axios.post('/crearpedido', { userId, direccion, descuento});
 
-// Ruta para obtener los pedidos del cliente
 export const obtenerPedidosCliente = (userId) => axios.get(`/pedidosCliente/${userId}`);
+export const obtenerPerfil = (userId) => {
+  return axios.get(`/perfil/${userId}`);
+};
+//actualizar el perfil del usuario
+export const actualizarPerfil = (userId, perfil) => {
+  return axios.put(`/perfil/${userId}`, perfil);
+};
 
+// Función para actualizar el número de teléfono del usuario
+export const actualizarTelefonoUsuario = (userId, telefono) => {
+  return axios.put(`/actualizar-telefono/${userId}`, { telefono });
+};
 // Ruta para obtener todos los pedidos (administrador)
 export const obtenerTodosLosPedidos = () => axios.get('/todosLosPedidos');
+export const actualizarPedido = (id, updatedData) => axios.put(`/actualizarPedido/${id}`, updatedData);
+export const eliminarPedido = (id) => axios.delete(`/eliminarPedido/${id}`);
+
+export const obtenerPedidosPorEstado = (estado) => axios.get(`/pedidos/estado/${estado}`);

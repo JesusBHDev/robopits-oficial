@@ -5,20 +5,42 @@ import { useAuth } from "../context/AuthContext.jsx";
 import { Icon } from "@iconify/react";
 import { useForm } from "react-hook-form";
 import { Helmet } from "react-helmet-async";
+import Captcha from '../components/Captcha';
 
 const Login = () => {
+
   const {
     register,
     handleSubmit,
     formState: { errors }
-  } = useForm();
+  } = useForm()
 
-  const {signin, isAuthenticated} = useAuth();
-  const navigate = useNavigate();
+  const {signin,isAuthenticated} =  useAuth();
+  const navigate = useNavigate()
+
+  const [captchaVerified, setCaptchaVerified] = useState(false);
+
+
+  const handleVerificationChange = (value) => {
+    console.log(value);
+    setCaptchaVerified(!!value); // Convierte el valor en un booleano y lo asigna al estado
+  };
+
+
+  const onSubmit = handleSubmit(data => {
+    if (captchaVerified) {
+      // Realiza acciones adicionales para enviar el formulario
+      alert('Usuario verificado. Enviar formulario.');
+    } else {
+      alert('Eres un robot. No se puede enviar el formulario.');
+    }
+    
+    signin(data);
+  })
 
   useEffect(()=>{
-    if(isAuthenticated) navigate('/todos-los-productos');
-  }, [isAuthenticated]);
+    if(isAuthenticated) navigate('/todos-los-productos')
+  }, [isAuthenticated])
 
   const [passwordVisible, setPasswordVisible] = useState(false);
 
@@ -26,21 +48,17 @@ const Login = () => {
     setPasswordVisible(!passwordVisible);
   };
 
-  const onSubmit = data => {
-    signin(data); // Procesa la autenticación con los datos ingresados
-  };
-
   return (
     <div className='img-fondo-login h-screen'>
       <Helmet>
-        <meta
+      <meta
           httpEquiv="Content-Security-Policy"
           content={`
             default-src 'self';
             script-src 'self' https://www.google.com https://www.gstatic.com https://api.unisvg.com https://api.iconify.design https://mailbite.io/api/check;
             style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://www.gstatic.com;
             style-src-elem 'self' 'unsafe-inline' https://fonts.googleapis.com https://www.gstatic.com;
-            connect-src 'self' https://api.simplesvg.com/ https://www.google.com https://api.unisvg.com https://api.iconify.design https://backend-robo.vercel.app http://localhost:4000 https://mailbite.io/api/check;
+            connect-src 'self' https://api.simplesvg.com/ https://www.google.com https://api.unisvg.com https://api.iconify.design https://backend-robo.vercel.app https://back-end-robopits.vercel.app http://localhost:4000 https://mailbite.io/api/check;
             object-src 'none';
             frame-src 'self' https://www.google.com;
             font-src 'self' https://fonts.gstatic.com;
@@ -63,20 +81,27 @@ const Login = () => {
         </div>
         <img className='logo-login' src="images/robopits-transparente2.webp" alt="RoboPits" />
         <div className='form-login'>
+
+          {/*COMIENZA A PEGAR DESDE AQUÍ */}
           <form onSubmit={handleSubmit(onSubmit)}>
             <h2 className='titulo-login'>Iniciar Sesión</h2>
 
             <div className='contenedor-cajas-login'>
+              {/* Input del Email */}
               <label className='nom-cajas-login' htmlFor="Email">Email</label>
-              <input className='cajas-login' placeholder='Ingrese su email' type="email" id="Email"  {...register('Email', {
+              <input className='cajas-login' placeholder='Ingrese su email' type="email" id="Email" autoComplete="off" {...register('Email', {
                 required: true,
                 pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/i,
               })} />
+              {/* Mensaje de error de EMAIL: Required */}
               {errors.Email?.type === 'required' && <p style={{ color: "red", marginTop: "-1px", height: "auto", fontSize: "12px" }}>El campo de email es obligatorio</p>}
+
+              {/* Mensaje de error de EMAIL: Pattern */}
               {errors.Email?.type === 'pattern' && <p style={{ color: "red", marginTop: "-1px", height: "auto", fontSize: "12px" }}>Ingresa un correo válido, no olvides usar @ y .com</p>}
             </div>
 
             <div className='contenedor-cajas-registro'>
+              {/* Input de la contraseña */}
               <label className='nom-cajas-registro' htmlFor="Password">Contraseña</label>
               <div className='password-toggle-login'>
                 <div className='input-contrasena-ojo-login'>
@@ -84,19 +109,25 @@ const Login = () => {
                     placeholder="Ingrese su contraseña" {...register('Password', {
                       required: true,
                       pattern: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/,
+
                     })} />
                   <button type="button" className='toggle-password-button-login' onClick={() => togglePasswordVisibility(!passwordVisible)}>
                     {passwordVisible ? <Icon icon="mdi:eye" /> : <Icon icon="mdi:eye-off" />}
                   </button>
                 </div>
               </div>
+              {/* Mensaje de error de CONTRASEÑA: Required */}
               {errors.Password?.type === 'required' && <p className='mensajes-error-registro'>El campo de contraseña es obligatorio</p>}
+
+              {/* Mensaje de error de CONTRASEÑA: Pattern */}
               {errors.Password?.type === 'pattern' && <p className='mensajes-error-registro'>Ingresa una contraseña válida con mínimo 8 cáracteres. Debes usar como mínimo 1 letra mayúscula,
                 1 letra minúscula, 1 símbolo raro y 1 número</p>}
+
             </div>
 
+            {/* TERMINA DE COPIAR AQUÍ */}
+
             <div className='botones-login'>
-              <input type="submit" id="login" className="btn-continuar-login" value="Continuar" />
 
               <div className='cont-btn-rest-contra-login'>
                 <NavLink to="/restablecerContrasena">
@@ -134,4 +165,4 @@ const Login = () => {
   )
 }
 
-export default Login;
+export default Login

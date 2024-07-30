@@ -6,7 +6,7 @@ import axios from 'axios';
 const MigasPan = () => {
   const [productos, setProductos] = useState([]);
 
-  const URL = "https://backend-robo.vercel.app/api/productos";
+  const URL = "https://back-end-robopits.vercel.app/api/productos";
 
   const showData = async () => {
     try {
@@ -17,8 +17,23 @@ const MigasPan = () => {
     }
   };
 
+  const loadCategories = async () => {
+    try {
+      const response = await axios.get('https://back-end-robopits.vercel.app/api/categorias');
+      response.data.forEach((categoria) => {
+        setRouteToComponent((prevRoutes) => ({
+          ...prevRoutes,
+          [`/categoria/${categoria._id}`]: `${categoria.NameCategoria}`,
+        }));
+      });
+    } catch (error) {
+      console.error('Error al obtener categorías:', error);
+    }
+  };
+
   useEffect(() => {
     showData();
+    loadCategories();
   }, []);
 
   useEffect(() => {
@@ -38,12 +53,17 @@ const MigasPan = () => {
     // Agrega aquí más mapeos según tus rutas y nombres de componentes
     '/quienes-somos': '¿Quiénes somos?',
     '/categorias': 'Categorías',
+    '/categoria': 'Categoria',
     '/todos-los-productos': 'Todos los productos',
     '/avisos-de-privacidad': 'Avisos de privacidad',
     '/terminos-y-condiciones': 'Términos y condiciones',
     '/preguntas-frecuentes': 'Preguntas frecuentes',
     '/resena-producto' : 'Reseña de producto',
     '/propuesta': 'Propuesta',
+    '/perfil': 'Mi perfil',
+    '/carrito': 'Carrito de compras',
+    '/Pedidos': 'Mis pedidos',
+
   });
 
 

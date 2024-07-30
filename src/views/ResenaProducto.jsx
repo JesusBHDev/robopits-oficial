@@ -5,7 +5,7 @@ import { NavLink, useParams } from 'react-router-dom';
 import { Image } from "antd";
 import CustomDropdown from '../components/CustomDropdown.jsx';
 import ToggleDiv from '../components/ToggleDiv.jsx';
-import { getProducto, agregarAlCarrito } from '../api/auth.js';
+import { getProducto, agregarAlCarrito, obtenerRecomendaciones } from '../api/auth.js';
 import { useAuth } from "../context/AuthContext.jsx";
 
 const options = [
@@ -24,6 +24,7 @@ const ResenaProducto = () => {
     const [loading, setLoading] = useState(true);
     const [producto, setProducto] = useState({});
     const [cantidad, setCantidad] = useState(1);
+    const [recommendations, setRecommendations] = useState([]);
 
     const fetchData = async () => {
         try {
@@ -46,6 +47,11 @@ const ResenaProducto = () => {
         try {
             await agregarAlCarrito(user.id, producto._id, cantidad);
             alert('Producto agregado al carrito exitosamente');
+
+            const recomendacionesResponse = await obtenerRecomendaciones();
+            setRecommendations(recomendacionesResponse.data);
+            console.log(recomendacionesResponse);
+
         } catch (error) {
             console.error('Error al agregar producto al carrito:', error);
             alert('Hubo un error al agregar el producto al carrito');
@@ -109,6 +115,25 @@ const ResenaProducto = () => {
                                         <ToggleDiv title="Categoría" content={producto.Categoria} />
                                         <ToggleDiv title="¿Qué incluye?" content={producto.Incluye} />
                                     </div>
+
+                                    {recommendations.length > 0 && (
+                                        <div className="mt-4">
+                                            <h1 className="text-xl font-bold mb-2">Otros clientes también agregaron estos productos a su carrito</h1>
+                                            <div className="flex overflow-x-auto space-x-4">
+                                                {recommendations.map((recProduct) => (
+                                                    <div key={recProduct._id} className="flex-shrink-0 w-40 p-2 border rounded-lg">
+                                                        <Image
+                                                            className="h-24 w-full object-cover rounded-md"
+                                                            src={recProduct.Imagen}
+                                                            alt={recProduct.NameProducto}
+                                                        />
+                                                        <p className="mt-2 text-sm font-semibold text-gray-700">{recProduct.NameProducto}</p>
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    )}
+
                                 </div>
                             </div>
                         )}
