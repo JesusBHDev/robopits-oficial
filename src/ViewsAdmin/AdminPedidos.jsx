@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { obtenerTodosLosPedidos, actualizarPedido, eliminarPedido, obtenerPedidosPorEstado } from '../api/auth.js';
+import { obtenerTodosLosPedidos, actualizarPedido, eliminarPedido, obtenerPedidosPorEstado, moverPedidoAlHistorial } from '../api/auth.js';
 import moment from 'moment';
 import { EncabezadoAdmin } from './ComponenetesAdmin/Encabezado'
 function OrderComponent() {
@@ -59,6 +59,16 @@ function OrderComponent() {
     setSelectedOrder(null);
   };
 
+  const handleMoverPedido = async (pedidoId) => {
+    try {
+      await moverPedidoAlHistorial(pedidoId);
+      // Actualizar la lista de pedidos después de mover al historial
+      const resultado = await obtenerTodosLosPedidos();
+      setPedidos(resultado.data);
+    } catch (error) {
+      console.error('Error al mover el pedido al historial:', error);
+    }
+  };
 
   return (
     <div>
@@ -94,6 +104,14 @@ function OrderComponent() {
                     >
                       Ver Pedido
                     </button>
+                    {pedido.estado === 'Listo' && (
+                    <button
+                      onClick={() => handleMoverPedido(pedido._id)}
+                      className="bg-red-500 text-white px-4 py-2 rounded-md"
+                    >
+                      Remover
+                    </button>
+                    )}
                   </div>
                 </li>
               ))}

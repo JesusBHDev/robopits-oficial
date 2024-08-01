@@ -11,10 +11,9 @@ export const verificarToken = async (token) => {
   };
 export const forgotPasswordRequest = email => axios.post(`/forgorPassword`, { Email: email });
 export const resetPasswordRequest = (token, Password) => axios.post(`/passwordReset`, { token, Password });
-//_____________APIS REALES DEL PROYECTO XD________//
+
 export const crearEmpleado = user => axios.post(`/registro`, user);
 export const IniciarEmpleado = user => axios.post(`/inicio`, user);
-
 export const verificarTokenEmpleado = async (admin) => {
   return await axios.get('/verificar', {
     headers: {
@@ -44,26 +43,27 @@ export const obtenerCarrito = (userId) =>  axios.get(`/carrito/${userId}`);
 export const decrementarCantidadProducto = (userId, productId) => axios.post('/carrito/decrement', { userId, productId });
 export const eliminarProductoDelCarrito = (userId, productId) => axios.post('/carrito/remove', { userId, productId });
 export const incrementarCantidadProducto = (userId, productId) => axios.post('/carrito/increment', { userId, productId });
-export const obtenerRecomendaciones = () => axios.get('/recomendaciones');
 
 export const agregarPedido = (userId, direccion, descuento) => axios.post('/crearpedido', { userId, direccion, descuento});
-
 export const obtenerPedidosCliente = (userId) => axios.get(`/pedidosCliente/${userId}`);
+
+export const obtenerRecomendaciones = () => axios.get('/recomendaciones');
+
 export const obtenerPerfil = (userId) => {
   return axios.get(`/perfil/${userId}`);
 };
-//actualizar el perfil del usuario
 export const actualizarPerfil = (userId, perfil) => {
   return axios.put(`/perfil/${userId}`, perfil);
 };
-
-// Función para actualizar el número de teléfono del usuario
 export const actualizarTelefonoUsuario = (userId, telefono) => {
   return axios.put(`/actualizar-telefono/${userId}`, { telefono });
 };
-// Ruta para obtener todos los pedidos (administrador)
+
 export const obtenerTodosLosPedidos = () => axios.get('/todosLosPedidos');
 export const actualizarPedido = (id, updatedData) => axios.put(`/actualizarPedido/${id}`, updatedData);
 export const eliminarPedido = (id) => axios.delete(`/eliminarPedido/${id}`);
-
 export const obtenerPedidosPorEstado = (estado) => axios.get(`/pedidos/estado/${estado}`);
+
+
+export const moverPedidoAlHistorial = (pedidoId) => axios.put(`/mover-pedido/${pedidoId}`);
+export const obtenerHistorialDePedidos = () => axios.get('/historial-pedidos');

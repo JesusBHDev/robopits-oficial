@@ -61,6 +61,11 @@ export function EncabezadoAdmin() {
           <p className="text-sm">Panel Administrativo</p>
         </div>
         <nav className="w-full flex flex-col items-center">
+        <Link to="/PanelAdmin" className="mb-4 w-4/5 flex justify-center">
+            <button className="w-3/4 px-4 py-2 bg-blue-600 text-white rounded-md shadow-md hover:bg-blue-700 transition duration-200">
+              Home
+            </button>
+          </Link>
           <Link to="/AdminProductos" className="mb-4 w-4/5 flex justify-center">
             <button className="w-3/4 px-4 py-2 bg-blue-600 text-white rounded-md shadow-md hover:bg-blue-700 transition duration-200">
               Productos
@@ -79,6 +84,11 @@ export function EncabezadoAdmin() {
           <Link to="/AdminPedidos" className="mb-4 w-4/5 flex justify-center">
             <button className="w-3/4 px-4 py-2 bg-blue-600 text-white rounded-md shadow-md hover:bg-blue-700 transition duration-200">
               Pedidos
+            </button>
+          </Link>
+          <Link to="/HistorialPedidos" className="mb-4 w-4/5 flex justify-center">
+            <button className="w-3/4 px-4 py-2 bg-blue-600 text-white rounded-md shadow-md hover:bg-blue-700 transition duration-200">
+              Historial Pedidos
             </button>
           </Link>
         </nav>

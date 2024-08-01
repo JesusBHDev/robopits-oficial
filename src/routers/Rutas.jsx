@@ -42,6 +42,7 @@ import AdminPagina from "../ViewsAdmin/AdminPagina.jsx";
 import ProductosPorCategoria from "../views/ProductosPorCategoria.jsx";
 import Carrito from "../views/Carrito.jsx";
 import Pedido from "../views/Pedido.jsx";
+import HistorialPedidos from "../ViewsAdmin/HistorialPedidos.jsx";
 export const Rutas = createBrowserRouter([
     {
         path: "/Inicio",
@@ -193,6 +194,11 @@ export const Rutas = createBrowserRouter([
     {
         path:"/AdminPagina",
         element: <ProtectorRutasPrivadas Page={AdminPagina}/>
+                        
+    },
+    {
+        path:"/HistorialPedidos",
+        element: <ProtectorRutasPrivadas Page={HistorialPedidos}/>
                         
     },
     {

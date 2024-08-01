@@ -205,7 +205,7 @@ function AdminProductos() {
         </div>
       </div>
       {showNewProductForm && (
-        <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-red-800 bg-opacity-50">
+        <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-blue-800 bg-opacity-50">
           <div className="bg-white p-8 rounded shadow w-11/12 h-5/6 overflow-y-auto">
             <h2 className="text-xl font-semibold mb-4">{editMode ? 'Editar Producto' : 'Agregar Nuevo Producto'}</h2>
             <form onSubmit={handleSubmit} className="grid grid-cols-2 gap-4">
@@ -269,7 +269,7 @@ function AdminProductos() {
         </div>
       )}
       {selectedProduct && (
-        <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-gray-800 bg-opacity-50">
+        <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-blue-800 bg-opacity-50">
           <div className="bg-white p-8 rounded shadow w-11/12 h-5/6 overflow-y-auto">
             {editMode ? (
               <form onSubmit={handleSubmit} className="grid grid-cols-2 gap-4">
