@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { obtenerTodosLosPedidos, actualizarPedido, eliminarPedido, obtenerPedidosPorEstado } from '../api/auth.js';
-
-import { EncabezadoAdmin, BotonMenu } from './ComponenetesAdmin/Encabezado'
+import moment from 'moment';
+import { EncabezadoAdmin } from './ComponenetesAdmin/Encabezado'
 function OrderComponent() {
   const [orders, setOrders] = useState([]);
   const [selectedOrder, setSelectedOrder] = useState(null);
@@ -42,14 +42,14 @@ function OrderComponent() {
       estado: order.estado
     });
   };
-  
+
   const handleDeleteOrder = async (id) => {
     await eliminarPedido(id);
     const response = await obtenerTodosLosPedidos();
     setTodosLosPedidos(response.data);
     setSelectedOrder(null);
   };
-  
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     await actualizarPedido(selectedOrder._id, formData);
@@ -58,13 +58,12 @@ function OrderComponent() {
     setEditMode(false);
     setSelectedOrder(null);
   };
-  
+
 
   return (
     <div>
       <EncabezadoAdmin />
-      <BotonMenu />
-      <div className="ml-40 pt-20 px-6 bg-gray-100 min-h-screen">
+      <div className="pt-20 px-6 bg-gray-100 min-h-screen">
         <h1 className="text-3xl font-bold mb-4">Todos los Pedidos</h1>
         <div className="mb-4">
           <label htmlFor="estado" className="mr-2">Filtrar por estado:</label>
@@ -84,12 +83,10 @@ function OrderComponent() {
             <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {pedidos.map((pedido) => (
                 <li key={pedido._id} className="bg-white p-4 rounded-md shadow-md">
-                  <p><strong>Pedido ID:</strong> {pedido._id}</p>
                   <p><strong>Cliente:</strong> {pedido.cliente.nombre}</p>
-                  <p><strong>Total:</strong> ${pedido.total}</p>
                   <p><strong>Estado:</strong> {pedido.estado}</p>
-                  <p><strong>Dirección:</strong> {pedido.direccion}</p>
                   <p><strong>Punto de Retiro:</strong> {pedido.puntoDeRetiro}</p>
+                  <p><strong>Fecha del pedido:</strong> {moment(pedido.createdAt).format('DD/MM/YYYY HH:mm')}</p>
                   <div className="flex justify-between mt-2">
                     <button
                       onClick={() => setSelectedOrder(pedido)}
@@ -106,70 +103,48 @@ function OrderComponent() {
           )}
         </div>
 
-        {orders.length > 0 ? (
-          <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {orders.map(pedido => (
-              <li key={pedido._id} className="bg-white p-4 rounded-md shadow-md">
-                <p><strong>Pedido ID:</strong> {pedido._id}</p>
-                <p><strong>Cliente:</strong> {pedido.cliente.nombre}</p>
-                <p><strong>Total:</strong> ${pedido.total}</p>
-                <p><strong>Estado:</strong> {pedido.estado}</p>
-                <p><strong>Dirección:</strong> {pedido.direccion}</p>
-                <p><strong>Punto de Retiro:</strong> {pedido.puntoDeRetiro}</p>
-
-                <div className="flex justify-between mt-2">
-                  <button
-                    onClick={() => setSelectedOrder(pedido)}
-                    className="bg-blue-500 text-white px-4 py-2 rounded-md"
-                  >
-                    Ver Pedido
-                  </button>
-
-                </div>
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <p>Estos son tus pedidos .</p>
-        )}
-
         {selectedOrder && !editMode && (
           <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-            <div className="bg-white p-8 rounded-md">
+            <div className="bg-white p-8 rounded-md w-auto max-w-3xl h-auto max-h-screen overflow-y-auto shadow-lg">
               <h2 className="text-2xl font-bold mb-4">Pedido Detalles</h2>
+              <div className="space-y-2">
               <p><strong>Pedido ID:</strong> {selectedOrder._id}</p>
-              <p><strong>Cliente:</strong> {selectedOrder.cliente.nombre}</p>
-              <p><strong>Total:</strong> ${selectedOrder.total}</p>
-              <p><strong>Total de productos:</strong> {selectedOrder.totalproductos} </p>
-              <p><strong>Estado:</strong> {selectedOrder.estado}</p>
-              <p><strong>Dirección:</strong> {selectedOrder.direccion}</p>
-              <p><strong>Punto de Retiro:</strong> {selectedOrder.puntoDeRetiro}</p>
-              <ul>
+              <p><strong>Fecha del pedido:</strong> {moment(selectedOrder.createdAt).format('DD/MM/YYYY HH:mm')}</p>
+                <p><strong>Cliente:</strong> {selectedOrder.cliente.nombre}</p>
+                <p><strong>Total:</strong> ${selectedOrder.total}</p>
+                <p><strong>Total de productos:</strong> {selectedOrder.totalproductos} </p>
+                <p><strong>Estado:</strong> {selectedOrder.estado}</p>
+                <p><strong>Dirección:</strong> {selectedOrder.direccion}</p>
+                <p><strong>Punto de Retiro:</strong> {selectedOrder.puntoDeRetiro}</p>
+              </div>
+              <ul className="mt-4 space-y-4">
                 {selectedOrder.productos.map(producto => (
-                  <li key={producto.productId}>
-                    <img src={producto.image} alt={producto.name} className="w-16 h-16" />
-                    <p><strong>Producto:</strong> {producto.name}</p>
-                    <p><strong>Cantidad:</strong> {producto.quantity}</p>
-                    <p><strong>Precio:</strong> ${producto.price}</p>
+                  <li key={producto.productId} className="flex items-center space-x-4">
+                    <img src={producto.image} alt={producto.name} className="w-16 h-16 rounded-md shadow-sm" />
+                    <div>
+                      <p><strong>Producto:</strong> {producto.name}</p>
+                      <p><strong>Cantidad:</strong> {producto.quantity}</p>
+                      <p><strong>Precio:</strong> ${producto.price}</p>
+                    </div>
                   </li>
                 ))}
               </ul>
               <div className="flex justify-between mt-4">
                 <button
                   onClick={() => setSelectedOrder(null)}
-                  className="bg-red-500 text-white px-4 py-2 rounded-md"
+                  className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 transition duration-200"
                 >
                   Cerrar
                 </button>
                 <button
                   onClick={() => handleEditOrder(selectedOrder)}
-                  className="bg-yellow-500 text-white px-4 py-2 rounded-md ml-2"
+                  className="bg-yellow-500 text-white px-4 py-2 rounded-md ml-2 hover:bg-yellow-600 transition duration-200"
                 >
                   Editar
                 </button>
                 <button
                   onClick={() => handleDeleteOrder(selectedOrder._id)}
-                  className="bg-red-700 text-white px-4 py-2 rounded-md ml-2"
+                  className="bg-red-700 text-white px-4 py-2 rounded-md ml-2 hover:bg-red-800 transition duration-200"
                 >
                   Eliminar
                 </button>
@@ -178,9 +153,10 @@ function OrderComponent() {
           </div>
         )}
 
+
         {selectedOrder && editMode && (
           <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-            <div className="bg-white p-8 rounded-md">
+            <div className="bg-white p-8 rounded-md w-auto max-w-2xl overflow-y-auto max-h-full">
               <h2 className="text-2xl font-bold mb-4">Editar Pedido</h2>
               <form onSubmit={handleSubmit}>
                 <div className="mb-4">
@@ -189,7 +165,7 @@ function OrderComponent() {
                     type="number"
                     value={formData.descuento}
                     onChange={e => setFormData({ ...formData, descuento: e.target.value })}
-                    className="w-full px-4 py-2 border rounded-md"
+                    className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600"
                   />
                 </div>
                 <div className="mb-4">
@@ -197,7 +173,7 @@ function OrderComponent() {
                   <select
                     value={formData.puntoDeRetiro}
                     onChange={e => setFormData({ ...formData, puntoDeRetiro: e.target.value })}
-                    className="w-full px-4 py-2 border rounded-md"
+                    className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600"
                   >
                     <option value="">Seleccionar punto de retiro</option>
                     <option value="Parque Poblamiento">Parque Poblamiento</option>
@@ -209,7 +185,7 @@ function OrderComponent() {
                   <select
                     value={formData.estado}
                     onChange={e => setFormData({ ...formData, estado: e.target.value })}
-                    className="w-full px-4 py-2 border rounded-md"
+                    className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600"
                   >
                     <option value="Pendiente">Pendiente</option>
                     <option value="En preparacion">En preparacion</option>
@@ -217,14 +193,14 @@ function OrderComponent() {
                     <option value="Cancelado">Cancelado</option>
                   </select>
                 </div>
-                <div className="flex justify-between">
-                  <button type="submit" className="bg-green-500 text-white px-4 py-2 rounded-md">
+                <div className="flex justify-between mt-4">
+                  <button type="submit" className="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 transition duration-200">
                     Guardar Cambios
                   </button>
                   <button
                     type="button"
                     onClick={() => { setEditMode(false); setSelectedOrder(null); }}
-                    className="bg-red-500 text-white px-4 py-2 rounded-md"
+                    className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 transition duration-200"
                   >
                     Cancelar
                   </button>
@@ -233,6 +209,7 @@ function OrderComponent() {
             </div>
           </div>
         )}
+
       </div>
     </div>
   );

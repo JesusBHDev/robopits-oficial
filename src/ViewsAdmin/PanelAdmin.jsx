@@ -1,11 +1,10 @@
 import React from 'react';
-import { EncabezadoAdmin, BotonMenu } from '../ViewsAdmin/ComponenetesAdmin/Encabezado.jsx';
+import { EncabezadoAdmin } from '../ViewsAdmin/ComponenetesAdmin/Encabezado.jsx';
 import MapaEntrega from './ComponenetesAdmin/MapaEntrega.js';
 
 function PanelAdmin() {
   return (
     <div className="flex">
-      <BotonMenu />
       <div className="flex-1 ml-40">
         <EncabezadoAdmin />
         <div className="p-6">

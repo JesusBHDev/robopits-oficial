@@ -1,4 +1,4 @@
-import { EncabezadoAdmin, BotonMenu } from './ComponenetesAdmin/Encabezado';
+import { EncabezadoAdmin } from './ComponenetesAdmin/Encabezado';
 import { getAllEmployees, deleteEmployee, updateEmpleado } from '../api/auth.js';
 import { useForm } from "react-hook-form";
 import { useState, useEffect } from 'react';
@@ -53,8 +53,7 @@ function AdminEmpleado() {
   return (
     <div className="flex">
       <EncabezadoAdmin />
-      <BotonMenu />
-      <div className="ml-40 pt-20 px-6 bg-gray-100 min-h-screen">
+      <div className="pt-20 px-6 bg-gray-100 min-h-screen">
 
         <div >
           <div className="flex justify-between items-center mb-4">

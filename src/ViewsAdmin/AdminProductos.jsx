@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { getAllProductos, crearProducto, updateProducto, EliminarProducto, getProducto, getAllCategorias } from '../api/auth';
-import { EncabezadoAdmin, BotonMenu } from './ComponenetesAdmin/Encabezado'
+import { EncabezadoAdmin } from './ComponenetesAdmin/Encabezado'
 
 function AdminProductos() {
   const [productos, setProductos] = useState([]);
@@ -177,8 +177,8 @@ function AdminProductos() {
   return (
     <div>
       <EncabezadoAdmin />
-      <BotonMenu />
-      <div className="ml-40 pt-20 px-6">
+      
+      <div className="pt-20 px-6">
         <div className="flex justify-between items-center mb-4 flex-wrap">
           <h1 className="text-3xl font-semibold">Productos</h1>
           <button
@@ -197,8 +197,7 @@ function AdminProductos() {
               <p className="text-sm text-gray-600 mb-2">ID: {producto.IdProducto}</p>
               <button
                 onClick={() => openProductDetails(producto)}
-                className="bg-green-500 text-white px-3 py-1 w-full rounded-md transition duration-300 ease-in-out transform hover:bg-green-600 hover:-translate-y-1 shadow-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50"
-              >
+                className="bg-blue-500 text-white px-4 py-2 rounded-md">
                 Ver Producto
               </button>
             </div>

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { EncabezadoAdmin, BotonMenu } from './ComponenetesAdmin/Encabezado'
+import { EncabezadoAdmin} from './ComponenetesAdmin/Encabezado'
 import { getAllCategorias, eliminarCategoria, updateCategoria, crearCategoria } from '../api/auth';
 
 function AdminCategorias() {
@@ -83,8 +83,7 @@ function AdminCategorias() {
   return (
     <div>
       <EncabezadoAdmin />
-      <BotonMenu />
-      <div className="ml-40 pt-20 px-6 bg-gray-100 min-h-screen">
+      <div className="pt-20 px-6 bg-gray-100 min-h-screen">
         <div >
           <h2 className="text-center text-black text-3xl py-4">Categorías</h2>
           <div className="mb-4 text-center">
@@ -153,15 +152,13 @@ function AdminCategorias() {
                     <h3 className="text-black text-lg font-semibold mb-2 text-center">{categoria.NameCategoria}</h3>
                     <div className="flex justify-center space-x-4 w-full">
                       <button
-                        className="bg-green-500 text-white px-3 py-1 rounded-md transition duration-300 ease-in-out transform hover:bg-green-600 hover:-translate-y-1 shadow-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50"
-                        onClick={() => handleEditarCategoria(categoria._id, categoria.NameCategoria)}
+                        className="bg-green-500 text-white px-4 py-2 rounded-md"
+                         onClick={() => handleEditarCategoria(categoria._id, categoria.NameCategoria)}
                       >
                         Editar
                       </button>
                       <button
-                        className="bg-red-500 text-white px-3 py-1 rounded-md transition duration-300 ease-in-out transform hover:bg-red-600 hover:-translate-y-1 shadow-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50"
-                        onClick={() => handleEliminarCategoria(categoria._id)}
-                      >
+                       className="bg-red-500 text-white px-4 py-2 rounded-md" >
                         Eliminar
                       </button>
                     </div>
