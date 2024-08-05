@@ -32,6 +32,7 @@ function AdminProductos() {
     Imagen: ''
   };
 
+
   const openNewProductForm = () => {
     setNewProductData(emptyProductData);
     setEditMode(false);
@@ -110,7 +111,7 @@ function AdminProductos() {
     formData.append('Caracteristicas', newProductData.Caracteristicas);
     formData.append('Incluye', newProductData.Incluye);
     formData.append('Imagen', newProductData.Imagen);
-
+  
     try {
       if (editMode && selectedProduct) {
         const updatedProduct = await updateProducto(selectedProduct._id, formData);
@@ -123,24 +124,19 @@ function AdminProductos() {
       } else {
         const createdProduct = await crearProducto(formData);
         console.log('Producto creado exitosamente:', createdProduct);
-        setProductos([...productos, createdProduct]);
+  
+        // Actualiza el estado de productos
+        setProductos(prevProductos => [...prevProductos, createdProduct.data]);
+  
         setShowNewProductForm(false);
       }
-      setNewProductData({
-        IdProducto: '',
-        NameProducto: '',
-        Categoria: '',
-        Precio: '',
-        Existencias: '',
-        Descripcion: '',
-        Caracteristicas: '',
-        Incluye: '',
-        Imagen: null
-      });
+  
+      setNewProductData(emptyProductData);
     } catch (error) {
       console.error('Error al guardar cambios', error);
     }
   };
+  
 
   const toggleNewProductForm = () => {
     setShowNewProductForm(prevState => !prevState);
@@ -209,11 +205,6 @@ function AdminProductos() {
           <div className="bg-white p-8 rounded shadow w-11/12 h-5/6 overflow-y-auto">
             <h2 className="text-xl font-semibold mb-4">{editMode ? 'Editar Producto' : 'Agregar Nuevo Producto'}</h2>
             <form onSubmit={handleSubmit} className="grid grid-cols-2 gap-4">
-
-              <div className="col-span-2">
-                <label htmlFor="IdProducto" className="block text-gray-700 mb-2">ID del Producto:</label>
-                <input type="text" name="IdProducto" value={newProductData.IdProducto} onChange={handleInputChange} placeholder="Id del producto" className="border border-gray-400 rounded-md p-2 w-full" required />
-              </div>
 
               <div className="col-span-2">
                 <label htmlFor="NameProducto" className="block text-gray-700 mb-2">Nombre del Producto:</label>
@@ -332,23 +323,31 @@ function AdminProductos() {
                 </div>
               </form>
             ) : (
-              <div>
-                <img src={selectedProduct.Imagen} alt={selectedProduct.NameProducto} className="w-40 h-40 object-cover mb-4" />
-                <h2 className="text-xl font-semibold mb-2">{selectedProduct.NameProducto}</h2>
-                <p className="text-gray-600 mb-2"><strong>ID:</strong> {selectedProduct.IdProducto}</p>
-                <p className="text-gray-600 mb-2"><strong>Categoría:</strong> {selectedProduct.Categoria}</p>
-                <p className="text-gray-600 mb-2"><strong>Precio:</strong> {selectedProduct.Precio}</p>
-                <p className="text-gray-600 mb-2"><strong>Existencias:</strong> {selectedProduct.Existencias}</p>
-                <p className="text-gray-600 mb-2"><strong>Descripción:</strong> {selectedProduct.Descripcion}</p>
-                <p className="text-gray-600 mb-2"><strong>Características:</strong> {selectedProduct.Caracteristicas}</p>
-                <p className="text-gray-600 mb-2"><strong>Incluye:</strong> {selectedProduct.Incluye}</p>
-                <div className="mt-4">
-                  <button onClick={openEditProductForm} className="bg-blue-500 text-white px-4 py-2 rounded-md mr-2">Editar</button>
-                  <button onClick={closeProductDetails} className="bg-gray-300 text-gray-800 px-4 py-2 rounded hover:bg-gray-400">Cerrar</button>
-                  <button onClick={handleRefresh} className="bg-green-500 text-white px-4 py-2 rounded-md ml-2">Refrescar</button>
-                  <button onClick={() => handleDeleteProduct(selectedProduct._id)} className="bg-red-500 text-white px-3 py-1 rounded-md">Eliminar</button>
-                </div>
+              <div >
+              <div className="flex justify-center mb-4">
+                <img
+                  src={selectedProduct.Imagen}
+                  alt={selectedProduct.NameProducto}
+                  className="w-60 h-60 object-cover mb-4"
+                />
               </div>
+              <h2 className="text-2xl font-bold mb-4 text-center">{selectedProduct.NameProducto}</h2>
+              <div className="space-y-2 text-gray-700">
+                <p><strong>ID:</strong> {selectedProduct.IdProducto}</p>
+                <p><strong>Categoría:</strong> {selectedProduct.Categoria}</p>
+                <p><strong>Precio:</strong> ${selectedProduct.Precio}</p>
+                <p><strong>Existencias:</strong> {selectedProduct.Existencias}</p>
+                <p><strong>Descripción:</strong> {selectedProduct.Descripcion}</p>
+                <p><strong>Características:</strong> {selectedProduct.Caracteristicas}</p>
+                <p><strong>Incluye:</strong> {selectedProduct.Incluye}</p>
+              </div>
+              <div className="mt-6 flex justify-between">
+                <button onClick={openEditProductForm} className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">Editar</button>
+                <button onClick={closeProductDetails} className="bg-gray-300 text-gray-800 px-4 py-2 rounded-md hover:bg-gray-400">Cerrar</button>
+                <button onClick={handleRefresh} className="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600">Refrescar</button>
+                <button onClick={() => handleDeleteProduct(selectedProduct._id)} className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600">Eliminar</button>
+              </div>
+            </div>
             )}
           </div>
         </div>

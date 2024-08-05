@@ -51,9 +51,9 @@ function AdminEmpleado() {
   };
 
   return (
-    <div className="flex">
+    <div>
       <EncabezadoAdmin />
-      <div className="pt-20 px-6 bg-gray-100 min-h-screen">
+      <div className="pt-20 px-6 bg-gray-200 min-h-screen">
 
         <div >
           <div className="flex justify-between items-center mb-4">

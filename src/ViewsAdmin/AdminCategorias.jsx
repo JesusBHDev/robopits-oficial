@@ -83,7 +83,7 @@ function AdminCategorias() {
   return (
     <div>
       <EncabezadoAdmin />
-      <div className="pt-20 px-6 bg-gray-100 min-h-screen">
+      <div className="pt-20 px-6 bg-gray-200 min-h-screen">
         <div >
           <h2 className="text-center text-black text-3xl py-4">Categorías</h2>
           <div className="mb-4 text-center">
@@ -96,7 +96,7 @@ function AdminCategorias() {
           </div>
 
           {showAddForm && (
-            <div className="bg-orange-400 flex flex-col items-center justify-center mb-4 rounded-md p-4 mx-auto w-full sm:w-2/3 md:w-1/2 lg:w-1/3">
+            <div className="bg-blue-900 flex flex-col items-center justify-center mb-4 rounded-md p-4 mx-auto w-full sm:w-2/3 md:w-1/2 lg:w-1/3">
               <input
                 type="text"
                 value={newCategoryName}
