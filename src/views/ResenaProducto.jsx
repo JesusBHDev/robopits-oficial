@@ -5,7 +5,7 @@ import { NavLink, useParams } from 'react-router-dom';
 import { Image } from "antd";
 import CustomDropdown from '../components/CustomDropdown.jsx';
 import ToggleDiv from '../components/ToggleDiv.jsx';
-import { getProducto, agregarAlCarrito, obtenerRecomendaciones } from '../api/auth.js';
+import { getProducto, agregarAlCarrito } from '../api/auth.js';
 import { useAuth } from "../context/AuthContext.jsx";
 
 const options = [
@@ -24,7 +24,7 @@ const ResenaProducto = () => {
     const [loading, setLoading] = useState(true);
     const [producto, setProducto] = useState({});
     const [cantidad, setCantidad] = useState(1);
-    const [recommendations, setRecommendations] = useState([]);
+    const [expanded, setExpanded] = useState(false);
 
     const fetchData = async () => {
         try {
@@ -47,11 +47,6 @@ const ResenaProducto = () => {
         try {
             await agregarAlCarrito(user.id, producto._id, cantidad);
             alert('Producto agregado al carrito exitosamente');
-
-            const recomendacionesResponse = await obtenerRecomendaciones();
-            setRecommendations(recomendacionesResponse.data);
-            console.log(recomendacionesResponse);
-
         } catch (error) {
             console.error('Error al agregar producto al carrito:', error);
             alert('Hubo un error al agregar el producto al carrito');
@@ -61,6 +56,10 @@ const ResenaProducto = () => {
     useEffect(() => {
         fetchData();
     }, [id]);
+
+    const toggleDescription = () => {
+        setExpanded(!expanded);
+    };
 
     return (
         <div>
@@ -77,63 +76,51 @@ const ResenaProducto = () => {
                         </div>
                     </div>
                 ) : (
-                    <div className="mx-auto w-4/5 max-w-4xl overflow-hidden grid md:flex border rounded border-2 bg-white my-5">
+                    <div className="mx-auto md:w-4/5 grid md:flex border rounded border-2 bg-white md:my-5">
                         {producto && (
-                            <div className="flex flex-col md:flex-row md:items-center w-full">
-                                <div className="md:w-1/2 p-4">
-                                    <Image
-                                        className="h-auto max-w-full"
-                                        src={producto.Imagen}
-                                        alt={producto.NameProducto}
-                                    />
-                                </div>
-
-                                <div className="md:w-1/2 p-5">
-                                    <div className="flex justify-between items-center">
-                                        <h2 className="text-2xl font-bold">{producto.NameProducto}</h2>
-                                        <div className="flex items-center">
-                                            <NavLink to="">
-                                                <Icon icon="mdi:heart-outline" className="text-black hover:text-blue-500 transition-all duration-300 ease-in-out" />
-                                            </NavLink>
-                                        </div>
+                            <div className=''>
+                                <div className="flex flex-col md:flex-row md:items-center w-auto mx-auto">
+                                    <div className="md:w-1/2 w-auto p-4">
+                                        <Image
+                                            className="h-auto w-auto mx-auto"
+                                            src={producto.Imagen}
+                                            alt={producto.NameProducto}
+                                        />
                                     </div>
 
-                                    <h2 className="text-2xl mt-2">${producto.Precio}</h2>
-                                    <p className="text-base mt-4 text-gray-500">{producto.Descripcion}</p>
-                                    <div className="flex mt-4">
-                                        <CustomDropdown options={options} onSelect={(key) => setCantidad(Number(key))} />
-                                        <p className="ml-2 text-base">(+{producto.Existencias} disponibles)</p>
-                                    </div>
-
-                                    <div className="flex space-x-2 mt-4">
-                                        <button type="submit" className="bg-[#3BA4F6] text-white rounded p-2 font-bold w-44 hover:bg-[#2587eb]">Comprar ahora</button>
-                                        <button type="button" onClick={handleAgregarAlCarrito} className="bg-[#4db4b2] text-white rounded p-2 font-bold w-44 hover:bg-[#329696]">Agregar al carrito</button>
-                                    </div>
-
-                                    <div className="mt-4">
-                                        <ToggleDiv title="Características" content={producto.Caracteristicas} />
-                                        <ToggleDiv title="Categoría" content={producto.Categoria} />
-                                        <ToggleDiv title="¿Qué incluye?" content={producto.Incluye} />
-                                    </div>
-
-                                    {recommendations.length > 0 && (
-                                        <div className="mt-4">
-                                            <h1 className="text-xl font-bold mb-2">Otros clientes también agregaron estos productos a su carrito</h1>
-                                            <div className="flex overflow-x-auto space-x-4">
-                                                {recommendations.map((recProduct) => (
-                                                    <div key={recProduct._id} className="flex-shrink-0 w-40 p-2 border rounded-lg">
-                                                        <Image
-                                                            className="h-24 w-full object-cover rounded-md"
-                                                            src={recProduct.Imagen}
-                                                            alt={recProduct.NameProducto}
-                                                        />
-                                                        <p className="mt-2 text-sm font-semibold text-gray-700">{recProduct.NameProducto}</p>
-                                                    </div>
-                                                ))}
+                                    <div className="md:w-1/2 w-auto mx-auto p-5">
+                                        <div className="w-auto  flex justify-between items-center">
+                                            <h2 className="text-2xl font-bold">{producto.NameProducto}</h2>
+                                            <div className="flex items-center">
+                                                <NavLink to="">
+                                                    <Icon icon="mdi:heart-outline" className="text-black hover:text-blue-500 transition-all duration-300 ease-in-out" />
+                                                </NavLink>
                                             </div>
                                         </div>
-                                    )}
 
+                                        <h2 className="text-2xl mt-2">${producto.Precio}</h2>
+                                        <p className={`text-base w-auto mt-4 text-gray-500 ${expanded ? '' : 'line-clamp-3'}`}>
+                                            {producto.Descripcion}
+                                        </p>
+                                        <button onClick={toggleDescription} className="text-blue-500">
+                                            {expanded ? 'Ver menos' : 'Ver más'}
+                                        </button>
+                                        <div className="flex mt-4">
+                                            <CustomDropdown options={options} onSelect={(key) => setCantidad(Number(key))} />
+                                            <p className="ml-2 text-base">(+{producto.Existencias} disponibles)</p>
+                                        </div>
+
+                                        <div className="flex space-x-2 mt-4 md:w-full w-auto">
+                                            <button type="submit" className="bg-[#3BA4F6] text-white rounded p-2 font-bold md:w-44 w-auto hover:bg-[#2587eb]">Comprar ahora</button>
+                                            <button type="button" onClick={handleAgregarAlCarrito} className="bg-[#4db4b2] text-white rounded p-2 font-bold md:w-44 w-auto hover:bg-[#329696]">Agregar al carrito</button>
+                                        </div>
+
+                                        <div className="mt-4 md:w-full w-20 mx-auto">
+                                            <ToggleDiv title="Características" content={producto.Caracteristicas} />
+                                            <ToggleDiv title="Categoría" content={producto.Categoria} />
+                                            <ToggleDiv title="¿Qué incluye?" content={producto.Incluye} />
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         )}

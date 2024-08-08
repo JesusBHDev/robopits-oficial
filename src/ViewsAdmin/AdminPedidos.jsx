@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { obtenerTodosLosPedidos, actualizarPedido, eliminarPedido, obtenerPedidosPorEstado, moverPedidoAlHistorial } from '../api/auth.js';
 import moment from 'moment';
+import swal from 'sweetalert';
 import { EncabezadoAdmin } from './ComponenetesAdmin/Encabezado'
 function OrderComponent() {
   const [orders, setOrders] = useState([]);
@@ -22,7 +23,9 @@ function OrderComponent() {
         const response = await obtenerPedidosPorEstado(estadoSeleccionado);
         setPedidos(response.data);
       } catch (error) {
+
         console.error('Error al obtener los pedidos:', error);
+
       }
     };
 
@@ -43,20 +46,42 @@ function OrderComponent() {
     });
   };
 
+  // Tu función handleDeleteOrder actualizada
   const handleDeleteOrder = async (id) => {
-    await eliminarPedido(id);
-    const response = await obtenerTodosLosPedidos();
-    setTodosLosPedidos(response.data);
-    setSelectedOrder(null);
+    try {
+      await eliminarPedido(id);
+      const response = await obtenerTodosLosPedidos();
+      setTodosLosPedidos(response.data);
+      setSelectedOrder(null);
+
+      // Mostrar alerta de éxito
+      swal("Éxito", "Pedido eliminado exitosamente", "success");
+    } catch (error) {
+      console.error('Error al eliminar el pedido', error);
+
+      // Mostrar alerta de error
+      swal("Error", "No se pudo eliminar el pedido", "error");
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await actualizarPedido(selectedOrder._id, formData);
-    const response = await obtenerTodosLosPedidos();
-    setTodosLosPedidos(response.data);
-    setEditMode(false);
-    setSelectedOrder(null);
+
+    try {
+      await actualizarPedido(selectedOrder._id, formData);
+      const response = await obtenerTodosLosPedidos();
+      setTodosLosPedidos(response.data);
+      setEditMode(false);
+      setSelectedOrder(null);
+
+      // Mostrar alerta de éxito
+      swal("Éxito", "Pedido actualizado exitosamente", "success");
+    } catch (error) {
+      console.error('Error al actualizar el pedido', error);
+
+      // Mostrar alerta de error
+      swal("Error", "No se pudo actualizar el pedido", "error");
+    }
   };
 
   const handleMoverPedido = async (pedidoId) => {
@@ -66,7 +91,8 @@ function OrderComponent() {
       const resultado = await obtenerTodosLosPedidos();
       setPedidos(resultado.data);
     } catch (error) {
-      console.error('Error al mover el pedido al historial:', error);
+      console.error('Error al mover el pedido al historial', error);
+      swal("Fallo", "Error al mover el pedido al historial", "error");
     }
   };
 
@@ -105,12 +131,12 @@ function OrderComponent() {
                       Ver Pedido
                     </button>
                     {pedido.estado === 'Listo' && (
-                    <button
-                      onClick={() => handleMoverPedido(pedido._id)}
-                      className="bg-red-500 text-white px-4 py-2 rounded-md"
-                    >
-                      Remover
-                    </button>
+                      <button
+                        onClick={() => handleMoverPedido(pedido._id)}
+                        className="bg-red-500 text-white px-4 py-2 rounded-md"
+                      >
+                        Remover
+                      </button>
                     )}
                   </div>
                 </li>
@@ -126,8 +152,8 @@ function OrderComponent() {
             <div className="bg-white p-8 rounded-md w-auto max-w-3xl h-auto max-h-screen overflow-y-auto shadow-lg">
               <h2 className="text-2xl font-bold mb-4">Pedido Detalles</h2>
               <div className="space-y-2">
-              <p><strong>Pedido ID:</strong> {selectedOrder._id}</p>
-              <p><strong>Fecha del pedido:</strong> {moment(selectedOrder.createdAt).format('DD/MM/YYYY HH:mm')}</p>
+                <p><strong>Pedido ID:</strong> {selectedOrder._id}</p>
+                <p><strong>Fecha del pedido:</strong> {moment(selectedOrder.createdAt).format('DD/MM/YYYY HH:mm')}</p>
                 <p><strong>Cliente:</strong> {selectedOrder.cliente.nombre}</p>
                 <p><strong>Total:</strong> ${selectedOrder.total}</p>
                 <p><strong>Total de productos:</strong> {selectedOrder.totalproductos} </p>

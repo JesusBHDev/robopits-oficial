@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { getAllProductos, crearProducto, updateProducto, EliminarProducto, getProducto, getAllCategorias } from '../api/auth';
 import { EncabezadoAdmin } from './ComponenetesAdmin/Encabezado'
+import swal from 'sweetalert';
 
 function AdminProductos() {
   const [productos, setProductos] = useState([]);
@@ -20,6 +21,7 @@ function AdminProductos() {
   const [showNewProductForm, setShowNewProductForm] = useState(false);
   const [editMode, setEditMode] = useState(false);
   const [categorias, setCategorias] = useState([]);
+  const [searchTerm, setSearchTerm] = useState(""); // Estado para el término de búsqueda
   const emptyProductData = {
     IdProducto: '',
     NameProducto: '',
@@ -32,12 +34,12 @@ function AdminProductos() {
     Imagen: ''
   };
 
-
   const openNewProductForm = () => {
     setNewProductData(emptyProductData);
     setEditMode(false);
     setShowNewProductForm(true);
   };
+
   useEffect(() => {
     getAllProductos()
       .then(response => {
@@ -84,9 +86,18 @@ function AdminProductos() {
     }));
   };
 
+  // handleFileChange actualizado
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     if (file) {
+      const fileType = file['type'];
+      const validImageTypes = ['image/gif', 'image/jpeg', 'image/png', 'image/webp'];
+      if (!validImageTypes.includes(fileType)) {
+        alert('Por favor seleccione un archivo de imagen válido (gif, jpeg, png, webp)');
+        e.target.value = ''; // Limpiar el input de archivo
+        return;
+      }
+
       const reader = new FileReader();
       reader.onloadend = () => {
         setNewProductData(prevData => ({
@@ -111,11 +122,12 @@ function AdminProductos() {
     formData.append('Caracteristicas', newProductData.Caracteristicas);
     formData.append('Incluye', newProductData.Incluye);
     formData.append('Imagen', newProductData.Imagen);
-  
+
     try {
       if (editMode && selectedProduct) {
         const updatedProduct = await updateProducto(selectedProduct._id, formData);
         console.log('Producto actualizado exitosamente:', updatedProduct);
+        swal("Éxito", "Producto Editado exitosamente", "success");
         const updatedProducts = productos.map(product =>
           product._id === updatedProduct._id ? updatedProduct : product
         );
@@ -124,19 +136,20 @@ function AdminProductos() {
       } else {
         const createdProduct = await crearProducto(formData);
         console.log('Producto creado exitosamente:', createdProduct);
-  
+
         // Actualiza el estado de productos
         setProductos(prevProductos => [...prevProductos, createdProduct.data]);
-  
+
         setShowNewProductForm(false);
+        swal("Éxito", "Producto creado", "success");
       }
-  
+
       setNewProductData(emptyProductData);
     } catch (error) {
       console.error('Error al guardar cambios', error);
+      swal("Fallo", "Error al guardar los cambios ", "error");
     }
   };
-  
 
   const toggleNewProductForm = () => {
     setShowNewProductForm(prevState => !prevState);
@@ -156,6 +169,7 @@ function AdminProductos() {
       setSelectedProduct(response.data);
     } catch (error) {
       console.error('Error al refrescar el producto', error);
+      swal("Fallo", "Error al refrescar el producto ", "error");
     }
   };
 
@@ -164,19 +178,32 @@ function AdminProductos() {
       .then(() => {
         setProductos(prevProductos => prevProductos.filter(producto => producto._id !== productId));
         closeProductDetails();
+        swal("Éxito", "Producto eliminado exitosamente", "success");
       })
       .catch(error => {
         console.error('Error al eliminar el producto', error);
+        swal("Fallo", "Producto no se pudo eliminar ", "error");
       });
   };
+  // Filtrar productos por el término de búsqueda
+  const filteredProductos = productos.filter(producto =>
+    producto.NameProducto && producto.NameProducto.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   return (
     <div>
       <EncabezadoAdmin />
-      
+
       <div className="pt-20 px-6">
         <div className="flex justify-between items-center mb-4 flex-wrap">
           <h1 className="text-3xl font-semibold">Productos</h1>
+          <input
+            type="text"
+            placeholder="Buscar producto..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="border border-gray-400 rounded-md p-2 w-full md:w-1/3 mb-4 md:mb-0"
+          />
           <button
             onClick={toggleNewProductForm}
             className="bg-blue-500 text-white px-4 py-2 mt-2 sm:mt-0 rounded-md transition duration-300 ease-in-out transform hover:bg-blue-600 hover:-translate-y-1 shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
@@ -185,7 +212,7 @@ function AdminProductos() {
           </button>
         </div>
         <div className="mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          {productos.map(producto => (
+          {filteredProductos.map(producto => (
             <div key={producto.IdProducto} className="w-full bg-white rounded-md p-4 shadow-md flex flex-col items-center">
               <img src={producto.Imagen} alt={producto.NameProducto} className="w-full h-32 object-cover mb-4" />
               <h2 className="text-lg font-semibold mb-2 text-center">{producto.NameProducto}</h2>
@@ -200,6 +227,7 @@ function AdminProductos() {
           ))}
         </div>
       </div>
+
       {showNewProductForm && (
         <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-blue-800 bg-opacity-50">
           <div className="bg-white p-8 rounded shadow w-11/12 h-5/6 overflow-y-auto">
@@ -248,7 +276,13 @@ function AdminProductos() {
 
               <div className="col-span-2">
                 <label htmlFor="Imagen" className="block text-gray-700 mb-2">Imagen del Producto:</label>
-                <input type="file" accept="image/*" onChange={handleFileChange} className="border border-gray-400 rounded-md p-2 w-full" />
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={handleFileChange}
+                  className="border border-gray-400 rounded-md p-2 w-full"
+                  required
+                />
               </div>
 
               <div className="flex justify-end col-span-2">
@@ -259,6 +293,7 @@ function AdminProductos() {
           </div>
         </div>
       )}
+
       {selectedProduct && (
         <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-blue-800 bg-opacity-50">
           <div className="bg-white p-8 rounded shadow w-11/12 h-5/6 overflow-y-auto">
@@ -324,36 +359,34 @@ function AdminProductos() {
               </form>
             ) : (
               <div >
-              <div className="flex justify-center mb-4">
-                <img
-                  src={selectedProduct.Imagen}
-                  alt={selectedProduct.NameProducto}
-                  className="w-60 h-60 object-cover mb-4"
-                />
+                <div className="flex justify-center mb-4">
+                  <img
+                    src={selectedProduct.Imagen}
+                    alt={selectedProduct.NameProducto}
+                    className="w-60 h-60 object-cover mb-4"
+                  />
+                </div>
+                <h2 className="text-2xl font-bold mb-4 text-center">{selectedProduct.NameProducto}</h2>
+                <div className="space-y-2 text-gray-700">
+                  <p><strong>ID:</strong> {selectedProduct.IdProducto}</p>
+                  <p><strong>Categoría:</strong> {selectedProduct.Categoria}</p>
+                  <p><strong>Precio:</strong> ${selectedProduct.Precio}</p>
+                  <p><strong>Existencias:</strong> {selectedProduct.Existencias}</p>
+                  <p><strong>Descripción:</strong> {selectedProduct.Descripcion}</p>
+                  <p><strong>Características:</strong> {selectedProduct.Caracteristicas}</p>
+                  <p><strong>Incluye:</strong> {selectedProduct.Incluye}</p>
+                </div>
+                <div className="mt-6 flex justify-between">
+                  <button onClick={openEditProductForm} className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">Editar</button>
+                  <button onClick={closeProductDetails} className="bg-gray-300 text-gray-800 px-4 py-2 rounded-md hover:bg-gray-400">Cerrar</button>
+                  <button onClick={handleRefresh} className="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600">Refrescar</button>
+                  <button onClick={() => handleDeleteProduct(selectedProduct._id)} className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600">Eliminar</button>
+                </div>
               </div>
-              <h2 className="text-2xl font-bold mb-4 text-center">{selectedProduct.NameProducto}</h2>
-              <div className="space-y-2 text-gray-700">
-                <p><strong>ID:</strong> {selectedProduct.IdProducto}</p>
-                <p><strong>Categoría:</strong> {selectedProduct.Categoria}</p>
-                <p><strong>Precio:</strong> ${selectedProduct.Precio}</p>
-                <p><strong>Existencias:</strong> {selectedProduct.Existencias}</p>
-                <p><strong>Descripción:</strong> {selectedProduct.Descripcion}</p>
-                <p><strong>Características:</strong> {selectedProduct.Caracteristicas}</p>
-                <p><strong>Incluye:</strong> {selectedProduct.Incluye}</p>
-              </div>
-              <div className="mt-6 flex justify-between">
-                <button onClick={openEditProductForm} className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">Editar</button>
-                <button onClick={closeProductDetails} className="bg-gray-300 text-gray-800 px-4 py-2 rounded-md hover:bg-gray-400">Cerrar</button>
-                <button onClick={handleRefresh} className="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600">Refrescar</button>
-                <button onClick={() => handleDeleteProduct(selectedProduct._id)} className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600">Eliminar</button>
-              </div>
-            </div>
             )}
           </div>
         </div>
       )}
-
-
     </div>
   );
 }

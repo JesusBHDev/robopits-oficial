@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { EncabezadoAdmin} from './ComponenetesAdmin/Encabezado'
+import { EncabezadoAdmin } from './ComponenetesAdmin/Encabezado'
 import { getAllCategorias, eliminarCategoria, updateCategoria, crearCategoria } from '../api/auth';
-
+import swal from 'sweetalert';
 function AdminCategorias() {
   const [categorias, setCategorias] = useState([]);
   const [editingCategoryId, setEditingCategoryId] = useState(null);
@@ -24,9 +24,11 @@ function AdminCategorias() {
       .then(response => {
         setCategorias(prevCategorias => prevCategorias.filter(categoria => categoria._id !== categoriaId));
         console.log('Categoría eliminada correctamente');
+        swal("Éxito", "Categoria eliminada", "success");
       })
       .catch(error => {
         console.error('Error al eliminar la categoría', error);
+        swal("Fallo", "no se pudo eliminar la categoria ", "error");
       });
   };
 
@@ -48,9 +50,11 @@ function AdminCategorias() {
         setEditedCategoryName('');
 
         console.log('Cambios guardados correctamente');
+        swal("Éxito", "Categoria Actualizada", "success");
       })
       .catch(error => {
         console.error('Error al guardar los cambios', error);
+        swal("Fallo", "no se pudo actualizar la categoria ", "error");
       });
   };
 
@@ -74,9 +78,11 @@ function AdminCategorias() {
         setNewCategoryName('');
 
         console.log('Categoría creada correctamente');
+        swal("Éxito", "Categoria Creada exitosamente", "success");
       })
       .catch(error => {
         console.error('Error al crear la categoría', error);
+        swal("Fallo", "no se pudo crear la categoria ", "error");
       });
   };
 
@@ -153,12 +159,14 @@ function AdminCategorias() {
                     <div className="flex justify-center space-x-4 w-full">
                       <button
                         className="bg-green-500 text-white px-4 py-2 rounded-md"
-                         onClick={() => handleEditarCategoria(categoria._id, categoria.NameCategoria)}
+                        onClick={() => handleEditarCategoria(categoria._id, categoria.NameCategoria)}
                       >
                         Editar
                       </button>
                       <button
-                       className="bg-red-500 text-white px-4 py-2 rounded-md" >
+                        className="bg-red-500 text-white px-4 py-2 rounded-md"
+                        onClick={() => handleEliminarCategoria(categoria._id)}
+                      >
                         Eliminar
                       </button>
                     </div>
