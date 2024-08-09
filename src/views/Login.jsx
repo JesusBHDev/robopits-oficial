@@ -18,9 +18,23 @@ const Login = () => {
   const {signin,isAuthenticated} =  useAuth();
   const navigate = useNavigate()
 
+  const [captchaVerified, setCaptchaVerified] = useState(false);
+
+
+  const handleVerificationChange = (value) => {
+    console.log(value);
+    setCaptchaVerified(!!value); // Convierte el valor en un booleano y lo asigna al estado
+  };
+
 
   const onSubmit = handleSubmit(data => {
-
+    if (captchaVerified) {
+      // Realiza acciones adicionales para enviar el formulario
+      alert('Usuario verificado. Enviar formulario.');
+    } else {
+      alert('Eres un robot. No se puede enviar el formulario.');
+    }
+    
     signin(data);
   })
 
@@ -75,7 +89,7 @@ const Login = () => {
             <div className='contenedor-cajas-login'>
               {/* Input del Email */}
               <label className='nom-cajas-login' htmlFor="Email">Email</label>
-              <input className='cajas-login' placeholder='Ingrese su email' type="email" id="Email" {...register('Email', {
+              <input className='cajas-login' placeholder='Ingrese su email' type="email" id="Email" autoComplete="off" {...register('Email', {
                 required: true,
                 pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/i,
               })} />
@@ -111,15 +125,16 @@ const Login = () => {
 
             </div>
 
-            {/* TERMINA DE COPIAR AQUÍ */}
-
+      
             <div className='botones-login'>
-            <input type="submit" id="login" className="btn-continuar-login" value="Continuar"  />
+           {/*    <Captcha onVerificationChange={handleVerificationChange} />
+              <input type="submit" id="login" className="btn-continuar-login" value="Continuar" disabled={!captchaVerified} />
+ */}
+
               <div className='cont-btn-rest-contra-login'>
                 <NavLink to="/restablecerContrasena">
                   <p className='btn-reestablecerContrasena-login'>¿Olvidaste tu contraseña?</p>
                 </NavLink>
-                
               </div>
               <div className='btn-creacuenta-login'>
                 <p className='no-cuenta-login'>¿No tienes cuenta?</p>

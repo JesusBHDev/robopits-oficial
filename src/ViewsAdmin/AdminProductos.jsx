@@ -85,7 +85,12 @@ function AdminProductos() {
       [name]: value
     }));
   };
-
+  const handleKeyDown = (e) => {
+    // Evitar la entrada de signos +, -, y e para números exponenciales
+    if (e.key === '-' || e.key === '+' || e.key === 'e') {
+      e.preventDefault();
+    }
+  };
   // handleFileChange actualizado
   const handleFileChange = (e) => {
     const file = e.target.files[0];
@@ -248,17 +253,35 @@ function AdminProductos() {
                   ))}
                 </select>
               </div>
-
               <div>
-                <label htmlFor="Precio" className="block text-gray-700 mb-2">Precio:</label>
-                <input type="number" name="Precio" value={newProductData.Precio} onChange={handleInputChange} placeholder="Precio" className="border border-gray-400 rounded-md p-2 w-full" required />
-              </div>
+                <div>
+                  <label htmlFor="Precio" className="block text-gray-700 mb-2">Precio:</label>
+                  <input
+                    type="number"
+                    name="Precio"
+                    value={newProductData.Precio}
+                    onChange={handleInputChange}
+                    onKeyDown={handleKeyDown}
+                    placeholder="Precio"
+                    className="border border-gray-400 rounded-md p-2 w-full"
+                    required
+                  />
+                </div>
 
-              <div>
-                <label htmlFor="Existencias" className="block text-gray-700 mb-2">Existencias:</label>
-                <input type="number" name="Existencias" value={newProductData.Existencias} onChange={handleInputChange} placeholder="Existencias" className="border border-gray-400 rounded-md p-2 w-full" required />
+                <div>
+                  <label htmlFor="Existencias" className="block text-gray-700 mb-2">Existencias:</label>
+                  <input
+                    type="number"
+                    name="Existencias"
+                    value={newProductData.Existencias}
+                    onChange={handleInputChange}
+                    onKeyDown={handleKeyDown}
+                    placeholder="Existencias"
+                    className="border border-gray-400 rounded-md p-2 w-full"
+                    required
+                  />
+                </div>
               </div>
-
               <div className="col-span-2">
                 <label htmlFor="Descripcion" className="block text-gray-700 mb-2">Descripción:</label>
                 <textarea name="Descripcion" value={newProductData.Descripcion} onChange={handleInputChange} placeholder="Descripción" className="border border-gray-400 rounded-md p-2 w-full" required></textarea>
@@ -295,23 +318,36 @@ function AdminProductos() {
       )}
 
       {selectedProduct && (
-        <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-blue-800 bg-opacity-50">
-          <div className="bg-white p-8 rounded shadow w-11/12 h-5/6 overflow-y-auto">
+        <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50">
+          <div className="bg-white p-6 rounded-lg shadow-lg max-w-4xl w-full lg:max-w-2xl lg:p-10 overflow-y-auto h-5/6">
             {editMode ? (
-              <form onSubmit={handleSubmit} className="grid grid-cols-2 gap-4">
+              <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="col-span-2">
-                  <label htmlFor="IdProducto" className="block text-gray-700 mb-2">ID del Producto:</label>
-                  <input type="text" name="IdProducto" value={newProductData.IdProducto} onChange={handleInputChange} className="border border-gray-300 rounded-md p-3 w-full" required />
+                  <p htmlFor="IdProducto" className="block text-gray-700 mb-2">ID del Producto:</p>
+                  <p className="text-sm text-gray-600 mb-4">ID: {newProductData.IdProducto}</p>
                 </div>
 
                 <div className="col-span-2">
                   <label htmlFor="NameProducto" className="block text-gray-700 mb-2">Nombre del Producto:</label>
-                  <input type="text" name="NameProducto" value={newProductData.NameProducto} onChange={handleInputChange} className="border border-gray-300 rounded-md p-3 w-full" required />
+                  <input
+                    type="text"
+                    name="NameProducto"
+                    value={newProductData.NameProducto}
+                    onChange={handleInputChange}
+                    className="border border-gray-300 rounded-md p-3 w-full"
+                    required
+                  />
                 </div>
 
                 <div className="col-span-2">
                   <label htmlFor="Categoria" className="block text-gray-700 mb-2">Categoría:</label>
-                  <select name="Categoria" value={newProductData.Categoria} onChange={handleInputChange} className="border border-gray-300 rounded-md p-3 w-full" required>
+                  <select
+                    name="Categoria"
+                    value={newProductData.Categoria}
+                    onChange={handleInputChange}
+                    className="border border-gray-300 rounded-md p-3 w-full"
+                    required
+                  >
                     <option value="">Seleccione una categoría</option>
                     {categorias.map(categoria => (
                       <option key={categoria._id} value={categoria.NameCategoria}>{categoria.NameCategoria}</option>
@@ -321,44 +357,94 @@ function AdminProductos() {
 
                 <div>
                   <label htmlFor="Precio" className="block text-gray-700 mb-2">Precio:</label>
-                  <input type="number" name="Precio" value={newProductData.Precio} onChange={handleInputChange} className="border border-gray-300 rounded-md p-3 w-full" required />
+                  <input
+                    type="number"
+                    name="Precio"
+                    value={newProductData.Precio}
+                    onChange={handleInputChange}
+                    onKeyDown={handleKeyDown}
+                    className="border border-gray-300 rounded-md p-3 w-full"
+                    required
+                  />
                 </div>
 
                 <div>
                   <label htmlFor="Existencias" className="block text-gray-700 mb-2">Existencias:</label>
-                  <input type="number" name="Existencias" value={newProductData.Existencias} onChange={handleInputChange} className="border border-gray-300 rounded-md p-3 w-full" required />
+                  <input
+                    type="number"
+                    name="Existencias"
+                    value={newProductData.Existencias}
+                    onChange={handleInputChange}
+                    onKeyDown={handleKeyDown}
+                    className="border border-gray-300 rounded-md p-3 w-full"
+                    required
+                  />
                 </div>
 
                 <div className="col-span-2">
                   <label htmlFor="Descripcion" className="block text-gray-700 mb-2">Descripción:</label>
-                  <textarea name="Descripcion" value={newProductData.Descripcion} onChange={handleInputChange} className="border border-gray-300 rounded-md p-3 w-full" required></textarea>
+                  <textarea
+                    name="Descripcion"
+                    value={newProductData.Descripcion}
+                    onChange={handleInputChange}
+                    className="border border-gray-300 rounded-md p-3 w-full h-24"
+                    required
+                  />
                 </div>
 
                 <div className="col-span-2">
                   <label htmlFor="Caracteristicas" className="block text-gray-700 mb-2">Características:</label>
-                  <textarea name="Caracteristicas" value={newProductData.Caracteristicas} onChange={handleInputChange} className="border border-gray-300 rounded-md p-3 w-full" required></textarea>
+                  <textarea
+                    name="Caracteristicas"
+                    value={newProductData.Caracteristicas}
+                    onChange={handleInputChange}
+                    className="border border-gray-300 rounded-md p-3 w-full h-24"
+                    required
+                  />
                 </div>
 
                 <div className="col-span-2">
                   <label htmlFor="Incluye" className="block text-gray-700 mb-2">Incluye:</label>
-                  <textarea name="Incluye" value={newProductData.Incluye} onChange={handleInputChange} className="border border-gray-300 rounded-md p-3 w-full" required></textarea>
+                  <textarea
+                    name="Incluye"
+                    value={newProductData.Incluye}
+                    onChange={handleInputChange}
+                    className="border border-gray-300 rounded-md p-3 w-full h-24"
+                    required
+                  />
                 </div>
 
                 <div className="col-span-2">
                   <label htmlFor="Imagen" className="block text-gray-700 mb-2">Imagen del Producto:</label>
-                  <input type="file" accept="image/*" onChange={handleFileChange} className="border border-gray-300 rounded-md p-3 w-full" />
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={handleFileChange}
+                    className="border border-gray-300 rounded-md p-3 w-full"
+                  />
                   {!newProductData.Imagen && (
                     <img src={selectedProduct.Imagen} alt={selectedProduct.NameProducto} className="w-40 h-40 object-cover mt-4" />
                   )}
                 </div>
 
                 <div className="flex justify-end col-span-2">
-                  <button type="button" onClick={() => setEditMode(false)} className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600 mr-3">Cancelar</button>
-                  <button type="submit" className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Guardar cambios</button>
+                  <button
+                    type="button"
+                    onClick={() => setEditMode(false)}
+                    className="bg-gray-500 text-white px-4 py-2 rounded-md hover:bg-gray-600 mr-3"
+                  >
+                    Cancelar
+                  </button>
+                  <button
+                    type="submit"
+                    className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700"
+                  >
+                    Guardar cambios
+                  </button>
                 </div>
               </form>
             ) : (
-              <div >
+              <div>
                 <div className="flex justify-center mb-4">
                   <img
                     src={selectedProduct.Imagen}
@@ -377,16 +463,37 @@ function AdminProductos() {
                   <p><strong>Incluye:</strong> {selectedProduct.Incluye}</p>
                 </div>
                 <div className="mt-6 flex justify-between">
-                  <button onClick={openEditProductForm} className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">Editar</button>
-                  <button onClick={closeProductDetails} className="bg-gray-300 text-gray-800 px-4 py-2 rounded-md hover:bg-gray-400">Cerrar</button>
-                  <button onClick={handleRefresh} className="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600">Refrescar</button>
-                  <button onClick={() => handleDeleteProduct(selectedProduct._id)} className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600">Eliminar</button>
+                  <button
+                    onClick={openEditProductForm}
+                    className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
+                  >
+                    Editar
+                  </button>
+                  <button
+                    onClick={closeProductDetails}
+                    className="bg-gray-300 text-gray-800 px-4 py-2 rounded-md hover:bg-gray-400"
+                  >
+                    Cerrar
+                  </button>
+                  <button
+                    onClick={handleRefresh}
+                    className="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600"
+                  >
+                    Refrescar
+                  </button>
+                  <button
+                    onClick={() => handleDeleteProduct(selectedProduct._id)}
+                    className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600"
+                  >
+                    Eliminar
+                  </button>
                 </div>
               </div>
             )}
           </div>
         </div>
       )}
+
     </div>
   );
 }
