@@ -19,7 +19,7 @@ El proyecto fue desarrollado utilizando las siguientes tecnologías:
 
 Utilizamos la metodología **Scrum**, que incluye las siguientes fases clave:
 - **Sprints**: Ciclos cortos de desarrollo con una duración de 1 a 2 semanas.
-- **Reuniones diarias : Para el seguimiento continuo del progreso .
+- **Reuniones** diarias : Para el seguimiento continuo del progreso .
 
 ## Herramienta de Control de Versiones y Flujo de Trabajo
 
