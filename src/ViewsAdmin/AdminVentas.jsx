@@ -1,4 +1,4 @@
-import { EncabezadoAdmin, BotonMenu } from './ComponenetesAdmin/Encabezado'
+import { EncabezadoAdmin} from './ComponenetesAdmin/Encabezado'
 
 function AdminVentas() {
     return (

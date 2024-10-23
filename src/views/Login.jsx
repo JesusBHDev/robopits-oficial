@@ -127,6 +127,8 @@ const Login = () => {
 
       
             <div className='botones-login'>
+            <input type="submit" id="login" className="btn-continuar-login" value="Continuar" />
+
            {/*    <Captcha onVerificationChange={handleVerificationChange} />
               <input type="submit" id="login" className="btn-continuar-login" value="Continuar" disabled={!captchaVerified} />
  */}
