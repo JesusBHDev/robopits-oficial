@@ -1,6 +1,6 @@
 import React from 'react';
 import { EncabezadoAdmin } from '../ViewsAdmin/ComponenetesAdmin/Encabezado.jsx';
-import MapaEntrega from './ComponenetesAdmin/MapaEntrega.js';
+
 
 function PanelAdmin() {
   return (
