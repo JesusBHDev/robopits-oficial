@@ -145,7 +145,7 @@ export const FooterInicio = () => {
                 <NavLink to="https://www.facebook.com/RoboPitS">
                     <div className='flex p-5 h-auto items-center'>
                         <Icon icon="mdi:facebook" style={{ width: "35px", height: "35px", color: "#4db4b2" }} />
-                        <p className='text-white font-bold ml-2.5 w-64 md:w-auto'>roboPits</p>
+                        <p className='text-white font-bold ml-2.5 w-64 md:w-auto'>RoboPits</p>
                     </div>
                 </NavLink>
             </div>

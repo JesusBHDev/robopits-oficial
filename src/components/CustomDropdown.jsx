@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import { Icon } from '@iconify/react';
 
-const CustomDropdown = ({ options }) => {
+const CustomDropdown = ({ options, onSelect }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState(options[0]);
 
   const handleOptionClick = (option) => {
     setSelectedOption(option);
     setIsOpen(false); // Cierra la lista desplegable cuando se selecciona una opción
+    onSelect(option.key); // Llama a la función onSelect con el key de la opción seleccionada
   };
 
   return (
@@ -27,7 +28,7 @@ const CustomDropdown = ({ options }) => {
             <li
               key={option.key}
               className={`py-3 px-3 hover:bg-gray-100 cursor-pointer w-44 ${
-                selectedOption === option ? 'text-blue-600 font-bold border-l-blue-600 border-l-4' : ''
+                selectedOption.key === option.key ? 'text-blue-600 font-bold border-l-blue-600 border-l-4' : ''
               }`}
               onClick={() => handleOptionClick(option)}
             >

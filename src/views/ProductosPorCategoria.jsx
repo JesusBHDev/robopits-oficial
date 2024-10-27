@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { obtenerProductosPorCategoria } from '../api/auth'; // Asegúrate de que la ruta está correctamente definida
 import { FooterInicio, HeaderInicio } from '../components/componentes-inicio';
+import { Icon } from '@iconify/react';
 import { NavLink } from 'react-router-dom';
 
 const ProductosPorCategoria = () => {
