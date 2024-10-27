@@ -5,7 +5,7 @@ import { NavLink, useParams } from 'react-router-dom';
 import { Image } from "antd";
 import CustomDropdown from '../components/CustomDropdown.jsx';
 import ToggleDiv from '../components/ToggleDiv.jsx';
-import { getProducto, agregarAlCarrito } from '../api/auth.js';
+import { getProducto, agregarAlCarrito, obtenerRecomendaciones } from '../api/auth.js';
 import { useAuth } from "../context/AuthContext.jsx";
 
 const options = [
@@ -25,6 +25,7 @@ const ResenaProducto = () => {
     const [producto, setProducto] = useState({});
     const [cantidad, setCantidad] = useState(1);
     const [expanded, setExpanded] = useState(false);
+    const [recomendaciones, setRecomendaciones] = useState([]);
 
     const fetchData = async () => {
         try {
@@ -38,6 +39,15 @@ const ResenaProducto = () => {
         }
     };
 
+    const fetchRecomendaciones = async () => {
+        try {
+            const response = await obtenerRecomendaciones();
+            setRecomendaciones(response.data);
+        } catch (error) {
+            console.error('Error al obtener recomendaciones:', error);
+        }
+    };
+
     const handleAgregarAlCarrito = async () => {
         if (!isAuthenticated) {
             alert('Debes iniciar sesión para agregar productos al carrito.');
@@ -47,11 +57,13 @@ const ResenaProducto = () => {
         try {
             await agregarAlCarrito(user.id, producto._id, cantidad);
             alert('Producto agregado al carrito exitosamente');
+            fetchRecomendaciones(); // Llamamos a las recomendaciones después de agregar al carrito
         } catch (error) {
             console.error('Error al agregar producto al carrito:', error);
             alert('Hubo un error al agregar el producto al carrito');
         }
     };
+
 
     useEffect(() => {
         fetchData();
@@ -60,6 +72,7 @@ const ResenaProducto = () => {
     const toggleDescription = () => {
         setExpanded(!expanded);
     };
+
 
     return (
         <div>
@@ -111,6 +124,9 @@ const ResenaProducto = () => {
                                         </div>
 
                                         <div className="flex space-x-2 mt-4 md:w-full w-auto">
+                                            {/* implementar método de pago */}
+                                            {/*  Primer intento de psuh nuevo en el proyecto*/}
+
                                             <button type="submit" className="bg-[#3BA4F6] text-white rounded p-2 font-bold md:w-44 w-auto hover:bg-[#2587eb]">Comprar ahora</button>
                                             <button type="button" onClick={handleAgregarAlCarrito} className="bg-[#4db4b2] text-white rounded p-2 font-bold md:w-44 w-auto hover:bg-[#329696]">Agregar al carrito</button>
                                         </div>
@@ -122,11 +138,36 @@ const ResenaProducto = () => {
                                         </div>
                                     </div>
                                 </div>
+
                             </div>
+
                         )}
                     </div>
+
                 )}
+                {recomendaciones.length > 0 && (
+                    <div className="">
+                        <h3 className="text-lg font-semibold text-center">Otros clientes agregaron estos productos</h3>
+                        <div className="mt-6 p-4 flex justify-center">
+                            <div className="flex overflow-x-auto space-x-6 mx-10">
+                                {recomendaciones.map((recomendacion) => (
+                                    <div key={recomendacion._id} className="flex-none w-80"> {/* Aumentamos el ancho del contenedor */}
+                                        <Image
+                                            className="w-full h-60 object-cover rounded-md" // Aumentamos la altura a h-60 y el ancho a w-full
+                                            src={recomendacion.Imagen}
+                                            alt={recomendacion.NameProducto}
+                                        />
+                                        <p className="text-center text-sm mt-2">{recomendacion.NameProducto}</p>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+                )}
+
+
             </div>
+
             <FooterInicio />
         </div>
     );

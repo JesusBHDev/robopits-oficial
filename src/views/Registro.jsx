@@ -124,22 +124,23 @@ const Registro = () => {
   };
 
   return (
-    <div className='img-fondo-registro h-screen'>
+    <div className='container'>
+    <div className='img-fondo-registro h-screen w-screen'>
       <Helmet>
         <meta
           httpEquiv="Content-Security-Policy"
           content={`
-            default-src 'self';
-            script-src 'self' https://www.google.com https://www.gstatic.com https://api.unisvg.com https://api.iconify.design https://mailbite.io/api/check;
-            style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://www.gstatic.com;
-            style-src-elem 'self' 'unsafe-inline' https://fonts.googleapis.com https://www.gstatic.com;
-            connect-src 'self' https://api.simplesvg.com/ https://www.google.com https://api.unisvg.com https://api.iconify.design https://backend-robo.vercel.app https://back-end-robopits.vercel.app https://mailbite.io/api/check;
-            object-src 'none';
-            frame-src 'self' https://www.google.com;
-            font-src 'self' https://fonts.gstatic.com;
-            img-src 'self' https://firebasestorage.googleapis.com
+              default-src 'self';
+              script-src 'self' https://www.google.com https://www.gstatic.com https://api.unisvg.com https://api.iconify.design https://mailbite.io/api/check https://firebasestorage.googleapis.com;
+              style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://www.gstatic.com https://firebasestorage.googleapis.com;
+              style-src-elem 'self' 'unsafe-inline' https://fonts.googleapis.com https://www.gstatic.com https://firebasestorage.googleapis.com;
+              connect-src 'self' https://api.simplesvg.com/ https://www.google.com https://api.unisvg.com https://api.iconify.design https://mailbite.io/api/check https://back-end-robopits.vercel.app https://firebasestorage.googleapis.com;
+              object-src 'none';
+              frame-src 'self' https://www.google.com;
+              font-src 'self' https://fonts.gstatic.com;
+              img-src 'self' https://firebasestorage.googleapis.com
             `}
-        ></meta>
+        />
       </Helmet>
       <div className='container-registro'>
         <div className='cont-home-registro'>
@@ -280,6 +281,7 @@ const Registro = () => {
           </form>
         </div>
       </div>
+    </div>
     </div>
   )
 }
