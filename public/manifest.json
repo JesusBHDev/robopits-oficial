@@ -32,6 +32,6 @@
   "display": "standalone",
   "background_color": "#282c34",
   "theme_color": "#282c34",
-  "description": "Una tienda online de RoboPits",
+  "description": "Una tienda online de componentes electronicos de la empresa RoboPits",
   "orientation": "portrait"
 }
