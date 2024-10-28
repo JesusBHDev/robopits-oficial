@@ -1,5 +1,5 @@
 import { useAuth } from "../../context/AuthContext.jsx";
-import { Link, Navigate, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import React, { useState } from 'react';
 
 export function EncabezadoAdmin() {
