@@ -52,43 +52,42 @@ describe('HistorialPedidos Component', () => {
   });
 
   // HistorialPedidos.test.js
-  // HistorialPedidos.test.js
-  // HistorialPedidos.test.js
-  test('debería mostrar la lista de pedidos después de cargar los datos', async () => {
+test('debería mostrar la lista de pedidos después de cargar los datos', async () => {
     render(
       <MemoryRouter>
         <HistorialPedidos />
       </MemoryRouter>
     );
-
+  
     // Verifica que el título "Historial de Pedidos" esté en el documento
     expect(screen.getByText(/Historial de Pedidos/i)).toBeInTheDocument();
-
+  
     // Verificar que el nombre "Javier" esté en el documento
     expect(await screen.findByText('Javier')).toBeInTheDocument();
-
+  
     // Obtener todas las coincidencias de "Estado:" y verificar su contenido
     const estados = screen.getAllByText(/Estado:/i);
     expect(estados[0]).toBeInTheDocument();
     expect(estados[1]).toBeInTheDocument();
-
+  
     // Verificar que cada estado tenga el texto "Listo"
     expect(screen.getAllByText(/Listo/i)[0]).toBeInTheDocument();
     expect(screen.getAllByText(/Listo/i)[1]).toBeInTheDocument();
-
+  
     // Verificar el texto "Punto de Retiro:" y "Pendiente"
     expect(screen.getAllByText(/Punto de Retiro:/i)[0]).toBeInTheDocument();
     expect(screen.getAllByText(/Pendiente/i)[0]).toBeInTheDocument();
     expect(screen.getAllByText(/Punto de Retiro:/i)[1]).toBeInTheDocument();
     expect(screen.getAllByText(/Pendiente/i)[1]).toBeInTheDocument();
-
+  
     // Verificar la fecha del primer pedido
     expect(screen.getByText(/25\/07\/2024 10:34/i)).toBeInTheDocument();
-
+  
     // Verificar el nombre "Bernardo"
     expect(await screen.findByText('Bernardo')).toBeInTheDocument();
-
+  
     // Verificar la fecha del segundo pedido
     expect(screen.getByText(/25\/07\/2024 10:42/i)).toBeInTheDocument();
   });
+  
 });
