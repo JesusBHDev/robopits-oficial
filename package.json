@@ -76,13 +76,18 @@
   },
   "jest": {
     "transform": {
-      "^.+\\.[t|j]sx?$": "babel-jest"
+      "^.+\\.[tj]sx?$": "babel-jest"
     },
     "transformIgnorePatterns": [
       "/node_modules/(?!axios).+\\.js$"
     ],
     "moduleNameMapper": {
       "^axios$": "<rootDir>/src/__mocks__/axios.js"
-    }
+    },
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx}",
+      "!src/index.js",
+      "!src/**/index.js"
+    ]
   }
 }
