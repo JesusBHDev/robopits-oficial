@@ -6,7 +6,6 @@ import { useAuth } from '../../context/AuthContext';
 jest.mock('../../context/AuthContext', () => ({
   useAuth: jest.fn(),
 }));
-
 describe('EncabezadoAdmin Component', () => {
   beforeEach(() => {
     useAuth.mockReturnValue({
@@ -14,7 +13,6 @@ describe('EncabezadoAdmin Component', () => {
       empleado: { Nombre: 'Empleado Test' },
     });
   });
-
   it('debería mostrar el nombre del empleado', () => {
     render(
       <BrowserRouter>
