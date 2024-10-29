@@ -81,14 +81,22 @@ describe('HistorialPedidos Component', () => {
     expect(screen.getAllByText(/Pendiente/i)[1]).toBeInTheDocument();
 
     // Verificar la fecha del primer pedido usando moment para generar la fecha esperada
-    const fechaEsperada1 = moment('2024-07-25T16:34:00Z').format('DD/MM/YYYY HH:mm');
-    expect(screen.getByText(new RegExp(fechaEsperada1, 'i'))).toBeInTheDocument();
+    const fechaEsperada1 = moment('2024-07-25T16:34:00Z').format(
+      'DD/MM/YYYY HH:mm'
+    );
+    expect(
+      screen.getByText(new RegExp(fechaEsperada1, 'i'))
+    ).toBeInTheDocument();
 
     // Verificar el nombre "Bernardo"
     expect(await screen.findByText('Bernardo')).toBeInTheDocument();
 
     // Verificar la fecha del segundo pedido usando moment para generar la fecha esperada
-    const fechaEsperada2 = moment('2024-07-25T16:42:00Z').format('DD/MM/YYYY HH:mm');
-    expect(screen.getByText(new RegExp(fechaEsperada2, 'i'))).toBeInTheDocument();
+    const fechaEsperada2 = moment('2024-07-25T16:42:00Z').format(
+      'DD/MM/YYYY HH:mm'
+    );
+    expect(
+      screen.getByText(new RegExp(fechaEsperada2, 'i'))
+    ).toBeInTheDocument();
   });
 });

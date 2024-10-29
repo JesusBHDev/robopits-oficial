@@ -6,6 +6,6 @@ test("verifica que el botón con el texto 'Agregar al carrito' esté presente", 
   const buttonElement = screen.getByRole('button', {
     name: /Agregar al carrito/i,
   });
-  
+
   expect(buttonElement).toBeInTheDocument();
 });
