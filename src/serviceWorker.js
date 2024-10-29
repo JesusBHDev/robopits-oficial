@@ -1,17 +1,15 @@
 // src/serviceWorker.js
-
-// Nombre y versión de la caché
 const CACHE_NAME = 'robopits-cache-v1';
 const urlsToCache = [
-  '/',           // Página principal
-  '/index.html', // HTML principal
+  '/',
+  '/index.html',
   '/manifest.json',
   '/robopits-192x192.png',
   '/robopits-512x512.png',
-  // Agrega aquí otros recursos estáticos (CSS, JS, imágenes) que quieras cachear
+  // Agrega otros recursos que quieras cachear
 ];
 
-// Evento de instalación - Cachea los archivos necesarios
+// Evento de instalación - Cachea los archivos
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
@@ -21,7 +19,7 @@ self.addEventListener('install', (event) => {
   );
 });
 
-// Evento de activación - Elimina cachés antiguas si cambia la versión
+// Evento de activación - Limpiar caché antigua
 self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches.keys().then((cacheNames) => {
@@ -37,12 +35,25 @@ self.addEventListener('activate', (event) => {
   );
 });
 
-// Evento de fetch - Responde con recursos de la caché o hace fetch a la red
+// Evento de fetch - Sirve desde la caché o hace fetch a la red
 self.addEventListener('fetch', (event) => {
   event.respondWith(
     caches.match(event.request).then((response) => {
-      // Si el recurso está en caché, responde con él; si no, sigue a la red
       return response || fetch(event.request);
     })
   );
 });
+
+// Exporta la función register para usarla en index.js
+export function register() {
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker
+      .register('/serviceWorker.js')
+      .then((registration) => {
+        console.log('Service Worker registrado con éxito:', registration);
+      })
+      .catch((error) => {
+        console.error('Error al registrar el Service Worker:', error);
+      });
+  }
+}

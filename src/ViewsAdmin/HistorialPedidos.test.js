@@ -26,7 +26,6 @@ describe('HistorialPedidos Component', () => {
       logoutEmpleado: jest.fn(),
       empleado: { Nombre: 'Empleado Test' },
     });
-
     // Datos simulados para `obtenerHistorialDePedidos`
     obtenerHistorialDePedidos.mockResolvedValue({
       data: [

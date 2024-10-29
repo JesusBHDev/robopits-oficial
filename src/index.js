@@ -7,9 +7,6 @@ import { Rutas } from './routers/Rutas';
 import { HelmetProvider } from 'react-helmet-async';
 import { AuthProvider } from './context/AuthContext.jsx';
 
-// Importa el service worker
-import * as serviceWorkerRegistration from './serviceWorker';
-
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <AuthProvider>
@@ -19,7 +16,14 @@ root.render(
   </AuthProvider>
 );
 
-// Registrar el service worker para habilitar modo offline
+// Registrar el service worker manualmente
 if ('serviceWorker' in navigator) {
-  serviceWorkerRegistration.register();
+  navigator.serviceWorker
+    .register('/serviceWorker.js')
+    .then((registration) => {
+      console.log('Service Worker registrado con éxito:', registration);
+    })
+    .catch((error) => {
+      console.error('Error al registrar el Service Worker:', error);
+    });
 }
