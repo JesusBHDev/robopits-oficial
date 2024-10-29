@@ -41,3 +41,10 @@ jobs:
 
       - name: Run Tests
         run: npm test -- --detectOpenHandles
+
+      - name: Cargar artefacto de compilación
+        uses: actions/upload-artifact@v3
+        with:
+          name: build-artifact
+          path: ./build
+          retention-days: 7
