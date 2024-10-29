@@ -25,7 +25,10 @@ const ToggleDiv = ({ title, content }) => {
           }}
         >
           {showDetails ? (
-            <Icon icon="mdi:minus" className="text-sky-500 hover:text-sky-700" />
+            <Icon
+              icon="mdi:minus"
+              className="text-sky-500 hover:text-sky-700"
+            />
           ) : (
             <Icon icon="mdi:plus" className="text-sky-500 hover:text-sky-700" />
           )}

@@ -1,16 +1,16 @@
-import { Navigate } from "react-router-dom"
-import { useAuth } from "../context/AuthContext"
+import { Navigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 
-function ProtectorRutasPrivadas({Page}) {
-  
-    const {empleadoLoading, isEmpleadoAuthenticated} = useAuth()
-    console.log(empleadoLoading, isEmpleadoAuthenticated)
+function ProtectorRutasPrivadas({ Page }) {
+  const { empleadoLoading, isEmpleadoAuthenticated } = useAuth();
+  console.log(empleadoLoading, isEmpleadoAuthenticated);
 
-    if(empleadoLoading) return <h1>Cargando ...</h1>;
+  if (empleadoLoading) return <h1>Cargando ...</h1>;
 
-    if(!empleadoLoading && !isEmpleadoAuthenticated) return <Navigate to='/login-admin' replace/>
-    
-  return <Page />
+  if (!empleadoLoading && !isEmpleadoAuthenticated)
+    return <Navigate to="/login-admin" replace />;
+
+  return <Page />;
 }
 
-export default ProtectorRutasPrivadas
+export default ProtectorRutasPrivadas;

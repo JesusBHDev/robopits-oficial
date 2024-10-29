@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import { FooterInicio, HeaderInicio } from '../components/componentes-inicio';
 
 const Potenciometros = () => {
@@ -6,11 +6,11 @@ const Potenciometros = () => {
     <div>
       <HeaderInicio />
       <div>
-        <h1 className='tituloB'>Potenciometro</h1>
+        <h1 className="tituloB">Potenciometro</h1>
       </div>
       <FooterInicio />
     </div>
-  )
-}
+  );
+};
 
-export default Potenciometros
+export default Potenciometros;
