@@ -5,7 +5,8 @@ import HistorialPedidos from './HistorialPedidos';
 import '@testing-library/jest-dom';
 import { obtenerHistorialDePedidos } from '../api/auth';
 import * as AuthContext from '../context/AuthContext';
-import { MemoryRouter } from 'react-router-dom'; // Importa MemoryRouter
+import { MemoryRouter } from 'react-router-dom';
+import moment from 'moment'; // Importa moment
 
 // Mock de la función `obtenerHistorialDePedidos`
 jest.mock('../api/auth', () => ({
@@ -51,9 +52,6 @@ describe('HistorialPedidos Component', () => {
     });
   });
 
-  // HistorialPedidos.test.js
-  // HistorialPedidos.test.js
-  // HistorialPedidos.test.js
   test('debería mostrar la lista de pedidos después de cargar los datos', async () => {
     render(
       <MemoryRouter>
@@ -82,13 +80,15 @@ describe('HistorialPedidos Component', () => {
     expect(screen.getAllByText(/Punto de Retiro:/i)[1]).toBeInTheDocument();
     expect(screen.getAllByText(/Pendiente/i)[1]).toBeInTheDocument();
 
-    // Verificar la fecha del primer pedido
-    expect(screen.getByText(/25\/07\/2024 10:34/i)).toBeInTheDocument();
+    // Verificar la fecha del primer pedido usando moment para generar la fecha esperada
+    const fechaEsperada1 = moment('2024-07-25T16:34:00Z').format('DD/MM/YYYY HH:mm');
+    expect(screen.getByText(new RegExp(fechaEsperada1, 'i'))).toBeInTheDocument();
 
     // Verificar el nombre "Bernardo"
     expect(await screen.findByText('Bernardo')).toBeInTheDocument();
 
-    // Verificar la fecha del segundo pedido
-    expect(screen.getByText(/25\/07\/2024 10:42/i)).toBeInTheDocument();
+    // Verificar la fecha del segundo pedido usando moment para generar la fecha esperada
+    const fechaEsperada2 = moment('2024-07-25T16:42:00Z').format('DD/MM/YYYY HH:mm');
+    expect(screen.getByText(new RegExp(fechaEsperada2, 'i'))).toBeInTheDocument();
   });
 });
