@@ -19,7 +19,6 @@ describe('EncabezadoAdmin Component', () => {
         <EncabezadoAdmin />
       </BrowserRouter>
     );
-
     expect(
       screen.getByText(/Bienvenido\s*Empleado\s*Test/i)
     ).toBeInTheDocument();
