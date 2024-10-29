@@ -1,6 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { getAllProductos, crearProducto, updateProducto, EliminarProducto, getProducto, getAllCategorias } from '../api/auth';
-import { EncabezadoAdmin } from './ComponenetesAdmin/Encabezado'
+import {
+  getAllProductos,
+  crearProducto,
+  updateProducto,
+  EliminarProducto,
+  getProducto,
+  getAllCategorias,
+} from '../api/auth';
+import { EncabezadoAdmin } from './ComponenetesAdmin/Encabezado';
 import swal from 'sweetalert';
 
 function AdminProductos() {
@@ -16,12 +23,12 @@ function AdminProductos() {
     Caracteristicas: '',
     Incluye: 'No incluye mas articulos',
     Imagen: null,
-    ImagenURL: ''
+    ImagenURL: '',
   });
   const [showNewProductForm, setShowNewProductForm] = useState(false);
   const [editMode, setEditMode] = useState(false);
   const [categorias, setCategorias] = useState([]);
-  const [searchTerm, setSearchTerm] = useState(""); // Estado para el término de búsqueda
+  const [searchTerm, setSearchTerm] = useState(''); // Estado para el término de búsqueda
   const emptyProductData = {
     IdProducto: '',
     NameProducto: '',
@@ -31,31 +38,25 @@ function AdminProductos() {
     Descripcion: '',
     Caracteristicas: '',
     Incluye: '',
-    Imagen: ''
-  };
-
-  const openNewProductForm = () => {
-    setNewProductData(emptyProductData);
-    setEditMode(false);
-    setShowNewProductForm(true);
+    Imagen: '',
   };
 
   useEffect(() => {
     getAllProductos()
-      .then(response => {
+      .then((response) => {
         setProductos(response.data);
       })
-      .catch(error => {
+      .catch((error) => {
         console.error('Error al obtener productos', error);
       });
   }, []);
 
   useEffect(() => {
     getAllCategorias()
-      .then(response => {
+      .then((response) => {
         setCategorias(response.data);
       })
-      .catch(error => {
+      .catch((error) => {
         console.error('Error al obtener categorías', error);
       });
   }, []);
@@ -64,7 +65,7 @@ function AdminProductos() {
     if (selectedProduct) {
       setNewProductData({
         ...selectedProduct,
-        ImagenURL: selectedProduct.Imagen // Establecer el enlace de la imagen en el nuevo estado
+        ImagenURL: selectedProduct.Imagen, // Establecer el enlace de la imagen en el nuevo estado
       });
     }
   }, [selectedProduct]);
@@ -80,9 +81,9 @@ function AdminProductos() {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setNewProductData(prevData => ({
+    setNewProductData((prevData) => ({
       ...prevData,
-      [name]: value
+      [name]: value,
     }));
   };
   const handleKeyDown = (e) => {
@@ -96,19 +97,26 @@ function AdminProductos() {
     const file = e.target.files[0];
     if (file) {
       const fileType = file['type'];
-      const validImageTypes = ['image/gif', 'image/jpeg', 'image/png', 'image/webp'];
+      const validImageTypes = [
+        'image/gif',
+        'image/jpeg',
+        'image/png',
+        'image/webp',
+      ];
       if (!validImageTypes.includes(fileType)) {
-        alert('Por favor seleccione un archivo de imagen válido (gif, jpeg, png, webp)');
+        alert(
+          'Por favor seleccione un archivo de imagen válido (gif, jpeg, png, webp)'
+        );
         e.target.value = ''; // Limpiar el input de archivo
         return;
       }
 
       const reader = new FileReader();
       reader.onloadend = () => {
-        setNewProductData(prevData => ({
+        setNewProductData((prevData) => ({
           ...prevData,
           Imagen: file,
-          ImagenURL: reader.result // Establecer la URL de la imagen en el nuevo estado
+          ImagenURL: reader.result, // Establecer la URL de la imagen en el nuevo estado
         }));
       };
       reader.readAsDataURL(file);
@@ -130,10 +138,13 @@ function AdminProductos() {
 
     try {
       if (editMode && selectedProduct) {
-        const updatedProduct = await updateProducto(selectedProduct._id, formData);
+        const updatedProduct = await updateProducto(
+          selectedProduct._id,
+          formData
+        );
         console.log('Producto actualizado exitosamente:', updatedProduct);
-        swal("Éxito", "Producto Editado exitosamente", "success");
-        const updatedProducts = productos.map(product =>
+        swal('Éxito', 'Producto Editado exitosamente', 'success');
+        const updatedProducts = productos.map((product) =>
           product._id === updatedProduct._id ? updatedProduct : product
         );
         setProductos(updatedProducts);
@@ -143,28 +154,31 @@ function AdminProductos() {
         console.log('Producto creado exitosamente:', createdProduct);
 
         // Actualiza el estado de productos
-        setProductos(prevProductos => [...prevProductos, createdProduct.data]);
+        setProductos((prevProductos) => [
+          ...prevProductos,
+          createdProduct.data,
+        ]);
 
         setShowNewProductForm(false);
-        swal("Éxito", "Producto creado", "success");
+        swal('Éxito', 'Producto creado', 'success');
       }
 
       setNewProductData(emptyProductData);
     } catch (error) {
       console.error('Error al guardar cambios', error);
-      swal("Fallo", "Error al guardar los cambios ", "error");
+      swal('Fallo', 'Error al guardar los cambios ', 'error');
     }
   };
 
   const toggleNewProductForm = () => {
-    setShowNewProductForm(prevState => !prevState);
+    setShowNewProductForm((prevState) => !prevState);
   };
 
   const openEditProductForm = () => {
     setEditMode(true);
     setNewProductData({
       ...selectedProduct,
-      Imagen: selectedProduct.Imagen // Conservar el enlace de la imagen actual
+      Imagen: selectedProduct.Imagen, // Conservar el enlace de la imagen actual
     });
   };
 
@@ -174,25 +188,29 @@ function AdminProductos() {
       setSelectedProduct(response.data);
     } catch (error) {
       console.error('Error al refrescar el producto', error);
-      swal("Fallo", "Error al refrescar el producto ", "error");
+      swal('Fallo', 'Error al refrescar el producto ', 'error');
     }
   };
 
   const handleDeleteProduct = (productId) => {
     EliminarProducto(productId)
       .then(() => {
-        setProductos(prevProductos => prevProductos.filter(producto => producto._id !== productId));
+        setProductos((prevProductos) =>
+          prevProductos.filter((producto) => producto._id !== productId)
+        );
         closeProductDetails();
-        swal("Éxito", "Producto eliminado exitosamente", "success");
+        swal('Éxito', 'Producto eliminado exitosamente', 'success');
       })
-      .catch(error => {
+      .catch((error) => {
         console.error('Error al eliminar el producto', error);
-        swal("Fallo", "Producto no se pudo eliminar ", "error");
+        swal('Fallo', 'Producto no se pudo eliminar ', 'error');
       });
   };
   // Filtrar productos por el término de búsqueda
-  const filteredProductos = productos.filter(producto =>
-    producto.NameProducto && producto.NameProducto.toLowerCase().includes(searchTerm.toLowerCase())
+  const filteredProductos = productos.filter(
+    (producto) =>
+      producto.NameProducto &&
+      producto.NameProducto.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   return (
@@ -217,15 +235,29 @@ function AdminProductos() {
           </button>
         </div>
         <div className="mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          {filteredProductos.map(producto => (
-            <div key={producto.IdProducto} className="w-full bg-white rounded-md p-4 shadow-md flex flex-col items-center">
-              <img src={producto.Imagen} alt={producto.NameProducto} className="w-full h-32 object-cover mb-4" />
-              <h2 className="text-lg font-semibold mb-2 text-center">{producto.NameProducto}</h2>
-              <p className="text-sm text-gray-600 mb-2">Categoría: {producto.Categoria}</p>
-              <p className="text-sm text-gray-600 mb-2">ID: {producto.IdProducto}</p>
+          {filteredProductos.map((producto) => (
+            <div
+              key={producto.IdProducto}
+              className="w-full bg-white rounded-md p-4 shadow-md flex flex-col items-center"
+            >
+              <img
+                src={producto.Imagen}
+                alt={producto.NameProducto}
+                className="w-full h-32 object-cover mb-4"
+              />
+              <h2 className="text-lg font-semibold mb-2 text-center">
+                {producto.NameProducto}
+              </h2>
+              <p className="text-sm text-gray-600 mb-2">
+                Categoría: {producto.Categoria}
+              </p>
+              <p className="text-sm text-gray-600 mb-2">
+                ID: {producto.IdProducto}
+              </p>
               <button
                 onClick={() => openProductDetails(producto)}
-                className="bg-blue-500 text-white px-4 py-2 rounded-md">
+                className="bg-blue-500 text-white px-4 py-2 rounded-md"
+              >
                 Ver Producto
               </button>
             </div>
@@ -236,26 +268,52 @@ function AdminProductos() {
       {showNewProductForm && (
         <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-blue-800 bg-opacity-50">
           <div className="bg-white p-8 rounded shadow w-11/12 h-5/6 overflow-y-auto">
-            <h2 className="text-xl font-semibold mb-4">{editMode ? 'Editar Producto' : 'Agregar Nuevo Producto'}</h2>
+            <h2 className="text-xl font-semibold mb-4">
+              {editMode ? 'Editar Producto' : 'Agregar Nuevo Producto'}
+            </h2>
             <form onSubmit={handleSubmit} className="grid grid-cols-2 gap-4">
-
               <div className="col-span-2">
-                <label htmlFor="NameProducto" className="block text-gray-700 mb-2">Nombre del Producto:</label>
-                <input type="text" name="NameProducto" value={newProductData.NameProducto} onChange={handleInputChange} placeholder="Nombre del producto" className="border border-gray-400 rounded-md p-2 w-full" required />
+                <label
+                  htmlFor="NameProducto"
+                  className="block text-gray-700 mb-2"
+                >
+                  Nombre del Producto:
+                </label>
+                <input
+                  type="text"
+                  name="NameProducto"
+                  value={newProductData.NameProducto}
+                  onChange={handleInputChange}
+                  placeholder="Nombre del producto"
+                  className="border border-gray-400 rounded-md p-2 w-full"
+                  required
+                />
               </div>
 
               <div className="col-span-2">
-                <label htmlFor="Categoria" className="block text-gray-700 mb-2">Categoría:</label>
-                <select name="Categoria" value={newProductData.Categoria} onChange={handleInputChange} className="border border-gray-400 rounded-md p-2 w-full" required>
+                <label htmlFor="Categoria" className="block text-gray-700 mb-2">
+                  Categoría:
+                </label>
+                <select
+                  name="Categoria"
+                  value={newProductData.Categoria}
+                  onChange={handleInputChange}
+                  className="border border-gray-400 rounded-md p-2 w-full"
+                  required
+                >
                   <option value="">Seleccione una categoría</option>
-                  {categorias.map(categoria => (
-                    <option key={categoria._id} value={categoria.NameCategoria}>{categoria.NameCategoria}</option>
+                  {categorias.map((categoria) => (
+                    <option key={categoria._id} value={categoria.NameCategoria}>
+                      {categoria.NameCategoria}
+                    </option>
                   ))}
                 </select>
               </div>
               <div>
                 <div>
-                  <label htmlFor="Precio" className="block text-gray-700 mb-2">Precio:</label>
+                  <label htmlFor="Precio" className="block text-gray-700 mb-2">
+                    Precio:
+                  </label>
                   <input
                     type="number"
                     name="Precio"
@@ -269,7 +327,12 @@ function AdminProductos() {
                 </div>
 
                 <div>
-                  <label htmlFor="Existencias" className="block text-gray-700 mb-2">Existencias:</label>
+                  <label
+                    htmlFor="Existencias"
+                    className="block text-gray-700 mb-2"
+                  >
+                    Existencias:
+                  </label>
                   <input
                     type="number"
                     name="Existencias"
@@ -283,22 +346,57 @@ function AdminProductos() {
                 </div>
               </div>
               <div className="col-span-2">
-                <label htmlFor="Descripcion" className="block text-gray-700 mb-2">Descripción:</label>
-                <textarea name="Descripcion" value={newProductData.Descripcion} onChange={handleInputChange} placeholder="Descripción" className="border border-gray-400 rounded-md p-2 w-full" required></textarea>
+                <label
+                  htmlFor="Descripcion"
+                  className="block text-gray-700 mb-2"
+                >
+                  Descripción:
+                </label>
+                <textarea
+                  name="Descripcion"
+                  value={newProductData.Descripcion}
+                  onChange={handleInputChange}
+                  placeholder="Descripción"
+                  className="border border-gray-400 rounded-md p-2 w-full"
+                  required
+                ></textarea>
               </div>
 
               <div className="col-span-2">
-                <label htmlFor="Caracteristicas" className="block text-gray-700 mb-2">Características:</label>
-                <textarea name="Caracteristicas" value={newProductData.Caracteristicas} onChange={handleInputChange} placeholder="Características" className="border border-gray-400 rounded-md p-2 w-full" required></textarea>
+                <label
+                  htmlFor="Caracteristicas"
+                  className="block text-gray-700 mb-2"
+                >
+                  Características:
+                </label>
+                <textarea
+                  name="Caracteristicas"
+                  value={newProductData.Caracteristicas}
+                  onChange={handleInputChange}
+                  placeholder="Características"
+                  className="border border-gray-400 rounded-md p-2 w-full"
+                  required
+                ></textarea>
               </div>
 
               <div className="col-span-2">
-                <label htmlFor="Incluye" className="block text-gray-700 mb-2">Incluye:</label>
-                <textarea name="Incluye" value={newProductData.Incluye} onChange={handleInputChange} placeholder="Incluye" className="border border-gray-400 rounded-md p-2 w-full" required></textarea>
+                <label htmlFor="Incluye" className="block text-gray-700 mb-2">
+                  Incluye:
+                </label>
+                <textarea
+                  name="Incluye"
+                  value={newProductData.Incluye}
+                  onChange={handleInputChange}
+                  placeholder="Incluye"
+                  className="border border-gray-400 rounded-md p-2 w-full"
+                  required
+                ></textarea>
               </div>
 
               <div className="col-span-2">
-                <label htmlFor="Imagen" className="block text-gray-700 mb-2">Imagen del Producto:</label>
+                <label htmlFor="Imagen" className="block text-gray-700 mb-2">
+                  Imagen del Producto:
+                </label>
                 <input
                   type="file"
                   accept="image/*"
@@ -309,8 +407,19 @@ function AdminProductos() {
               </div>
 
               <div className="flex justify-end col-span-2">
-                <button type="button" onClick={toggleNewProductForm} className="bg-gray-300 text-gray-800 px-4 py-2 rounded hover:bg-gray-400 mr-2">Cancelar</button>
-                <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded-md">{editMode ? 'Guardar cambios' : 'Agregar Producto'}</button>
+                <button
+                  type="button"
+                  onClick={toggleNewProductForm}
+                  className="bg-gray-300 text-gray-800 px-4 py-2 rounded hover:bg-gray-400 mr-2"
+                >
+                  Cancelar
+                </button>
+                <button
+                  type="submit"
+                  className="bg-blue-500 text-white px-4 py-2 rounded-md"
+                >
+                  {editMode ? 'Guardar cambios' : 'Agregar Producto'}
+                </button>
               </div>
             </form>
           </div>
@@ -321,14 +430,26 @@ function AdminProductos() {
         <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50">
           <div className="bg-white p-6 rounded-lg shadow-lg max-w-4xl w-full lg:max-w-2xl lg:p-10 overflow-y-auto h-5/6">
             {editMode ? (
-              <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <form
+                onSubmit={handleSubmit}
+                className="grid grid-cols-1 md:grid-cols-2 gap-6"
+              >
                 <div className="col-span-2">
-                  <p htmlFor="IdProducto" className="block text-gray-700 mb-2">ID del Producto:</p>
-                  <p className="text-sm text-gray-600 mb-4">ID: {newProductData.IdProducto}</p>
+                  <p htmlFor="IdProducto" className="block text-gray-700 mb-2">
+                    ID del Producto:
+                  </p>
+                  <p className="text-sm text-gray-600 mb-4">
+                    ID: {newProductData.IdProducto}
+                  </p>
                 </div>
 
                 <div className="col-span-2">
-                  <label htmlFor="NameProducto" className="block text-gray-700 mb-2">Nombre del Producto:</label>
+                  <label
+                    htmlFor="NameProducto"
+                    className="block text-gray-700 mb-2"
+                  >
+                    Nombre del Producto:
+                  </label>
                   <input
                     type="text"
                     name="NameProducto"
@@ -340,7 +461,12 @@ function AdminProductos() {
                 </div>
 
                 <div className="col-span-2">
-                  <label htmlFor="Categoria" className="block text-gray-700 mb-2">Categoría:</label>
+                  <label
+                    htmlFor="Categoria"
+                    className="block text-gray-700 mb-2"
+                  >
+                    Categoría:
+                  </label>
                   <select
                     name="Categoria"
                     value={newProductData.Categoria}
@@ -349,14 +475,21 @@ function AdminProductos() {
                     required
                   >
                     <option value="">Seleccione una categoría</option>
-                    {categorias.map(categoria => (
-                      <option key={categoria._id} value={categoria.NameCategoria}>{categoria.NameCategoria}</option>
+                    {categorias.map((categoria) => (
+                      <option
+                        key={categoria._id}
+                        value={categoria.NameCategoria}
+                      >
+                        {categoria.NameCategoria}
+                      </option>
                     ))}
                   </select>
                 </div>
 
                 <div>
-                  <label htmlFor="Precio" className="block text-gray-700 mb-2">Precio:</label>
+                  <label htmlFor="Precio" className="block text-gray-700 mb-2">
+                    Precio:
+                  </label>
                   <input
                     type="number"
                     name="Precio"
@@ -369,7 +502,12 @@ function AdminProductos() {
                 </div>
 
                 <div>
-                  <label htmlFor="Existencias" className="block text-gray-700 mb-2">Existencias:</label>
+                  <label
+                    htmlFor="Existencias"
+                    className="block text-gray-700 mb-2"
+                  >
+                    Existencias:
+                  </label>
                   <input
                     type="number"
                     name="Existencias"
@@ -382,7 +520,12 @@ function AdminProductos() {
                 </div>
 
                 <div className="col-span-2">
-                  <label htmlFor="Descripcion" className="block text-gray-700 mb-2">Descripción:</label>
+                  <label
+                    htmlFor="Descripcion"
+                    className="block text-gray-700 mb-2"
+                  >
+                    Descripción:
+                  </label>
                   <textarea
                     name="Descripcion"
                     value={newProductData.Descripcion}
@@ -393,7 +536,12 @@ function AdminProductos() {
                 </div>
 
                 <div className="col-span-2">
-                  <label htmlFor="Caracteristicas" className="block text-gray-700 mb-2">Características:</label>
+                  <label
+                    htmlFor="Caracteristicas"
+                    className="block text-gray-700 mb-2"
+                  >
+                    Características:
+                  </label>
                   <textarea
                     name="Caracteristicas"
                     value={newProductData.Caracteristicas}
@@ -404,7 +552,9 @@ function AdminProductos() {
                 </div>
 
                 <div className="col-span-2">
-                  <label htmlFor="Incluye" className="block text-gray-700 mb-2">Incluye:</label>
+                  <label htmlFor="Incluye" className="block text-gray-700 mb-2">
+                    Incluye:
+                  </label>
                   <textarea
                     name="Incluye"
                     value={newProductData.Incluye}
@@ -415,7 +565,9 @@ function AdminProductos() {
                 </div>
 
                 <div className="col-span-2">
-                  <label htmlFor="Imagen" className="block text-gray-700 mb-2">Imagen del Producto:</label>
+                  <label htmlFor="Imagen" className="block text-gray-700 mb-2">
+                    Imagen del Producto:
+                  </label>
                   <input
                     type="file"
                     accept="image/*"
@@ -423,7 +575,11 @@ function AdminProductos() {
                     className="border border-gray-300 rounded-md p-3 w-full"
                   />
                   {!newProductData.Imagen && (
-                    <img src={selectedProduct.Imagen} alt={selectedProduct.NameProducto} className="w-40 h-40 object-cover mt-4" />
+                    <img
+                      src={selectedProduct.Imagen}
+                      alt={selectedProduct.NameProducto}
+                      className="w-40 h-40 object-cover mt-4"
+                    />
                   )}
                 </div>
 
@@ -452,15 +608,32 @@ function AdminProductos() {
                     className="w-60 h-60 object-cover mb-4"
                   />
                 </div>
-                <h2 className="text-2xl font-bold mb-4 text-center">{selectedProduct.NameProducto}</h2>
+                <h2 className="text-2xl font-bold mb-4 text-center">
+                  {selectedProduct.NameProducto}
+                </h2>
                 <div className="space-y-2 text-gray-700">
-                  <p><strong>ID:</strong> {selectedProduct.IdProducto}</p>
-                  <p><strong>Categoría:</strong> {selectedProduct.Categoria}</p>
-                  <p><strong>Precio:</strong> ${selectedProduct.Precio}</p>
-                  <p><strong>Existencias:</strong> {selectedProduct.Existencias}</p>
-                  <p><strong>Descripción:</strong> {selectedProduct.Descripcion}</p>
-                  <p><strong>Características:</strong> {selectedProduct.Caracteristicas}</p>
-                  <p><strong>Incluye:</strong> {selectedProduct.Incluye}</p>
+                  <p>
+                    <strong>ID:</strong> {selectedProduct.IdProducto}
+                  </p>
+                  <p>
+                    <strong>Categoría:</strong> {selectedProduct.Categoria}
+                  </p>
+                  <p>
+                    <strong>Precio:</strong> ${selectedProduct.Precio}
+                  </p>
+                  <p>
+                    <strong>Existencias:</strong> {selectedProduct.Existencias}
+                  </p>
+                  <p>
+                    <strong>Descripción:</strong> {selectedProduct.Descripcion}
+                  </p>
+                  <p>
+                    <strong>Características:</strong>{' '}
+                    {selectedProduct.Caracteristicas}
+                  </p>
+                  <p>
+                    <strong>Incluye:</strong> {selectedProduct.Incluye}
+                  </p>
                 </div>
                 <div className="mt-6 flex justify-between">
                   <button
@@ -493,7 +666,6 @@ function AdminProductos() {
           </div>
         </div>
       )}
-
     </div>
   );
 }

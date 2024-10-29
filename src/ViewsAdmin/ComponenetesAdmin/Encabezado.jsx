@@ -1,5 +1,5 @@
-import { useAuth } from "../../context/AuthContext.jsx";
-import { Link } from "react-router-dom";
+import { useAuth } from '../../context/AuthContext.jsx';
+import { Link } from 'react-router-dom';
 import React, { useState } from 'react';
 
 export function EncabezadoAdmin() {
@@ -11,7 +11,7 @@ export function EncabezadoAdmin() {
   };
 
   const toggleMenu = () => {
-    setMenuVisible(prevMenuVisible => !prevMenuVisible); // Alterna la visibilidad del menú
+    setMenuVisible((prevMenuVisible) => !prevMenuVisible); // Alterna la visibilidad del menú
   };
 
   return (
@@ -27,13 +27,11 @@ export function EncabezadoAdmin() {
           </button>
         </div>
         <img
-            src="images/robopits-pequeño.webp"
-            className="w-10 h-10 rounded-full "
-          />
+          src="images/robopits-pequeño.webp"
+          className="w-10 h-10 rounded-full "
+        />
         <div className="text-white text-xl font-bold">Robopits</div>
-        <div className="text-white">
-          Bienvenido {empleado.Nombre}
-        </div>
+        <div className="text-white">Bienvenido {empleado.Nombre}</div>
         <div>
           <button
             type="button"
@@ -44,12 +42,11 @@ export function EncabezadoAdmin() {
           </button>
         </div>
       </div>
-
       {/* Mostrar el menú si menuVisible es true */}
       <div
-        className={`bg-gray-900 text-gray-200 w-60 flex flex-col items-center pt-20 h-full fixed top-0 left-0 transform transition-transform duration-300 ${
-          menuVisible ? 'translate-x-0' : '-translate-x-full'
-        }`}
+        role="navigation" // Add this role to make selection easier in tests
+        className={`bg-gray-900 text-gray-200 w-60 flex flex-col items-center pt-20 h-full fixed top-0 left-0 transform transition-transform duration-300 
+          ${menuVisible ? 'translate-x-0' : '-translate-x-full'}`}
       >
         <div className="mb-8 flex flex-col items-center">
           <img
@@ -61,7 +58,7 @@ export function EncabezadoAdmin() {
           <p className="text-sm">Panel Administrativo</p>
         </div>
         <nav className="w-full flex flex-col items-center">
-        <Link to="/PanelAdmin" className="mb-4 w-4/5 flex justify-center">
+          <Link to="/PanelAdmin" className="mb-4 w-4/5 flex justify-center">
             <button className="w-3/4 px-4 py-2 bg-blue-600 text-white rounded-md shadow-md hover:bg-blue-700 transition duration-200">
               Home
             </button>
@@ -71,7 +68,10 @@ export function EncabezadoAdmin() {
               Productos
             </button>
           </Link>
-          <Link to="/AdminCategorias" className="mb-4 w-4/5 flex justify-center">
+          <Link
+            to="/AdminCategorias"
+            className="mb-4 w-4/5 flex justify-center"
+          >
             <button className="w-3/4 px-4 py-2 bg-blue-600 text-white rounded-md shadow-md hover:bg-blue-700 transition duration-200">
               Categorías
             </button>
@@ -86,7 +86,10 @@ export function EncabezadoAdmin() {
               Pedidos
             </button>
           </Link>
-          <Link to="/HistorialPedidos" className="mb-4 w-4/5 flex justify-center">
+          <Link
+            to="/HistorialPedidos"
+            className="mb-4 w-4/5 flex justify-center"
+          >
             <button className="w-3/4 px-4 py-2 bg-blue-600 text-white rounded-md shadow-md hover:bg-blue-700 transition duration-200">
               Historial Pedidos
             </button>

@@ -1,7 +1,6 @@
 import React from 'react';
 import { EncabezadoAdmin } from '../ViewsAdmin/ComponenetesAdmin/Encabezado.jsx';
 
-
 function PanelAdmin() {
   return (
     <div className="flex">

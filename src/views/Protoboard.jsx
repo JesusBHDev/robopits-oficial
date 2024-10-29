@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import { FooterInicio, HeaderInicio } from '../components/componentes-inicio';
 
 const Protoboard = () => {
@@ -6,11 +6,11 @@ const Protoboard = () => {
     <div>
       <HeaderInicio />
       <div>
-        <h1 className='tituloB'>Protoboard</h1>
+        <h1 className="tituloB">Protoboard</h1>
       </div>
       <FooterInicio />
     </div>
-  )
-}
+  );
+};
 
-export default Protoboard
+export default Protoboard;

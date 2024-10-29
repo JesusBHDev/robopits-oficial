@@ -6,7 +6,7 @@ import axios from 'axios';
 const MigasPan = () => {
   const [productos, setProductos] = useState([]);
 
-  const URL = "https://backend-robo.vercel.app/api/productos";
+  const URL = 'https://backend-robo.vercel.app/api/productos';
 
   const showData = async () => {
     try {
@@ -19,7 +19,9 @@ const MigasPan = () => {
 
   const loadCategories = async () => {
     try {
-      const response = await axios.get('https://backend-robo.vercel.app/api/categorias');
+      const response = await axios.get(
+        'https://backend-robo.vercel.app/api/categorias'
+      );
       response.data.forEach((categoria) => {
         setRouteToComponent((prevRoutes) => ({
           ...prevRoutes,
@@ -58,19 +60,22 @@ const MigasPan = () => {
     '/avisos-de-privacidad': 'Avisos de privacidad',
     '/terminos-y-condiciones': 'Términos y condiciones',
     '/preguntas-frecuentes': 'Preguntas frecuentes',
-    '/resena-producto' : 'Reseña de producto',
+    '/resena-producto': 'Reseña de producto',
     '/propuesta': 'Propuesta',
     '/perfil': 'Mi perfil',
     '/carrito': 'Carrito de compras',
     '/Pedidos': 'Mis pedidos',
-
   });
-
 
   return (
     <div className="container mx-auto my-4 animate__animated animate__bounceInDown">
       <div className="flex items-center text-sm">
-        <Link to="/" className="font-sans text-blue-400 hover:underline font-bold">Home</Link>
+        <Link
+          to="/"
+          className="font-sans text-blue-400 hover:underline font-bold"
+        >
+          Home
+        </Link>
         {pathnames.map((name, index) => {
           const routeTo = `/${pathnames.slice(0, index + 1).join('/')}`;
           const isLast = index === pathnames.length - 1;
@@ -78,11 +83,19 @@ const MigasPan = () => {
 
           return (
             <span key={name} className="flex items-center">
-              <span className="font-sans mx-2 text-gray-500 font-thin"> / </span>
+              <span className="font-sans mx-2 text-gray-500 font-thin">
+                {' '}
+                /{' '}
+              </span>
               {isLast ? (
                 <span className="font-sans text-gray-500">{componentName}</span>
               ) : (
-                <Link to={routeTo} className="font-sans text-blue-500 hover:underline">{componentName}</Link>
+                <Link
+                  to={routeTo}
+                  className="font-sans text-blue-500 hover:underline"
+                >
+                  {componentName}
+                </Link>
               )}
             </span>
           );
@@ -92,4 +105,4 @@ const MigasPan = () => {
   );
 };
 
-export default MigasPan
+export default MigasPan;

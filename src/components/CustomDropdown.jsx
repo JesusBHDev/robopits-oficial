@@ -28,7 +28,9 @@ const CustomDropdown = ({ options, onSelect }) => {
             <li
               key={option.key}
               className={`py-3 px-3 hover:bg-gray-100 cursor-pointer w-44 ${
-                selectedOption.key === option.key ? 'text-blue-600 font-bold border-l-blue-600 border-l-4' : ''
+                selectedOption.key === option.key
+                  ? 'text-blue-600 font-bold border-l-blue-600 border-l-4'
+                  : ''
               }`}
               onClick={() => handleOptionClick(option)}
             >

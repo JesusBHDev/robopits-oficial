@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import { FooterInicio, HeaderInicio } from '../components/componentes-inicio';
 
 const Motores = () => {
@@ -6,11 +6,11 @@ const Motores = () => {
     <div>
       <HeaderInicio />
       <div>
-        <h1 className='tituloB'>Motores</h1>
+        <h1 className="tituloB">Motores</h1>
       </div>
       <FooterInicio />
     </div>
-  )
-}
+  );
+};
 
-export default Motores
+export default Motores;

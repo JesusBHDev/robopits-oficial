@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { EncabezadoAdmin } from './ComponenetesAdmin/Encabezado'
-import { getAllCategorias, eliminarCategoria, updateCategoria, crearCategoria } from '../api/auth';
+import { EncabezadoAdmin } from './ComponenetesAdmin/Encabezado';
+import {
+  getAllCategorias,
+  eliminarCategoria,
+  updateCategoria,
+  crearCategoria,
+} from '../api/auth';
 import swal from 'sweetalert';
 function AdminCategorias() {
   const [categorias, setCategorias] = useState([]);
@@ -11,24 +16,27 @@ function AdminCategorias() {
 
   useEffect(() => {
     getAllCategorias()
-      .then(response => {
+      .then((response) => {
         setCategorias(response.data);
       })
-      .catch(error => {
+      .catch((error) => {
         console.error('Error al obtener categorías', error);
       });
   }, []);
 
   const handleEliminarCategoria = (categoriaId) => {
     eliminarCategoria(categoriaId)
-      .then(response => {
-        setCategorias(prevCategorias => prevCategorias.filter(categoria => categoria._id !== categoriaId));
+      .then((response) => {
+        console.log(response);
+        setCategorias((prevCategorias) =>
+          prevCategorias.filter((categoria) => categoria._id !== categoriaId)
+        );
         console.log('Categoría eliminada correctamente');
-        swal("Éxito", "Categoria eliminada", "success");
+        swal('Éxito', 'Categoria eliminada', 'success');
       })
-      .catch(error => {
+      .catch((error) => {
         console.error('Error al eliminar la categoría', error);
-        swal("Fallo", "no se pudo eliminar la categoria ", "error");
+        swal('Fallo', 'no se pudo eliminar la categoria ', 'error');
       });
   };
 
@@ -39,22 +47,27 @@ function AdminCategorias() {
 
   const handleGuardarCambios = (categoriaId) => {
     updateCategoria(categoriaId, { NameCategoria: editedCategoryName })
-      .then(response => {
+      .then((response) => {
+        console.log(response);
         // Actualiza el estado con los cambios
-        setCategorias(prevCategorias => prevCategorias.map(categoria =>
-          categoria._id === categoriaId ? { ...categoria, NameCategoria: editedCategoryName } : categoria
-        ));
+        setCategorias((prevCategorias) =>
+          prevCategorias.map((categoria) =>
+            categoria._id === categoriaId
+              ? { ...categoria, NameCategoria: editedCategoryName }
+              : categoria
+          )
+        );
 
         // Desactiva la edición y reinicia el nombre editado
         setEditingCategoryId(null);
         setEditedCategoryName('');
 
         console.log('Cambios guardados correctamente');
-        swal("Éxito", "Categoria Actualizada", "success");
+        swal('Éxito', 'Categoria Actualizada', 'success');
       })
-      .catch(error => {
+      .catch((error) => {
         console.error('Error al guardar los cambios', error);
-        swal("Fallo", "no se pudo actualizar la categoria ", "error");
+        swal('Fallo', 'no se pudo actualizar la categoria ', 'error');
       });
   };
 
@@ -69,20 +82,20 @@ function AdminCategorias() {
 
   const handleGuardarNuevaCategoria = () => {
     crearCategoria({ NameCategoria: newCategoryName })
-      .then(response => {
+      .then((response) => {
         // Actualiza el estado con la nueva categoría
-        setCategorias(prevCategorias => [...prevCategorias, response.data]);
+        setCategorias((prevCategorias) => [...prevCategorias, response.data]);
 
         // Oculta el formulario y reinicia el nombre
         setShowAddForm(false);
         setNewCategoryName('');
 
         console.log('Categoría creada correctamente');
-        swal("Éxito", "Categoria Creada exitosamente", "success");
+        swal('Éxito', 'Categoria Creada exitosamente', 'success');
       })
-      .catch(error => {
+      .catch((error) => {
         console.error('Error al crear la categoría', error);
-        swal("Fallo", "no se pudo crear la categoria ", "error");
+        swal('Fallo', 'no se pudo crear la categoria ', 'error');
       });
   };
 
@@ -90,7 +103,7 @@ function AdminCategorias() {
     <div>
       <EncabezadoAdmin />
       <div className="pt-20 px-6 bg-gray-200 min-h-screen">
-        <div >
+        <div>
           <h2 className="text-center text-black text-3xl py-4">Categorías</h2>
           <div className="mb-4 text-center">
             <button
@@ -129,7 +142,10 @@ function AdminCategorias() {
 
           <div className="container mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {categorias.map((categoria) => (
-              <div key={categoria._id} className="bg-white rounded-md p-4 shadow-md flex flex-col items-center">
+              <div
+                key={categoria._id}
+                className="bg-white rounded-md p-4 shadow-md flex flex-col items-center"
+              >
                 {editingCategoryId === categoria._id ? (
                   <div className="flex flex-col items-center w-full">
                     <input
@@ -155,11 +171,18 @@ function AdminCategorias() {
                   </div>
                 ) : (
                   <div className="flex flex-col items-center w-full">
-                    <h3 className="text-black text-lg font-semibold mb-2 text-center">{categoria.NameCategoria}</h3>
+                    <h3 className="text-black text-lg font-semibold mb-2 text-center">
+                      {categoria.NameCategoria}
+                    </h3>
                     <div className="flex justify-center space-x-4 w-full">
                       <button
                         className="bg-green-500 text-white px-4 py-2 rounded-md"
-                        onClick={() => handleEditarCategoria(categoria._id, categoria.NameCategoria)}
+                        onClick={() =>
+                          handleEditarCategoria(
+                            categoria._id,
+                            categoria.NameCategoria
+                          )
+                        }
                       >
                         Editar
                       </button>
