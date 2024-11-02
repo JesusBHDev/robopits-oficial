@@ -6,7 +6,6 @@ import { useAuth } from '../../context/AuthContext';
 jest.mock('../../context/AuthContext', () => ({
   useAuth: jest.fn(),
 }));
-
 describe('EncabezadoAdmin Component', () => {
   beforeEach(() => {
     useAuth.mockReturnValue({
@@ -14,7 +13,6 @@ describe('EncabezadoAdmin Component', () => {
       empleado: { Nombre: 'Empleado Test' },
     });
   });
-
   it('debería mostrar el nombre del empleado', () => {
     render(
       <BrowserRouter>
@@ -22,7 +20,9 @@ describe('EncabezadoAdmin Component', () => {
       </BrowserRouter>
     );
 
-    expect(screen.getByText(/Bienvenido\s*Empleado\s*Test/i)).toBeInTheDocument();
+    expect(
+      screen.getByText(/Bienvenido\s*Empleado\s*Test/i)
+    ).toBeInTheDocument();
   });
 
   it('debería llamar a `logoutEmpleado` al hacer clic en "Cerrar sesión"', () => {
@@ -43,21 +43,20 @@ describe('EncabezadoAdmin Component', () => {
         <EncabezadoAdmin />
       </BrowserRouter>
     );
-  
+
     // Retrieve all elements with the role "navigation"
     const menus = screen.getAllByRole('navigation', { hidden: true });
     const menu = menus[0]; // Assuming the first navigation element is the menu you want
-  
+
     // Check that the menu has the class `-translate-x-full` initially
     expect(menu).toHaveClass('-translate-x-full');
-  
+
     // Simulate a click on the "Menu" button to toggle the menu visibility
     fireEvent.click(screen.getByText(/Menu/i));
-  
+
     // Verify that the menu is now visible (class `-translate-x-full` removed)
     await waitFor(() => {
       expect(menu).toHaveClass('translate-x-0');
     });
   });
-  
 });
