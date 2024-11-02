@@ -1,107 +1,103 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;700;800&family=Poppins:wght@100;200;400;500;700;800&display=swap');
 
-*{
-    padding: 0;
-    margin: 0;
-    text-decoration: none;
-    list-style: none;
+* {
+  padding: 0;
+  margin: 0;
+  text-decoration: none;
+  list-style: none;
 }
 
 #naptha_container0932014_0707 {
-    display: none !important;  /* Oculta el elemento si es visible */
-    /* o puedes intentar otras propiedades que anulen el estilo, como */
-    /* background: none; */
-    /* border: none; */
-    /* ... */
-  }
-  
+  display: none !important; /* Oculta el elemento si es visible */
+  /* o puedes intentar otras propiedades que anulen el estilo, como */
+  /* background: none; */
+  /* border: none; */
+  /* ... */
+}
 
-.cont-home-login{
-    width: 100%;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 1% 2% 0% 2%;
+.cont-home-login {
+  width: 100%;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1% 2% 0% 2%;
 }
 
 .img-fondo-login {
-    background-image: url("../images-fondo/fondo-lrc.webp");
-    background-size: cover;
-    background-position: center;
+  background-image: url('../images-fondo/fondo-lrc.webp');
+  background-size: cover;
+  background-position: center;
 }
 
 .container-login {
-    width: 100%;
-    height: auto;
-    display: grid;
-    place-items: center;
-
+  width: 100%;
+  height: auto;
+  display: grid;
+  place-items: center;
 }
 
-.form-logo-login{
-    height: 150px;
+.form-logo-login {
+  height: 150px;
 }
 
 .logo-login {
-    width: 149px;
-    height: 149px;
-    margin-top: 1%;
-    margin-bottom: 3%;
+  width: 149px;
+  height: 149px;
+  margin-top: 1%;
+  margin-bottom: 3%;
 }
 
-
 .form-login {
-    text-align: center;
-    width: 375px;
-    height: auto;
-    border-style: solid;
-    border-color: #C1C1C1;
-    border-width: 2px;
-    background-color: #FFF;
+  text-align: center;
+  width: 375px;
+  height: auto;
+  border-style: solid;
+  border-color: #c1c1c1;
+  border-width: 2px;
+  background-color: #fff;
 }
 
 .titulo-login {
-    height: 40px;
-    font-family: 'Poppins', sans-serif;
-    font-weight: 500;
-    margin-top: 4%;
+  height: 40px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  margin-top: 4%;
 }
 
-.contenedor-cajas-login{
-    height: 70px;
+.contenedor-cajas-login {
+  height: 70px;
 }
-
 
 .nom-cajas-login {
-    height: 20px;
-    font-family: 'Open Sans', sans-serif;
-    font-size: 14px;
-    display: flex;
-    padding-left: 9%;
+  height: 20px;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 14px;
+  display: flex;
+  padding-left: 9%;
 }
 
 .cajas-login {
-    width: 305px;
-    height: 36px;
-    background-color: #eee;
-    border-style: solid;
-    border-color: #eee;
-    border-width: 1px;
-    border-radius: 6px;
-    font-family: 'Open Sans', sans-serif;
-    font-weight: 200;
-    font-size: 14px;
-    padding-left: 3%;
-    color: black;
+  width: 305px;
+  height: 36px;
+  background-color: #eee;
+  border-style: solid;
+  border-color: #eee;
+  border-width: 1px;
+  border-radius: 6px;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 200;
+  font-size: 14px;
+  padding-left: 3%;
+  color: black;
 }
 
 .cajas-login::placeholder {
-    font-family: 'Open Sans', sans-serif;
-    font-style: italic;
-    font-weight: 100;
-    font-size: 14px;
-    color: black;
+  font-family: 'Open Sans', sans-serif;
+  font-style: italic;
+  font-weight: 100;
+  font-size: 14px;
+  color: black;
 }
 /*Focus para cambiar el color cuando se selecciona*/
 /*
@@ -124,118 +120,117 @@
 }
 */
 .botones-login {
-    height: 290px;
-    display: grid;
-    place-items: center;
+  height: 290px;
+  display: grid;
+  place-items: center;
 }
 
-.cont-btn-rest-contra-login{
-    height: 25px;
+.cont-btn-rest-contra-login {
+  height: 25px;
 }
 
 .btn-continuar-login {
-    width: 305px;
-    height: 36px;
-    font-family: 'Open Sans', sans-serif;
-    font-size: 14px;
-    font-weight: bold;
-    color: #FFF;
-    background-color: #3BA4F6;
-    border-style: solid;
-    border-color: #3BA4F6;
-    border-radius: 6px;
-    border-width: 1px;
-    cursor: pointer;
+  width: 305px;
+  height: 36px;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 14px;
+  font-weight: bold;
+  color: #fff;
+  background-color: #3ba4f6;
+  border-style: solid;
+  border-color: #3ba4f6;
+  border-radius: 6px;
+  border-width: 1px;
+  cursor: pointer;
 }
 
 .btn-reestablecerContrasena-login {
-    font-family: 'Open Sans', sans-serif;
-    font-size: 14px;
-    font-style: italic;
-    font-weight: 500;
-    color: #3BA4F6;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 14px;
+  font-style: italic;
+  font-weight: 500;
+  color: #3ba4f6;
 }
 
 .btn-creacuenta-login {
-    width: 80%;
-    display: flex;
-    justify-content: space-between;
+  width: 80%;
+  display: flex;
+  justify-content: space-between;
 }
 
 .no-cuenta-login {
-    font-family: 'Open Sans', sans-serif;
-    font-size: 14px;
-    font-style: italic;
-    font-weight: 500;
-    color: #000;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 14px;
+  font-style: italic;
+  font-weight: 500;
+  color: #000;
 }
 
 .crea-cuenta-login {
-    font-family: 'Open Sans', sans-serif;
-    font-size: 14px;
-    font-style: italic;
-    font-weight: 500;
-    color: #3BA4F6;
-    margin-bottom: 15%;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 14px;
+  font-style: italic;
+  font-weight: 500;
+  color: #3ba4f6;
+  margin-bottom: 15%;
 }
 
 .cont-line-login {
-    width: 85%;
-    display: flex;
-    justify-content: space-between;
+  width: 85%;
+  display: flex;
+  justify-content: space-between;
 }
 
 .horizontal-line-login {
-    width: 129px;
-    height: 1px;
+  width: 129px;
+  height: 1px;
 }
 
 .cont-logos-login {
-    width: 35%;
-    display: flex;
-    justify-content: space-between;
+  width: 35%;
+  display: flex;
+  justify-content: space-between;
 }
 
 .logos-login {
-    width: 34px;
-    height: 34px;
-    cursor: pointer;
+  width: 34px;
+  height: 34px;
+  cursor: pointer;
 }
-
 
 /*ESTILO PARA VER Y OCULTAR LA CONTRASEÑA*/
 
-.input-contrasena-ojo-login{
-    height: auto;
-    align-items: center;
-    align-self: center;
-    justify-content: center;
+.input-contrasena-ojo-login {
+  height: auto;
+  align-items: center;
+  align-self: center;
+  justify-content: center;
 }
 .password-toggle-login {
-    position: relative;
-  }
-  
-  .password-toggle-login .toggle-password-button-login {
-    position: absolute;
-    top: 0px;
-    right: 35px;
-    bottom: 0px;
-    border: none;
-    background: none;
-    padding: 0 0.5rem;
-    cursor: pointer;
-  }
+  position: relative;
+}
 
-  .toggle-password-button-login{
-    height: auto;
-  }
-  
-  .password-toggle-login .toggle-password-button-login:focus {
-    outline: none;
-  }
-  
-  .password-toggle-login .toggle-password-button-login svg {
-    width: 1rem;
-    height: 1rem;
-    fill: #666;
-  }
+.password-toggle-login .toggle-password-button-login {
+  position: absolute;
+  top: 0px;
+  right: 35px;
+  bottom: 0px;
+  border: none;
+  background: none;
+  padding: 0 0.5rem;
+  cursor: pointer;
+}
+
+.toggle-password-button-login {
+  height: auto;
+}
+
+.password-toggle-login .toggle-password-button-login:focus {
+  outline: none;
+}
+
+.password-toggle-login .toggle-password-button-login svg {
+  width: 1rem;
+  height: 1rem;
+  fill: #666;
+}
