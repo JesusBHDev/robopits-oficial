@@ -1,120 +1,125 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="%PUBLIC_URL%/robopits.ico" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="description" content="RoboPits tu Tienda Online" />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/robopits-192x192.webp" />
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
 
-<head>
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" href="%PUBLIC_URL%/robopits.ico" />
-  <meta name="theme-color" content="#000000" />
-  <meta name="description" content="RoboPits tu Tienda Online" />
-  <link rel="apple-touch-icon" href="%PUBLIC_URL%/robopits-192x192.webp" />
-  <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <title>RoboPits</title>
 
-  <title>RoboPits</title>
-  
-<style>
-  body {
-    height: 100vh;
-    width: auto;
-    margin: 0;
-    background-color: #f0f0f0;
-  }
-  .container{
-    height: auto;
-    width: auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .spinner {
-    position: relative;
-    width: 100px;
-    height: 100px;
-    animation: spin 1s linear infinite;
-  }
+    <style>
+      body {
+        height: 100vh;
+        width: auto;
+        margin: 0;
+        background-color: #f0f0f0;
+      }
+      .container {
+        height: auto;
+        width: auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .spinner {
+        position: relative;
+        width: 100px;
+        height: 100px;
+        animation: spin 1s linear infinite;
+      }
 
-  @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-  }
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
 
-  .robot {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 60px;
-    height: 80px;
-    background-color: #3498db;
-    border-radius: 8px;
-  }
+      .robot {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 60px;
+        height: 80px;
+        background-color: #3498db;
+        border-radius: 8px;
+      }
 
-  .head {
-    position: absolute;
-    top: 5px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 30px;
-    height: 30px;
-    background-color: #e74c3c;
-    border-radius: 50%;
-  }
+      .head {
+        position: absolute;
+        top: 5px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 30px;
+        height: 30px;
+        background-color: #e74c3c;
+        border-radius: 50%;
+      }
 
-  .eye {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 8px;
-    height: 8px;
-    background-color: #ffffff;
-    border-radius: 50%;
-  }
+      .eye {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 8px;
+        height: 8px;
+        background-color: #ffffff;
+        border-radius: 50%;
+      }
 
-  .eye.left { left: 30%; }
-  .eye.right { left: 70%; }
+      .eye.left {
+        left: 30%;
+      }
+      .eye.right {
+        left: 70%;
+      }
 
-  .antenna {
-    position: absolute;
-    top: -10px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 4px;
-    height: 20px;
-    background-color: #e74c3c;
-  }
+      .antenna {
+        position: absolute;
+        top: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 4px;
+        height: 20px;
+        background-color: #e74c3c;
+      }
 
-  .antenna-tip {
-    position: absolute;
-    top: -20px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 12px;
-    height: 12px;
-    background-color: #e74c3c;
-    border-radius: 50%;
-  }
-</style>
-</head>
+      .antenna-tip {
+        position: absolute;
+        top: -20px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 12px;
+        height: 12px;
+        background-color: #e74c3c;
+        border-radius: 50%;
+      }
+    </style>
+  </head>
 
-<body>
-  <noscript>Está es la Tienda Online RoboPits.</noscript>
-  <div id="root">
-    <div class="container">
-      <div class="spinner">
-        <div class="robot">
-          <div class="head">
-            <div class="eye left"></div>
-            <div class="eye right"></div>
+  <body>
+    <noscript>Está es la Tienda Online RoboPits.</noscript>
+    <div id="root">
+      <div class="container">
+        <div class="spinner">
+          <div class="robot">
+            <div class="head">
+              <div class="eye left"></div>
+              <div class="eye right"></div>
+            </div>
+            <div class="antenna"></div>
+            <div class="antenna-tip"></div>
           </div>
-          <div class="antenna"></div>
-          <div class="antenna-tip"></div>
         </div>
       </div>
     </div>
-  </div>
-
-</body>
-
+  </body>
 </html>

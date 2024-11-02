@@ -16,14 +16,18 @@ root.render(
   </AuthProvider>
 );
 
-// Registrar el service worker manualmente
 if ('serviceWorker' in navigator) {
-  navigator.serviceWorker
-    .register('/serviceWorker.js')
-    .then((registration) => {
-      console.log('Service Worker registrado con éxito:', registration);
-    })
-    .catch((error) => {
-      console.error('Error al registrar el Service Worker:', error);
-    });
+  window.addEventListener('load', () => {
+    navigator.serviceWorker
+      .register('/service-worker.js')
+      .then((registration) => {
+        console.log(
+          'Service Worker registered with scope:',
+          registration.scope
+        );
+      })
+      .catch((error) => {
+        console.error('Service Worker registration failed:', error);
+      });
+  });
 }

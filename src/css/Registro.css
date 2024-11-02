@@ -1,255 +1,252 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;700;800&family=Poppins:wght@100;200;400;500;700;800&display=swap');
 
-*{
-    padding: 0;
-    margin: 0;
-    text-decoration: none;
-    list-style: none;
+* {
+  padding: 0;
+  margin: 0;
+  text-decoration: none;
+  list-style: none;
 }
 
-.cont-home-registro{
-    width: 100%;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 1% 2% 0% 2%;
+.cont-home-registro {
+  width: 100%;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1% 2% 0% 2%;
 }
 
-.img-fondo-registro{
-    background-image: url("../images-fondo/fondo-lrc.webp");
-    background-size: cover;
-    background-position: center;
+.img-fondo-registro {
+  background-image: url('../images-fondo/fondo-lrc.webp');
+  background-size: cover;
+  background-position: center;
 }
 
 .container-registro {
-    width: 100%;
-    height: auto;
-    display: grid;
-    place-items: center;
+  width: 100%;
+  height: auto;
+  display: grid;
+  place-items: center;
 }
 
 .logo-registro {
-    width: 149px;
-    height: 149px;
-    margin-bottom: 1%;
+  width: 149px;
+  height: 149px;
+  margin-bottom: 1%;
 }
 
 .form-registro {
-    text-align: center;
-    width: 375px;
-    height: auto;
-    border-style: solid;
-    border-color: #C1C1C1;
-    border-width: 2px;
-    background-color: #FFF;
+  text-align: center;
+  width: 375px;
+  height: auto;
+  border-style: solid;
+  border-color: #c1c1c1;
+  border-width: 2px;
+  background-color: #fff;
 }
 
 .titulo-registro {
-    height: 40px;
-    font-family: 'Poppins', sans-serif;
-    font-weight: 500;
-    margin-top: 4%;
+  height: 40px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  margin-top: 4%;
 }
 
-.contenedor-cajas-registro{
-    height: 13%;
+.contenedor-cajas-registro {
+  height: 13%;
 }
 
-.contenedor-msj-error-registro{
-    height: 15px;
-    background-color: #FFF;
+.contenedor-msj-error-registro {
+  height: 15px;
+  background-color: #fff;
 }
 
-
-.mensajes-error-registro{
-    height: auto;
-    color: red;
-    margin-top: -1px;
-    font-size: 12px;
+.mensajes-error-registro {
+  height: auto;
+  color: red;
+  margin-top: -1px;
+  font-size: 12px;
 }
 
 .invalid-input {
-    border: 2px solid red;
+  border: 2px solid red;
 }
-  
+
 .valid-input {
-    border: 2px solid green;
+  border: 2px solid green;
 }
-  
+
 .nom-cajas-registro {
-    flex: 1;
-    height: 20px;
-    font-family: 'Open Sans', sans-serif;
-    font-size: 14px;
-    display: flex;
-    padding-left: 9%;
+  flex: 1;
+  height: 20px;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 14px;
+  display: flex;
+  padding-left: 9%;
 }
 
 .cajas-registro {
-    width: 305px;
-    height: 36px;
-    background-color: #eee;
-    border-style: solid;
-    border-color: #eee;
-    border-width: 1px;
-    border-radius: 6px;
-    font-family: 'Open Sans', sans-serif;
-    font-weight: 200;
-    font-size: 14px;
-    padding-left: 3%;
-    color: black;
+  width: 305px;
+  height: 36px;
+  background-color: #eee;
+  border-style: solid;
+  border-color: #eee;
+  border-width: 1px;
+  border-radius: 6px;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 200;
+  font-size: 14px;
+  padding-left: 3%;
+  color: black;
 }
 
 .cajas-registro::placeholder {
-    font-family: 'Open Sans', sans-serif;
-    font-style: italic;
-    font-weight: 100;
-    font-size: 14px;
-    color: black;
+  font-family: 'Open Sans', sans-serif;
+  font-style: italic;
+  font-weight: 100;
+  font-size: 14px;
+  color: black;
 }
 
 .botones-registro {
-    height: 270px;
-    display: grid;
-    place-items: center;
+  height: 270px;
+  display: grid;
+  place-items: center;
 }
 
 .btn-registrar-registro {
-    width: 305px;
-    height: 36px;
-    font-family: 'Open Sans', sans-serif;
-    font-size: 14px;
-    font-weight: bold;
-    color: #FFF;
-    background-color: #3BA4F6;
-    border-style: solid;
-    border-color: #3BA4F6;
-    border-radius: 6px;
-    border-width: 1px;
-    cursor: pointer;
+  width: 305px;
+  height: 36px;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 14px;
+  font-weight: bold;
+  color: #fff;
+  background-color: #3ba4f6;
+  border-style: solid;
+  border-color: #3ba4f6;
+  border-radius: 6px;
+  border-width: 1px;
+  cursor: pointer;
 }
 
 .btn-registrar-registro:disabled {
-    background-color: #93d8fd; /* Cambia el color de fondo */
-    color: #ffff; /* Cambia el color del texto */
-    cursor: not-allowed; /* Cambia el cursor del mouse */
-    opacity: 0.6; /* Cambia la opacidad para indicar que está deshabilitado */
+  background-color: #93d8fd; /* Cambia el color de fondo */
+  color: #ffff; /* Cambia el color del texto */
+  cursor: not-allowed; /* Cambia el cursor del mouse */
+  opacity: 0.6; /* Cambia la opacidad para indicar que está deshabilitado */
 }
 
 .btn-iniciarsesion-registro {
-    width: 75%;
-    display: flex;
-    justify-content: space-between;
+  width: 75%;
+  display: flex;
+  justify-content: space-between;
 }
 
 .con-cuenta-registro {
-    font-family: 'Open Sans', sans-serif;
-    font-size: 14px;
-    font-style: italic;
-    font-weight: 500;
-    color: #000;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 14px;
+  font-style: italic;
+  font-weight: 500;
+  color: #000;
 }
 
 .inicia-ahora-registro {
-    font-family: 'Open Sans', sans-serif;
-    font-size: 14px;
-    font-style: italic;
-    font-weight: 500;
-    color: #3BA4F6;
-    margin-bottom: 9%;
-    cursor: pointer;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 14px;
+  font-style: italic;
+  font-weight: 500;
+  color: #3ba4f6;
+  margin-bottom: 9%;
+  cursor: pointer;
 }
 
 .cont-line-registro {
-    width: 85%;
-    height: 5px;
-    display: flex;
-    justify-content: space-between;
+  width: 85%;
+  height: 5px;
+  display: flex;
+  justify-content: space-between;
 }
 
 .horizontal-line-registro {
-    width: 129px;
-    height: 1px;
+  width: 129px;
+  height: 1px;
 }
 
 .cont-logos-registro {
-    width: 35%;
-    display: flex;
-    justify-content: space-between;
+  width: 35%;
+  display: flex;
+  justify-content: space-between;
 }
 
 .logos-registro {
-    width: 34px;
-    height: 34px;
-    cursor: pointer;
+  width: 34px;
+  height: 34px;
+  cursor: pointer;
 }
 
 /*ESTILO PARA VER Y OCULTAR LA CONTRASEÑA*/
 
-.input-contrasena-ojo{
-    height: auto;
-    align-items: center;
-    align-self: center;
-    justify-content: center;
+.input-contrasena-ojo {
+  height: auto;
+  align-items: center;
+  align-self: center;
+  justify-content: center;
 }
 .password-toggle {
-    position: relative;
-  }
-  
-  .password-toggle .toggle-password-button {
-    position: absolute;
-    top: 5px;
-    right: 35px;
-    bottom: 0px;
-    border: none;
-    background: none;
-    padding: 0 0.5rem;
-    cursor: pointer;
-  }
+  position: relative;
+}
 
-  .toggle-password-button{
-    height: auto;
-  }
-  
-  .password-toggle .toggle-password-button:focus {
-    outline: none;
-  }
-  
-  .password-toggle .toggle-password-button svg {
-    width: 1rem;
-    height: 1rem;
-    fill: #666;
-  }
+.password-toggle .toggle-password-button {
+  position: absolute;
+  top: 5px;
+  right: 35px;
+  bottom: 0px;
+  border: none;
+  background: none;
+  padding: 0 0.5rem;
+  cursor: pointer;
+}
+
+.toggle-password-button {
+  height: auto;
+}
+
+.password-toggle .toggle-password-button:focus {
+  outline: none;
+}
+
+.password-toggle .toggle-password-button svg {
+  width: 1rem;
+  height: 1rem;
+  fill: #666;
+}
 
 .password-toggle2 {
-    height: auto;
-    position: relative;
+  height: auto;
+  position: relative;
+}
 
-  }
-  
-  .password-toggle2 .toggle-password-button2 {
-    position: absolute;
-    top: 12px;
-    right: 35px;
-    bottom: 0px;
-    border: none;
-    background: none;
-    padding: 0 0.5rem;
-    cursor: pointer;
-  }
+.password-toggle2 .toggle-password-button2 {
+  position: absolute;
+  top: 12px;
+  right: 35px;
+  bottom: 0px;
+  border: none;
+  background: none;
+  padding: 0 0.5rem;
+  cursor: pointer;
+}
 
-  .toggle-password-button{
-    height: auto;
-  }
-  
-  .password-toggle2 .toggle-password-button2:focus {
-    outline: none;
-  }
-  
-  .password-toggle2 .toggle-password-button2 svg {
-    width: 1rem;
-    height: 1rem;
-    fill: #666;
-  }
+.toggle-password-button {
+  height: auto;
+}
 
+.password-toggle2 .toggle-password-button2:focus {
+  outline: none;
+}
+
+.password-toggle2 .toggle-password-button2 svg {
+  width: 1rem;
+  height: 1rem;
+  fill: #666;
+}

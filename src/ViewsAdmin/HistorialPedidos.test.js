@@ -12,7 +12,6 @@ import moment from 'moment'; // Importa moment
 jest.mock('../api/auth', () => ({
   obtenerHistorialDePedidos: jest.fn(),
 }));
-
 // Mock de `useAuth` desde `AuthContext`
 jest.mock('../context/AuthContext', () => ({
   ...jest.requireActual('../context/AuthContext'),
