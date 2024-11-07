@@ -89,3 +89,18 @@ export const obtenerPedidosPorEstado = (estado) =>
 export const moverPedidoAlHistorial = (pedidoId) =>
   axios.put(`/mover-pedido/${pedidoId}`);
 export const obtenerHistorialDePedidos = () => axios.get('/historial-pedidos');
+
+export const todasOferta = () => axios.get('/ofertas');
+export const unaoferta = (ofertaId) => axios.get(`/oferta/${ofertaId}`);
+export const crearOferta = (oferta) => {
+  return axios.post('/ofertas', oferta);
+};
+export const eliminaOferta = (ofertaId) => axios.delete(`/oferta/${ofertaId}`);
+
+// Nueva función para guardar la suscripción
+export const guardarSuscripcion = (userId, subscription) => {
+  return axios.post('/suscripcion', {
+    userId,
+    subscription,
+  });
+};

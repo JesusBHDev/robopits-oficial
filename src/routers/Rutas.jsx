@@ -43,6 +43,8 @@ import ProductosPorCategoria from '../views/ProductosPorCategoria.jsx';
 import Carrito from '../views/Carrito.jsx';
 import Pedido from '../views/Pedido.jsx';
 import HistorialPedidos from '../ViewsAdmin/HistorialPedidos.jsx';
+import AdminOfertas from '../ViewsAdmin/AdminOfertas.jsx';
+
 export const Rutas = createBrowserRouter([
   {
     path: '/Inicio',
@@ -196,6 +198,10 @@ export const Rutas = createBrowserRouter([
   {
     path: '/problema',
     element: <RevenuePrediction />,
+  },
+  {
+    path: '/AdminOfertas',
+    element: <ProtectorRutasPrivadas Page={AdminOfertas} />,
   },
 ]);
 
