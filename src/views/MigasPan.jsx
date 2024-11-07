@@ -6,7 +6,7 @@ import axios from 'axios';
 const MigasPan = () => {
   const [productos, setProductos] = useState([]);
 
-  const URL = 'https://backend-robo.vercel.app/api/productos';
+  const URL = 'https://back-end-robopits.vercel.app/api/productos';
 
   const showData = async () => {
     try {
@@ -20,7 +20,7 @@ const MigasPan = () => {
   const loadCategories = async () => {
     try {
       const response = await axios.get(
-        'https://backend-robo.vercel.app/api/categorias'
+        'https://back-end-robopits.vercel.app/api/categorias'
       );
       response.data.forEach((categoria) => {
         setRouteToComponent((prevRoutes) => ({

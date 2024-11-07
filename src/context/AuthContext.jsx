@@ -8,6 +8,7 @@ import {
   crearEmpleado,
 } from '../api/auth.js';
 import Cookies from 'js-cookie';
+import { subscribeUserToPush } from '../index.js'; // Asegúrate de que la ruta sea correcta
 
 export const AuthContext = createContext();
 
@@ -57,21 +58,41 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  // Función de login en AuthContext.jsx
   const signin = async (user) => {
     try {
-      const cookies = Cookies.get();
-      console.log(cookies);
-      const res = await loginRequest(user);
-      console.log(res);
+      const res = await loginRequest(user); // Llamada de login al servidor
+      console.log('User ID obtenido del login:', res.data._id); // Verifica si contiene userId
+
       setIsAuthenticated(true);
       setUser(res.data);
-      console.log(res.data.token);
       Cookies.set('token', res.data.token);
-    } catch (error) {
-      if (Array.isArray(error.response.data)) {
-        return setErrors(error.response.data);
+
+      // Suscribir al usuario a notificaciones push si el permiso ya está otorgado
+      if (Notification.permission === 'granted') {
+        await subscribeUserToPush(res.data.id);
+        console.log('Suscripción push enviada al servidor.');
+      } else if (Notification.permission === 'default') {
+        // Pedir permiso si aún no ha sido otorgado o denegado
+        const permission = await Notification.requestPermission();
+        if (permission === 'granted') {
+          await subscribeUserToPush(res.data._id);
+          console.log('Suscripción push enviada al servidor.');
+        } else {
+          console.log('Permiso de notificaciones denegado por el usuario.');
+        }
+      } else {
+        console.log(
+          'El usuario no ha otorgado permiso para notificaciones push.'
+        );
       }
-      setErrors([error.response.data.message]);
+    } catch (error) {
+      console.error('Error en el proceso de inicio de sesión:', error);
+      if (Array.isArray(error.response.data)) {
+        setErrors(error.response.data);
+      } else {
+        setErrors([error.response.data.message]);
+      }
     }
   };
 

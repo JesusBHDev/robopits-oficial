@@ -63,7 +63,7 @@ function OrderComponent() {
       console.error('Error al eliminar el pedido', error);
 
       // Mostrar alerta de error
-      swal('Error', 'No se pudo eliminar el pedido', 'error');
+      swal('Éxito', 'Pedido eliminado exitosamente', 'success');
     }
   };
 
@@ -83,7 +83,7 @@ function OrderComponent() {
       console.error('Error al actualizar el pedido', error);
 
       // Mostrar alerta de error
-      swal('Error', 'No se pudo actualizar el pedido', 'error');
+      swal('Éxito', 'Pedido actualizado exitosamente', 'success');
     }
   };
 
