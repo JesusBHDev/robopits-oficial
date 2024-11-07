@@ -48,3 +48,43 @@ registerRoute(
     ],
   })
 );
+
+self.addEventListener('push', (event) => {
+  // Verifica si hay datos en el evento push
+  const data = event.data ? event.data.json() : {};
+
+  // Configura el contenido de la notificación
+  const options = {
+    body: data.body || 'Tienes una nueva notificación',
+    icon: '/icon-192x192.png',
+    badge: '/badge-72x72.png',
+    data: data.url || '/',
+  };
+
+  console.log('Intentando mostrar notificación: ', options);
+
+  // Verifica el permiso antes de mostrar la notificación
+  if (Notification.permission === 'granted') {
+    event.waitUntil(
+      self.registration.showNotification(
+        data.title || 'Nueva Notificación',
+        options
+      )
+    );
+  } else {
+    console.warn(
+      'Permiso de notificación no concedido:',
+      Notification.permission
+    );
+  }
+});
+
+// Escucha el evento de clic en la notificación
+self.addEventListener('notificationclick', (event) => {
+  event.notification.close(); // Cierra la notificación al hacer clic
+
+  /* eslint-disable no-undef */
+  // Abre la URL asociada a la notificación
+  event.waitUntil(clients.openWindow(event.notification.data));
+  /* eslint-enable no-undef */
+});

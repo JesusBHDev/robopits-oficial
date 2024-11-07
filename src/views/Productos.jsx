@@ -19,7 +19,8 @@ const Productos = () => {
     return input.replace(/['"]/g, '');
   };
 
-  const URL = 'https://backend-robo.vercel.app/api/productos';
+  //onst URL = 'https://backend-robo.vercel.app/api/productos';
+  const URL = 'http://localhost:4000/api/productos';
 
   const showData = async () => {
     try {

@@ -68,6 +68,11 @@ export function EncabezadoAdmin() {
               Productos
             </button>
           </Link>
+          <Link to="/AdminOfertas" className="mb-4 w-4/5 flex justify-center">
+            <button className="w-3/4 px-4 py-2 bg-blue-600 text-white rounded-md shadow-md hover:bg-blue-700 transition duration-200">
+              Ofertas
+            </button>
+          </Link>
           <Link
             to="/AdminCategorias"
             className="mb-4 w-4/5 flex justify-center"
