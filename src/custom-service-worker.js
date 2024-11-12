@@ -1,10 +1,39 @@
+/* eslint-env serviceworker */
 import { registerRoute } from 'workbox-routing';
 import { StaleWhileRevalidate, CacheFirst } from 'workbox-strategies';
 import { precacheAndRoute } from 'workbox-precaching';
 import { ExpirationPlugin } from 'workbox-expiration';
-
-// Precarga los archivos estáticos
+import { NetworkOnly } from 'workbox-strategies';
+// Precarga archivos estáticos
 precacheAndRoute(self.__WB_MANIFEST || []);
+
+// Cachea páginas de la aplicación para navegación offline
+registerRoute(
+  ({ request }) => request.mode === 'navigate', // Filtra solo solicitudes de navegación (páginas)
+  new StaleWhileRevalidate({
+    cacheName: 'pages-cache',
+    plugins: [
+      new ExpirationPlugin({
+        maxEntries: 20, // Limita el cache de páginas a 20 entradas
+        maxAgeSeconds: 30 * 24 * 60 * 60, // 30 días
+      }),
+    ],
+  })
+);
+
+// Cachea fuentes web para uso offline
+registerRoute(
+  ({ request }) => request.destination === 'font',
+  new CacheFirst({
+    cacheName: 'fonts-cache',
+    plugins: [
+      new ExpirationPlugin({
+        maxEntries: 30, // Limita el caché de fuentes a 30 entradas
+        maxAgeSeconds: 365 * 24 * 60 * 60, // 1 año
+      }),
+    ],
+  })
+);
 
 // Cachea imágenes con un límite de 50 archivos y 30 días de duración
 registerRoute(
@@ -13,7 +42,21 @@ registerRoute(
     cacheName: 'images-cache',
     plugins: [
       new ExpirationPlugin({
-        maxEntries: 50, // Máximo de 50 imágenes en el caché
+        maxEntries: 100,
+        maxAgeSeconds: 30 * 24 * 60 * 60,
+      }),
+    ],
+  })
+);
+
+// Cachea JSON y otros datos estáticos
+registerRoute(
+  ({ request }) => request.destination === 'document', // Esto incluye JSON y similares
+  new StaleWhileRevalidate({
+    cacheName: 'data-cache',
+    plugins: [
+      new ExpirationPlugin({
+        maxEntries: 50, // Limita a 50 respuestas en caché
         maxAgeSeconds: 30 * 24 * 60 * 60, // 30 días
       }),
     ],
@@ -29,62 +72,67 @@ registerRoute(
   })
 );
 
+// Evitar el cacheo para las solicitudes de pedidos
+registerRoute(
+  ({ url }) =>
+    url.origin === 'https://back-end-robopits.vercel.app' &&
+    url.pathname.startsWith('/api/pedidos'),
+  new NetworkOnly()
+);
+
 // Cachea solicitudes a la API con un límite de 100 respuestas y 7 días de duración
 registerRoute(
-  ({ url }) => url.origin === 'https://back-end-robopits.vercel.app', // Cambia esto a la URL de tu API
+  ({ url }) => url.origin === 'https://back-end-robopits.vercel.app',
   new CacheFirst({
     cacheName: 'api-cache',
     plugins: [
       new ExpirationPlugin({
-        maxEntries: 100, // Máximo de 100 respuestas de la API en caché
-        maxAgeSeconds: 7 * 24 * 60 * 60, // 7 días
+        maxEntries: 100,
+        maxAgeSeconds: 7 * 24 * 60 * 60,
       }),
       {
-        cacheWillUpdate: async ({ response }) => {
-          // Solo cachea respuestas exitosas (status 200)
-          return response && response.status === 200 ? response : null;
-        },
+        cacheWillUpdate: async ({ response }) =>
+          response?.ok ? response : null,
       },
     ],
   })
 );
 
 self.addEventListener('push', (event) => {
-  // Verifica si hay datos en el evento push
   const data = event.data ? event.data.json() : {};
 
-  // Configura el contenido de la notificación
   const options = {
     body: data.body || 'Tienes una nueva notificación',
-    icon: '/icon-192x192.png',
-    badge: '/badge-72x72.png',
+    icon: data.icon || '/',
     data: data.url || '/',
   };
 
-  console.log('Intentando mostrar notificación: ', options);
+  console.log('Mostrando notificación: ', options);
 
-  // Verifica el permiso antes de mostrar la notificación
-  if (Notification.permission === 'granted') {
-    event.waitUntil(
-      self.registration.showNotification(
-        data.title || 'Nueva Notificación',
-        options
-      )
-    );
-  } else {
-    console.warn(
-      'Permiso de notificación no concedido:',
-      Notification.permission
-    );
-  }
+  event.waitUntil(
+    self.registration.showNotification(
+      data.title || 'Nueva Notificación',
+      options
+    )
+  );
 });
 
-// Escucha el evento de clic en la notificación
 self.addEventListener('notificationclick', (event) => {
-  event.notification.close(); // Cierra la notificación al hacer clic
+  event.notification.close();
 
-  /* eslint-disable no-undef */
-  // Abre la URL asociada a la notificación
-  event.waitUntil(clients.openWindow(event.notification.data));
-  /* eslint-enable no-undef */
+  const urlToOpen = event.notification.data;
+  event.waitUntil(
+    clients
+      .matchAll({ type: 'window', includeUncontrolled: true })
+      .then((clientList) => {
+        for (const client of clientList) {
+          if (client.url === urlToOpen && 'focus' in client) {
+            return client.focus();
+          }
+        }
+        if (clients.openWindow) {
+          return clients.openWindow(urlToOpen);
+        }
+      })
+  );
 });
