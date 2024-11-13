@@ -81,6 +81,6 @@ jobs:
           lftp -u $HOSTINGER_USER,$HOSTINGER_PASSWORD $HOSTINGER_HOST <<-EOF
           set ssl:verify-certificate no
           cd public_html
-          mirror -R --delete /home/runner/work/robopits-oficial/robopits-oficial . 
+          mirror -R --delete --exclude-glob .htaccess /home/runner/work/robopits-oficial/robopits-oficial .
           bye
           EOF
