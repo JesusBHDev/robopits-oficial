@@ -11,7 +11,7 @@ const Bienvenida = () => {
       <div className="container-bienvenida">
         <div className="grid text-center">
           <h1 className="text-4xl text-blue-400 font-bold">
-            ¡Hola, te damos la bienvenida jesus ivan!
+            ¡Hola, te damos la bienvenida jesus ivan bautista hernandez!
           </h1>
           <h3 className="text-lg ">
             Compra aquí tus componentes electrónicos, herramientas y más...
