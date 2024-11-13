@@ -78,7 +78,8 @@ jobs:
           HOSTINGER_USER: ${{ secrets.HOSTINGER_USER }}
           HOSTINGER_PASSWORD: ${{ secrets.HOSTINGER_PASSWORD }}
         run: |
+          cd build
           lftp -u $HOSTINGER_USER,$HOSTINGER_PASSWORD $HOSTINGER_HOST <<-EOF
-          mirror -R ./build public_html
+          mirror -R . public_html
           bye
           EOF
