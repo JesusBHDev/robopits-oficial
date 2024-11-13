@@ -45,9 +45,36 @@ jobs:
       - name: Run Tests
         run: npm test -- --detectOpenHandles
 
+      - name: Build for production
+        run: npm run build
+
       - name: Cargar artefacto de compilación
         uses: actions/upload-artifact@v3
         with:
           name: build-artifact
           path: ./build
           retention-days: 7
+
+  deploy:
+    needs: build # Se ejecuta después de build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Descargar artefacto de compilación
+        uses: actions/download-artifact@v3
+        with:
+          name: build-artifact
+
+      - name: Instalar lftp
+        run: sudo apt-get install lftp
+
+      - name: Desplegar en Hostinger via FTP
+        env:
+          HOSTINGER_HOST: ${{ secrets.HOSTINGER_HOST }}
+          HOSTINGER_USER: ${{ secrets.HOSTINGER_USER }}
+          HOSTINGER_PASSWORD: ${{ secrets.HOSTINGER_PASSWORD }}
+        run: |
+          lftp -u $HOSTINGER_USER,$HOSTINGER_PASSWORD $HOSTINGER_HOST <<-EOF
+          mirror -R ./build public_html
+          bye
+          EOF
