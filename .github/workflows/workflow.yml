@@ -67,10 +67,7 @@ jobs:
           path: ./
 
       - name: Verificar estructura de directorios después de la descarga
-        run: ls -R # Lista todos los archivos y carpetas en el directorio raíz
-
-      - name: Verificar contenido de build
-        run: ls -R ./build # Lista el contenido de la carpeta build
+        run: ls -R /home/runner/work/robopits-oficial/robopits-oficial # Verifica todos los archivos descargados
 
       - name: Instalar lftp
         run: sudo apt-get install lftp
@@ -82,6 +79,6 @@ jobs:
           HOSTINGER_PASSWORD: ${{ secrets.HOSTINGER_PASSWORD }}
         run: |
           lftp -u $HOSTINGER_USER,$HOSTINGER_PASSWORD $HOSTINGER_HOST <<-EOF
-          mirror -R ./build public_html
+          mirror -R /home/runner/work/robopits-oficial/robopits-oficial/build public_html
           bye
           EOF
