@@ -67,7 +67,7 @@ jobs:
           path: ./
 
       - name: Verificar contenido de build
-        run: ls -R
+        run: ls -R ./build # Lista el contenido de la carpeta build
 
       - name: Instalar lftp
         run: sudo apt-get install lftp
@@ -78,8 +78,7 @@ jobs:
           HOSTINGER_USER: ${{ secrets.HOSTINGER_USER }}
           HOSTINGER_PASSWORD: ${{ secrets.HOSTINGER_PASSWORD }}
         run: |
-          cd build
           lftp -u $HOSTINGER_USER,$HOSTINGER_PASSWORD $HOSTINGER_HOST <<-EOF
-          mirror -R . public_html
+          mirror -R ./build public_html
           bye
           EOF
