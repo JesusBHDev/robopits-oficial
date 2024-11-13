@@ -80,6 +80,7 @@ jobs:
         run: |
           lftp -u $HOSTINGER_USER,$HOSTINGER_PASSWORD $HOSTINGER_HOST <<-EOF
           set ssl:verify-certificate no
-          mirror -R /home/runner/work/robopits-oficial/robopits-oficial public_html
+          cd public_html
+          mirror -R --delete /home/runner/work/robopits-oficial/robopits-oficial . 
           bye
           EOF
