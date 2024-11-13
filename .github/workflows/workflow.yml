@@ -79,6 +79,7 @@ jobs:
           HOSTINGER_PASSWORD: ${{ secrets.HOSTINGER_PASSWORD }}
         run: |
           lftp -u $HOSTINGER_USER,$HOSTINGER_PASSWORD $HOSTINGER_HOST <<-EOF
+          set ssl:verify-certificate no
           mirror -R /home/runner/work/robopits-oficial/robopits-oficial public_html
           bye
           EOF
