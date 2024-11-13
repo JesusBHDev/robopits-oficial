@@ -103,8 +103,9 @@ self.addEventListener('push', (event) => {
 
   const options = {
     body: data.body || 'Tienes una nueva notificación',
-    icon: data.icon || '/',
-    data: data.url || '/',
+    icon: data.icon || '/', // Ícono pequeño, que aparece a la izquierda
+    badge: data.badge || '/', // Imagen grande o de perfil, que aparece en el centro o más destacado
+    data: data.url || '/', // URL a la que redirige al hacer clic
   };
 
   console.log('Mostrando notificación: ', options);
