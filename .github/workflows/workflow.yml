@@ -66,6 +66,9 @@ jobs:
           name: build-artifact
           path: ./
 
+      - name: Verificar estructura de directorios después de la descarga
+        run: ls -R # Lista todos los archivos y carpetas en el directorio raíz
+
       - name: Verificar contenido de build
         run: ls -R ./build # Lista el contenido de la carpeta build
 
