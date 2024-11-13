@@ -64,6 +64,10 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: build-artifact
+          path: ./
+
+      - name: Verificar contenido de build
+        run: ls -R
 
       - name: Instalar lftp
         run: sudo apt-get install lftp
