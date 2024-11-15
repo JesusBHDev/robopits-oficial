@@ -67,7 +67,7 @@ jobs:
           path: ./
 
       - name: Verificar estructura de directorios después de la descarga
-        run: ls -R /home/runner/work/robopits-oficial/robopits-oficial 
+        run: ls -R /home/runner/work/robopits-oficial/robopits-oficial
 
       - name: Instalar lftp
         run: sudo apt-get install lftp
