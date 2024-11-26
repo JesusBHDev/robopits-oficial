@@ -8,6 +8,7 @@
     "@heroicons/react": "^2.1.1",
     "@iconify/react": "^4.1.1",
     "@material-tailwind/react": "^2.1.9",
+    "@sentry/react": "^8.40.0",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",

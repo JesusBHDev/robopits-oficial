@@ -7,6 +7,22 @@ import { Rutas } from './routers/Rutas';
 import { HelmetProvider } from 'react-helmet-async';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import { guardarSuscripcion } from './api/auth.js';
+import * as Sentry from '@sentry/react';
+
+Sentry.init({
+  dsn: 'https://2fec83ecbf42fa28160c6d6f758b6309@o4508344919654400.ingest.us.sentry.io/4508344982437888',
+  integrations: [
+    Sentry.browserTracingIntegration(),
+    Sentry.replayIntegration(),
+  ],
+  // Tracing
+  tracesSampleRate: 1.0, //  Capture 100% of the transactions
+  // Set 'tracePropagationTargets' to control for which URLs distributed tracing should be enabled
+  tracePropagationTargets: ['localhost', /^https:\/\/yourserver\.io\/api/],
+  // Session Replay
+  replaysSessionSampleRate: 0.1, // This sets the sample rate at 10%. You may want to change it to 100% while in development and then sample at a lower rate in production.
+  replaysOnErrorSampleRate: 1.0, // If you're not already sampling the entire session, change the sample rate to 100% when sampling sessions where errors occur.
+});
 
 const App = () => {
   const { isAuthenticated, user } = useAuth();
