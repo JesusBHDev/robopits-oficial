@@ -2,6 +2,8 @@ import React from 'react';
 import './css/App.css';
 import { Helmet } from 'react-helmet-async';
 import Bienvenida from './views/Bienvenida.jsx';
+import * as Sentry from "@sentry/react";
+
 const App = () => {
   return (
     <div className="container-app">
@@ -25,4 +27,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default Sentry.withProfiler(App);
